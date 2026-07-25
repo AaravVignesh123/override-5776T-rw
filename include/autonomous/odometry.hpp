@@ -14,9 +14,9 @@
 
 // Odom sensors
 extern pros::Rotation trackingWheelLRSensor;
-// extern pros::Rotation trackingWheelFBSensor;
+extern pros::Rotation trackingWheelFBSensor;
 extern lemlib::TrackingWheel trackingWheelLR; // Left-right motion tracking
-// extern lemlib::TrackingWheel trackingWheelFB; // Forward-back motion tracking
+extern lemlib::TrackingWheel trackingWheelFB; // Forward-back motion tracking
 extern pros::Imu imu;
 extern lemlib::OdomSensors sensors;
 

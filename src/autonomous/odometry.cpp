@@ -10,20 +10,20 @@
 
 
 // Odom sensors
-pros::Rotation trackingWheelLRSensor(-2);
+pros::Rotation trackingWheelLRSensor(2);
 // pros::Rotation trackingWheelFBSensor(-18);
-lemlib::TrackingWheel trackingWheelLR(&trackingWheelLRSensor, lemlib::Omniwheel::NEW_275, 2.4);
+lemlib::TrackingWheel trackingWheelLR(&trackingWheelLRSensor, lemlib::Omniwheel::NEW_275, -2.4);
 // lemlib::TrackingWheel trackingWheelFB(&trackingWheelLRSensor, lemlib::Omniwheel::NEW_275, -0.4);
 // lemlib::TrackingWheel trackingWheelFB(&trackingWheelFBSensor, lemlib::Omniwheel::NEW_275, -0.4);
 pros::Imu imu(5);
 
 lemlib::OdomSensors sensors(
-    &trackingWheelLR, //&trackingWheelFB,
+    nullptr, //&trachkingWheelFB,
     nullptr, // no 2nd FB tracking
-    nullptr, // no 2nd FB tracking
+    &trackingWheelLR, //&trackingWheelLR,
     nullptr, // no 2nd LR tracking
     &imu
-);
+);   
 
 // PIDs
 lemlib::ControllerSettings chassisDrivePid(

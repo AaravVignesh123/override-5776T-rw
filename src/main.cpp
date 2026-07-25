@@ -298,12 +298,21 @@ double poseY;
 
 
 void initialize() {
+	pros::lcd::initialize();
     // Reset tracking wheel position
 	trackingWheelLR.reset();
 	// trackingWheelFB.reset();
+	chassis.calibrate();
 
-	pros::lcd::initialize();
-    chassis.calibrate();
+	while (imu.is_calibrating()) {
+        pros::delay(10);
+    }
+    
+	pros::delay(250);
+	chassis.setPose(lemlib::Pose(0, 0, 0));
+
+    pros::lcd::print(0, "IMU ready");
+	
 
 	// Initialize pneumatics
 	pros::c::adi_pin_mode(kPneumaticScraperPort, OUTPUT);
@@ -383,13 +392,33 @@ void opcontrol() {
 
             switch (showDebug) {
                 case 1: {
+					lemlib::Pose debugPose = chassis.getPose();
+					double wheelPos = trackingWheelLRSensor.get_position();
+					double imuHeading = imu.get_heading();
                     pros::lcd::set_text(0, "LF: " + std::to_string(driveLF.get_position()));
                     pros::lcd::set_text(1, "LC: " + std::to_string(driveLC.get_position()));
                     pros::lcd::set_text(2, "LB: " + std::to_string(driveLB.get_position()));
                     pros::lcd::set_text(3, "RF: " + std::to_string(driveRF.get_position()));
                     pros::lcd::set_text(4, "RC: " + std::to_string(driveRC.get_position()));
                     pros::lcd::set_text(5, "RB: " + std::to_string(driveRB.get_position()));
-                    pros::lcd::set_text(6, "Position (ft): (" + std::to_string(chassisX().convert(foot)) + "," + std::to_string(chassisY().convert(foot)) + ")");
+					//pros::lcd::set_text(4, "IMU hdg: " + std::to_string(imuHeading));
+					//pros::lcd::set_text(5, "Wheel:   " + std::to_string(wheelPos));
+
+					//pros::lcd::set_text(6, "Pose x: " + std::to_string(debugPose.x));
+					// pros::lcd::set_text(7, "Pose y: " + std::to_string(debugPose.y));
+					
+					//pros::lcd::set_text(6, "Wheel: " + std::to_string(trackingWheelLRSensor.get_position()));
+					
+    				//pros::lcd::set_text(7, "Pose: " + std::to_string(debugPose.x) + "," + std::to_string(debugPose.y));
+                    
+					/*
+				    double wheelPos = trackingWheelLRSensor.get_position();
+					double wheelVel = trackingWheelLRSensor.get_velocity();
+					double imuHeading = imu.get_heading();
+					*/
+
+					
+					pros::lcd::set_text(6, "Position (ft): (" + std::to_string(chassisX().convert(foot)) + "," + std::to_string(chassisY().convert(foot)) + ")");
                     pros::lcd::set_text(7, "Angle: " + std::to_string(chassisAngle().convert(degree)) + " deg");
                     break;
                 } case 2: {
@@ -446,7 +475,7 @@ void opcontrol() {
             delay(100_ms);
         }
     });
-
+	/*	
     // Intake task
     pros::Task intakeTask([&] {
 		while (true) {
@@ -513,6 +542,7 @@ void opcontrol() {
             delay(10_ms);
 		}
   	});
+	*/
 
 	// Main loop
 	while (true) {

@@ -322,6 +322,8 @@ void initialize() {
     pros::c::adi_pin_mode(kPneumaticMiddleDescorePort, OUTPUT);
 
 	autonSelector();
+	turnTuning();
+	delay(1_s);
 }
 
 void disabled() {}
@@ -394,6 +396,7 @@ void opcontrol() {
                 case 1: {
 					lemlib::Pose debugPose = chassis.getPose();
 					double wheelPos = trackingWheelLRSensor.get_position();
+					double angle = chassisAngle().convert(degree);
 					double imuHeading = imu.get_heading();
                     pros::lcd::set_text(0, "LF: " + std::to_string(driveLF.get_position()));
                     pros::lcd::set_text(1, "LC: " + std::to_string(driveLC.get_position()));
@@ -419,7 +422,7 @@ void opcontrol() {
 
 					
 					pros::lcd::set_text(6, "Position (ft): (" + std::to_string(chassisX().convert(foot)) + "," + std::to_string(chassisY().convert(foot)) + ")");
-                    pros::lcd::set_text(7, "Angle: " + std::to_string(chassisAngle().convert(degree)) + " deg");
+                    pros::lcd::set_text(7, "Angle: " + std::to_string(imuHeading) + " deg");
                     break;
                 } case 2: {
                     pros::lcd::set_text(0, "Up:    " + std::to_string(upButton.held));

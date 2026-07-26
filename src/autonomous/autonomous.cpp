@@ -670,17 +670,17 @@ void skills() {
 // Misc Autons --------------------------------------------
 void turnTuning() {
     setChassisPose(0_ft, 0_ft, 0_deg);
-    double startAngle = chassisAngle().convert(degree);
+    double startAngle = imu.get_heading();
     pros::lcd::print(3, "Start: %f", startAngle);
 
     turnToAngle(90_deg);
     
-    double endAngle = chassisAngle().convert(degree);
+    double endAngle = imu.get_heading();
     pros::lcd::print(4, "End: %f", endAngle);
     pros::lcd::print(5, "Difference: %f", endAngle - startAngle - 90);
     delay(2_s);
 
-    turnToAngle(0_deg);
+    // turnToAngle(0_deg);
 }
 
 void translationTuning() {

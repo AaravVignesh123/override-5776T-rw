@@ -299,10 +299,12 @@ double poseY;
 
 void initialize() {
 	pros::lcd::initialize();
+	allMotors.set_brake_mode_all(pros::MotorBrake::hold);
     // Reset tracking wheel position
 	trackingWheelLR.reset();
 	// trackingWheelFB.reset();
 	chassis.calibrate();
+
 
 	while (imu.is_calibrating()) {
         pros::delay(10);
@@ -322,7 +324,7 @@ void initialize() {
     pros::c::adi_pin_mode(kPneumaticMiddleDescorePort, OUTPUT);
 
 	autonSelector();
-	turnTuning();
+	translationTuning();
 	delay(1_s);
 }
 

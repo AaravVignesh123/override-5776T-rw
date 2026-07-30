@@ -27,15 +27,15 @@ lemlib::OdomSensors sensors(
 
 // PIDs
 lemlib::ControllerSettings chassisDrivePid(
-    1, // kP
+    6, // kP
     0, // kI
-    0.9, // kD
+    5, // kD, can be 11 or 1
     3, // anti windup
-    2, // small error range, in inches
-    100, // small error range timeout, in milliseconds
-    4, // large error range, in inches
+    2, // small error range, in inches, org 2
+    100, // small error range timeout, in milliseconds, 100
+    4, // large error range, in inches, 4
     500, // large error range timeout, in milliseconds
-    20 // maximum acceleration (slew)
+    0 // maximum acceleration (slew), was 20 before changing
 );
 lemlib::ControllerSettings chassisTurnPid(
     3.2, // kP

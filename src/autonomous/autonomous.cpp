@@ -696,7 +696,7 @@ void translationTuning() {
     delay(2_s);
 
     // relative(-2_ft, 0_x, 0.3_x, TRANSLATE_TIMEOUT_LONG);
-    moveToPoint(0_ft, 0_ft, false, 0_x, 0.3_x, 3_s);
+    //moveToPoint(0_ft, 0_ft, false, 0_x, 0.3_x, 3_s);
 }
 
 void maxSpeedMeasuring() {

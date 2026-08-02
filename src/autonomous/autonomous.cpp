@@ -662,6 +662,36 @@ void soloAwp2() {
     
 }
 
+//18 point auto from the video
+void eighteenPointAuto() {
+    //starting against left wall, front touching wall
+    setChassisPose(0_ft, 0_ft, -90_deg);
+
+    //toggle x2
+    relative(-10_in, 0.35_x);
+    relative(10_in, 0.35_x);
+
+    relative(-10_in, 0.35_x);
+    relative(10_in, 0.35_x);
+
+    //2 ft away from the wall
+    moveToPoint(0_ft, -2_ft, true, 0.4_x, 0.7_x, 0.75_s);
+    //turn so that the back of the bot is facing the goal
+    turnToAngle(0_deg, 0.5_x);
+
+    moveToPoint(-2_ft, -2_ft, true, 0.4_x, 0.7_x, 0.75_s);
+    //lift up
+    //lift down, assuming we make a function for this later
+    moveToPoint(0_ft, -2_ft, false, 0.4_x, 0.7_x, 0.75_s);
+    turnToAngle(-90_deg, 0.5_x);
+
+    //drive backwards 2 ft to pick up the cup and cone
+    moveToPoint(0_ft, -4_ft, true, 0.4_x, 0.7_x, 0.75_s);
+    //clamp function
+}
+
+
+
 // Skills Route -------------------------------------------
 void skills() {
 

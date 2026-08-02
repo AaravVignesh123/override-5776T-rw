@@ -21,6 +21,8 @@ void rightAwp(bool nineBall = false);
 void soloAwp();
 void soloAwp2();
 
+void eighteenPointAuto();
+
 // Skills
 void skills();
 

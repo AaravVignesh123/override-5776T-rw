@@ -324,7 +324,7 @@ void initialize() {
     pros::c::adi_pin_mode(kPneumaticMiddleDescorePort, OUTPUT);
 
 	autonSelector();
-	translationTuning();
+	//translationTuning();
 	delay(1_s);
 }
 

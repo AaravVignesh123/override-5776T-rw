@@ -7,6 +7,7 @@
 #include "autonomous/odometry.hpp"
 #include "autonomous/odomDistance.hpp"
 #include "lemlib/api.hpp"
+#include "subsystems/claw.hpp"
 
 
 // ----------------------------------------------------------------------------------------------------
@@ -331,7 +332,7 @@ void initialize() {
 void disabled() {}
 
 void competition_initialize() {}
-
+/*
 void autonomous() {
 	allMotors.set_brake_mode_all(pros::MotorBrake::hold); // for tighter movements
     intakeTop.set_brake_mode(pros::MotorBrake::hold);
@@ -371,7 +372,7 @@ void autonomous() {
 			break;
 	}
 }
-
+*/
 
 void opcontrol() {
 	Time init = getTime() / 1000;
@@ -577,32 +578,43 @@ void opcontrol() {
 		// Macros
 		enableMacros = aButton.held;
 
-		// Intake controls
-		if (r2Button.held && l1Button.held) {
-            intakeCommand = LONG_GOAL;
-		} else if (r2Button.held && l2Button.held) {
-            intakeCommand = MID_GOAL;
-		} else if (r1Button.held) {
-            intakeCommand = LOW_GOAL;
-		} else if (r2Button.held) {
-			intakeCommand = STORE_BALLS;
+		// Claw controls
+		// after pollControllerDigital(...) calls
+		if (bButton.held) {
+    		storePin();
+		} else if (yButton.held) {
+    		releasePin();
 		} else {
+    		setMotorSpeed(clawMotor, 0_x);
+		}
+
+		// Intake controls
+		if (r2Button.held) {
+            intakePins();
+		} else if (r1Button.held) {
+			outtakePins();
+		} else {
+			stopIntake();
 			intakeCommand = STOPPED;
 		}
 
 		// Scraper toggle
+		/*
 		if (!enableMacros && bButton.pressed) {
 			scraperToggle = !scraperToggle;
 			pneumaticToggle(kPneumaticScraperPort, scraperToggle);
 		}
+		*/
 
 		// Descore toggle
+		/*
         descoreToggle = rightButton.held;
         pneumaticToggle(kPneumaticDescorePort, descoreToggle);
 
         // Middle descore toggle
         middleDescoreToggle = l2Button.held;
         pneumaticToggle(kPneumaticMiddleDescorePort, middleDescoreToggle);
+		*/
 
 		// Debug things
 		if (xButton.pressed) {

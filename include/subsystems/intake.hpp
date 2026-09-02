@@ -15,12 +15,17 @@
 
 // Intake motors
 extern pros::Motor intakeBottomLarge;
-extern pros::Motor intakeBottomSmall;
-extern pros::Motor intakeTop;
+//extern pros::Motor intakeBottomSmall;
+//extern pros::Motor intakeTop;
 
+/*
 void storeBalls();
 void scoreBallsUp();
 void scoreBallsMiddle(bool driverControl = false);
 void clearMiddleSection();
 void scoreBallsDown();
+*/
+
 void stopIntake();
+void intakePins();
+void outtakePins();

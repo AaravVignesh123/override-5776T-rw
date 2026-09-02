@@ -4,13 +4,14 @@
 #include "subsystems/pneumatics.hpp"
 
 // Temporary stubbed-out intake subsystem for odometry testing.
-pros::Motor intakeBottomLarge(-1);
-pros::Motor intakeBottomSmall(-1);
-pros::Motor intakeTop(-1);
+pros::Motor intakeBottomLarge(11);
 
-void storeBalls() {
-    // Intake disabled for odometry testing.
+void intakePins() {
+    setMotorSpeed(intakeBottomLarge, 1.5_x);
 }
+void outtakePins() {
+    setMotorSpeed(intakeBottomLarge, -1.5_x);
+}   
 
 void scoreBallsUp() {
     // Intake disabled for odometry testing.
@@ -31,4 +32,5 @@ void scoreBallsDown() {
 
 void stopIntake() {
     // Intake disabled for odometry testing.
+    setMotorSpeed(intakeBottomLarge, 0_x);
 }

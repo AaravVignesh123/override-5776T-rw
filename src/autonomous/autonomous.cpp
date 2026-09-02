@@ -5,6 +5,54 @@
 #include "autonomous/autonomous.hpp"
 #include "autonomous/odomDistance.hpp"
 
+// Temporary stubs while the old autonomous logic is kept as reference.
+void unloadMatchloader(Length x, bool useDelay, Angle angleOffset) {
+    (void)x;
+    (void)useDelay;
+    (void)angleOffset;
+}
+
+void hookDescoreWing(Length x, Length y) {
+    (void)x;
+    (void)y;
+}
+
+#define ALIGN_TO_LONG_GOAL(time) do { (void)(time); } while (0)
+#define ALIGN_TO_MIDDLE_GOAL(time) do { (void)(time); } while (0)
+
+void left(bool secureLongGoal) {
+    (void)secureLongGoal;
+}
+
+void leftAwp(bool nineBall) {
+    (void)nineBall;
+}
+
+void right(bool secureLongGoal) {
+    (void)secureLongGoal;
+}
+
+void rightAwp(bool nineBall) {
+    (void)nineBall;
+}
+
+void soloAwp() {}
+
+void soloAwp2() {}
+
+void eighteenPointAuto() {}
+
+void skills() {}
+
+void turnTuning() {}
+
+void translationTuning() {}
+
+void maxSpeedMeasuring() {}
+
+void testingAuton() {}
+
+/*
 // Helper Functions ---------------------------------------
 void unloadMatchloader(Length x, bool useDelay, Angle angleOffset) {
     turnToAngle(180_deg + angleOffset, 0.1_x);
@@ -82,7 +130,7 @@ void left(bool secureLongGoal) {
 
         // Hook descore arm into goal to secure control bonus
         hookDescoreWing(-3_ft, 20_in);
-        */
+        
     } else {
         // 7 balls in the long goal rush
 
@@ -260,7 +308,7 @@ void right(bool secureLongGoal) {
 
         // Hook descore arm into goal to secure control bonus
         hookDescoreWing(3_ft, 20_in);
-        */
+        
     } else {
         // 7 balls in the long goal rush
 
@@ -323,7 +371,7 @@ void rightAwp(bool nineBall) {
         swingToAngle(-175_deg, lemlib::DriveSide::RIGHT, 1_x);
         scoreBallsUp();
         ALIGN_TO_LONG_GOAL(FOUR_BALLS_INTO_LONG)
-        */
+    
 
         // Grab 3 balls by bottom middle goal
         storeBalls();
@@ -658,7 +706,7 @@ void soloAwp2() {
     scoreBallsMiddle();
     delay(0.5_s);
     pros::c::adi_digital_write(kPneumaticScraperPort, LOW);
-    delay(1_s); */
+    delay(1_s);
     
 }
 
@@ -805,3 +853,4 @@ void testingAuton() {
 
     // setChassisSpeed(0_x, 0_x);
 }
+*/

@@ -662,9 +662,9 @@ void opcontrol() {
 		lastTipAngles[0] = tipAngle;
 
 		// Tank controls
-        chassis.tank(leftY, rightY);
+        //chassis.tank(leftY, rightY);
         // 2-stick arcade controls
-        // chassis.arcade(leftY, rightX);
+        chassis.arcade(leftY, rightX);
 
 		delay(10_ms);
 	}

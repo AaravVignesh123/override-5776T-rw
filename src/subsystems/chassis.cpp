@@ -4,12 +4,12 @@
 
 // Motor ports, motors, and motor groups
 
-const int8_t kDriveLFPort = -15; //idk if negative
-const int8_t kDriveLCPort = -19;
-const int8_t kDriveLBPort = -10;
-const int8_t kDriveRFPort = 13;
-const int8_t kDriveRCPort = 12;
-const int8_t kDriveRBPort = 11;
+const int8_t kDriveLFPort = -16; //idk if negative
+const int8_t kDriveLCPort = -13;
+const int8_t kDriveLBPort = -12;
+const int8_t kDriveRFPort = 15;
+const int8_t kDriveRCPort = 17;
+const int8_t kDriveRBPort = 14;
 pros::Motor driveLF(kDriveLFPort);
 pros::Motor driveLC(kDriveLCPort);
 pros::Motor driveLB(kDriveLBPort);

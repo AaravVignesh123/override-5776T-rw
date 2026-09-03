@@ -5,8 +5,8 @@
 pros::Motor clawMotor(-1);
 
 void storePin() {
-    setMotorSpeed(clawMotor, -1.5_x);
+    setMotorSpeed(clawMotor, -2.0_x);
 }
 void releasePin() {
-    setMotorSpeed(clawMotor, 1.5_x);
+    setMotorSpeed(clawMotor, 2.0_x);
 }

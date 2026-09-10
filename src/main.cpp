@@ -2,6 +2,7 @@
 #include "autonomous/odometry.hpp"
 #include "subsystems/chassis.hpp"
 #include "subsystems/intake.hpp"
+#include "subsystems/lift.hpp"
 #include "subsystems/pneumatics.hpp"
 #include "autonomous/autonomous.hpp"
 #include "autonomous/odometry.hpp"
@@ -302,8 +303,8 @@ void initialize() {
 	pros::lcd::initialize();
 	allMotors.set_brake_mode_all(pros::MotorBrake::hold);
     // Reset tracking wheel position
-	trackingWheelLR.reset();
-	// trackingWheelFB.reset();
+	//trackingWheelLR.reset();
+	trackingWheelFB.reset();
 	chassis.calibrate();
 
 
@@ -398,7 +399,7 @@ void opcontrol() {
             switch (showDebug) {
                 case 1: {
 					lemlib::Pose debugPose = chassis.getPose();
-					double wheelPos = trackingWheelLRSensor.get_position();
+					double wheelPos = trackingWheelFBSensor.get_position();
 					double angle = chassisAngle().convert(degree);
 					double imuHeading = imu.get_heading();
                     pros::lcd::set_text(0, "LF: " + std::to_string(driveLF.get_position()));
@@ -596,6 +597,23 @@ void opcontrol() {
 		} else {
 			stopIntake();
 			intakeCommand = STOPPED;
+		}
+
+		if(l1Button.held) {
+			scoringReady();
+		} else if (l2Button.held) {
+			rest();
+		} else {
+			setMotorSpeed(clawTwistMotor, 0_x);
+		}
+		// Lift controls
+		if (upButton.held) {
+			liftUp();
+		} else if (downButton.held) {
+			liftDown();
+		} else {
+			setMotorSpeed(liftMotor1, 0_x);
+			setMotorSpeed(liftMotor2, 0_x);
 		}
 
 		// Scraper toggle

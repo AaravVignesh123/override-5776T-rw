@@ -4,7 +4,7 @@
 #include "subsystems/pneumatics.hpp"
 
 // Temporary stubbed-out intake subsystem for odometry testing.
-pros::Motor intakeBottomLarge(11);
+pros::Motor intakeBottomLarge(-5);
 
 void intakePins() {
     setMotorSpeed(intakeBottomLarge, 1.5_x);

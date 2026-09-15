@@ -301,6 +301,7 @@ double poseY;
 
 void initialize() {
 	pros::lcd::initialize();
+	clawTwistMotor.tare_position();
 	allMotors.set_brake_mode_all(pros::MotorBrake::hold);
     // Reset tracking wheel position
 	//trackingWheelLR.reset();
@@ -317,6 +318,7 @@ void initialize() {
 
     pros::lcd::print(0, "IMU ready");
 	
+	clawTwistMotor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 	// Initialize pneumatics
 	pros::c::adi_pin_mode(kPneumaticScraperPort, OUTPUT);
@@ -578,6 +580,16 @@ void opcontrol() {
 
 		// Macros
 		enableMacros = aButton.held;
+		if (rightButton.held){
+			storePin();
+			intakePins();
+		} else if (leftButton.held) {
+			releasePin();
+			outtakePins();
+		} else {
+			setMotorSpeed(clawMotor, 0_x);
+			stopIntake();
+		}
 
 		// Claw controls
 		// after pollControllerDigital(...) calls
@@ -590,21 +602,23 @@ void opcontrol() {
 		}
 
 		// Intake controls
-		if (r2Button.held) {
+		if (r1Button.held) {
             intakePins();
-		} else if (r1Button.held) {
+		} else if (r2Button.held) {
 			outtakePins();
 		} else {
 			stopIntake();
 			intakeCommand = STOPPED;
 		}
-
-		if(l1Button.held) {
-			scoringReady();
+		if (l1Button.held) {
+			scoringReady2();
 		} else if (l2Button.held) {
+			rest2();
+		}
+		if(leftButton.held) {
+			scoringReady();
+		} else if (rightButton.held) {
 			rest();
-		} else {
-			setMotorSpeed(clawTwistMotor, 0_x);
 		}
 		// Lift controls
 		if (upButton.held) {

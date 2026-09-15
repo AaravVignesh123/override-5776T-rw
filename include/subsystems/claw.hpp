@@ -8,3 +8,6 @@ void storePin();
 void releasePin();
 void scoringReady();
 void rest();
+void scoringReady2();
+void rest2();
+void holdTwistPosition(double targetPosition);

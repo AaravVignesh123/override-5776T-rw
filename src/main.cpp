@@ -405,10 +405,10 @@ void opcontrol() {
 					double angle = chassisAngle().convert(degree);
 					double imuHeading = imu.get_heading();
                     pros::lcd::set_text(0, "LF: " + std::to_string(driveLF.get_position()));
-                    pros::lcd::set_text(1, "LC: " + std::to_string(driveLC.get_position()));
+                    //pros::lcd::set_text(1, "LC: " + std::to_string(driveLC.get_position()));
                     pros::lcd::set_text(2, "LB: " + std::to_string(driveLB.get_position()));
                     pros::lcd::set_text(3, "RF: " + std::to_string(driveRF.get_position()));
-                    pros::lcd::set_text(4, "RC: " + std::to_string(driveRC.get_position()));
+                    //pros::lcd::set_text(4, "RC: " + std::to_string(driveRC.get_position()));
                     pros::lcd::set_text(5, "RB: " + std::to_string(driveRB.get_position()));
 					//pros::lcd::set_text(4, "IMU hdg: " + std::to_string(imuHeading));
 					//pros::lcd::set_text(5, "Wheel:   " + std::to_string(wheelPos));
@@ -463,13 +463,13 @@ void opcontrol() {
                     break;
                 } case 5: {
                     pros::lcd::set_text(0, "LF Power Draw: " + std::to_string(driveLF.get_current_draw()));
-                    pros::lcd::set_text(1, "LC Power Draw: " + std::to_string(driveLC.get_current_draw()));
-                    pros::lcd::set_text(2, "LB Power Draw: " + std::to_string(driveLB.get_current_draw()));
-                    pros::lcd::set_text(3, "RF Power Draw: " + std::to_string(driveRF.get_current_draw()));
-                    pros::lcd::set_text(4, "RC Power Draw: " + std::to_string(driveRC.get_current_draw()));
-                    pros::lcd::set_text(5, "RB Power Draw: " + std::to_string(driveRB.get_current_draw()));
-                    pros::lcd::set_text(6, "Tipping angle: " + std::to_string(chassisPitch().convert(degree)));
-                    pros::lcd::set_text(7, "Untip command: " + std::to_string(antiTipCommand));
+                    //pros::lcd::set_text(1, "LC Power Draw: " + std::to_string(driveLC.get_current_draw()));
+                    pros::lcd::set_text(1, "LB Power Draw: " + std::to_string(driveLB.get_current_draw()));
+                    pros::lcd::set_text(2, "RF Power Draw: " + std::to_string(driveRF.get_current_draw()));
+                    //pros::lcd::set_text(4, "RC Power Draw: " + std::to_string(driveRC.get_current_draw()));
+                    pros::lcd::set_text(3, "RB Power Draw: " + std::to_string(driveRB.get_current_draw()));
+                    pros::lcd::set_text(4, "Tipping angle: " + std::to_string(chassisPitch().convert(degree)));
+                    pros::lcd::set_text(5, "Untip command: " + std::to_string(antiTipCommand));
                     break;
                 } case 0: {
                     for (int i = 0; i <= 7; i++) {
@@ -611,14 +611,9 @@ void opcontrol() {
 			intakeCommand = STOPPED;
 		}
 		if (l1Button.held) {
-			scoringReady2();
+			scoringReadyPosition();
 		} else if (l2Button.held) {
-			rest2();
-		}
-		if(leftButton.held) {
-			scoringReady();
-		} else if (rightButton.held) {
-			rest();
+			restPosition();
 		}
 		// Lift controls
 		if (upButton.held) {

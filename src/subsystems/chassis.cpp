@@ -5,20 +5,20 @@
 // Motor ports, motors, and motor groups
 
 const int8_t kDriveLFPort = -16; //idk if negative
-const int8_t kDriveLCPort = -13;
+//const int8_t kDriveLCPort = -13;
 const int8_t kDriveLBPort = -12;
 const int8_t kDriveRFPort = 15;
-const int8_t kDriveRCPort = 17;
+// const int8_t kDriveRCPort = 17;
 const int8_t kDriveRBPort = 14;
 pros::Motor driveLF(kDriveLFPort);
-pros::Motor driveLC(kDriveLCPort);
+//pros::Motor driveLC(kDriveLCPort);
 pros::Motor driveLB(kDriveLBPort);
 pros::Motor driveRF(kDriveRFPort);
-pros::Motor driveRC(kDriveRCPort);
+//pros::Motor driveRC(kDriveRCPort);
 pros::Motor driveRB(kDriveRBPort);
-pros::MotorGroup leftMotors({kDriveLFPort, kDriveLCPort, kDriveLBPort}, pros::MotorGearset::blue);
-pros::MotorGroup rightMotors({kDriveRFPort, kDriveRCPort, kDriveRBPort}, pros::MotorGearset::blue);
-pros::MotorGroup allMotors({kDriveLFPort, kDriveLCPort, kDriveLBPort, kDriveRFPort, kDriveRCPort, kDriveRBPort}, pros::MotorGearset::blue);
+pros::MotorGroup leftMotors({kDriveLFPort, kDriveLBPort}, pros::MotorGearset::blue);
+pros::MotorGroup rightMotors({kDriveRFPort, kDriveRBPort}, pros::MotorGearset::blue);
+pros::MotorGroup allMotors({kDriveLFPort, kDriveLBPort, kDriveRFPort, kDriveRBPort}, pros::MotorGearset::blue);
 
 // Drivetrain object
 lemlib::Drivetrain drivetrain(

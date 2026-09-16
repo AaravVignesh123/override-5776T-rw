@@ -54,14 +54,14 @@ void rest2(){
     }
 }
 
-/*
+
 // Draft position-control version for the claw twist.
 // Assumes the motor axle and claw gear are approximately 1:1.
 // The negative sign is based on the current setup, where negative motor
 // encoder values move the claw toward scoring position.
 
 const double TWIST_REST_POSITION = 0.0;
-const double TWIST_SCORING_POSITION = -360.0;
+const double TWIST_SCORING_POSITION = -900.0;  // Adjust this value based on the actual scoring position
 const int TWIST_POSITION_SPEED = 100;
 
 // Run this once after the claw is physically placed in its rest position.
@@ -78,7 +78,7 @@ void restPosition() {
     clawTwistMotor.move_absolute(TWIST_REST_POSITION,
                                  TWIST_POSITION_SPEED);
 }
-
+/*
 void scoringReadyPosition() {
     clawTwistMotor.move_absolute(-360.0, 100);
 }

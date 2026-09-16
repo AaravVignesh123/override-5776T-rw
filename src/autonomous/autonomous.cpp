@@ -737,6 +737,25 @@ void eighteenPointAuto() {
     moveToPoint(0_ft, -4_ft, true, 0.4_x, 0.7_x, 0.75_s);
     //clamp function
 }
+*/
+void BlueAutoRight(){
+    // Initiialize starting pos
+    setChassisPose(0_ft, 0_ft, 0_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
+    // needa set up distance sensors when ready
+
+    
+    // toggle
+    relative(-0.5_ft, 0.4_x);
+    moveToPoint(0_ft, 0.2_ft, true, 0.4_x, 0.7_x, 1.5_s); // move to startining point plus a bit of y
+    relative(-0.5_ft, 0.4_x);
+    moveToPoint(0_ft, 0.2_ft, true, 0.4_x, 0.7_x, 1.5_s); // move to starting point plus a bit of y
+
+    // move to black goal
+    movetoPoint(0_ft, -0.1_ft, false, 0.4_x, 0.7_x, 1.5_s); // move to black goal
+    turnToAngle(-30_deg, 0.5_x); // turn to face goal
+    moveToPoint()
+
+}
 
 
 
@@ -853,4 +872,5 @@ void testingAuton() {
 
     // setChassisSpeed(0_x, 0_x);
 }
-*/
+
+}

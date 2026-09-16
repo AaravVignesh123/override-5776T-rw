@@ -7,10 +7,10 @@
 pros::Motor intakeBottomLarge(-5);
 
 void intakePins() {
-    setMotorSpeed(intakeBottomLarge, 2.5_x);
+    setMotorSpeed(intakeBottomLarge, 100_power);
 }
 void outtakePins() {
-    setMotorSpeed(intakeBottomLarge, -2.5_x);
+    setMotorSpeed(intakeBottomLarge, -100_power);
 }   
 
 void scoreBallsUp() {

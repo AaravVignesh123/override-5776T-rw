@@ -579,7 +579,7 @@ void opcontrol() {
         pollControllerDigital(r2Button, pros::E_CONTROLLER_DIGITAL_R2);
 
 		// Macros
-		enableMacros = aButton.held;
+		/* enableMacros = aButton.held;
 		if (rightButton.held){
 			storePin();
 			intakePins();
@@ -589,7 +589,7 @@ void opcontrol() {
 		} else {
 			setMotorSpeed(clawMotor, 0_x);
 			stopIntake();
-		}
+		} */
 
 		// Claw controls
 		// after pollControllerDigital(...) calls
@@ -691,7 +691,8 @@ void opcontrol() {
 		// Tank controls
         //chassis.tank(leftY, rightY);
         // 2-stick arcade controls
-        chassis.arcade(leftY, rightX);
+        // chassis.arcade(leftY, rightX);
+		chassis.arcade(leftY, rightX * 1.4);
 
 		delay(10_ms);
 	}

@@ -2,7 +2,7 @@
 #include "subsystems/claw.hpp"
 #include "autonomous/odometry.hpp"
 
-pros::Motor clawMotor(-1);
+pros::Motor clawMotor(-10);
 pros::Motor clawTwistMotor(7);
 const double TWIST_UP_LIMIT = -400.0;
 const double TWIST_START_POSITION = 0.0;
@@ -25,10 +25,10 @@ void holdTwistPosition(double targetPosition) {
 }
 
 void storePin() {
-    setMotorSpeed(clawMotor, -2.0_x);
+    setMotorSpeed(clawMotor, -127_power);
 }
 void releasePin() {
-    setMotorSpeed(clawMotor, 2.0_x);
+    setMotorSpeed(clawMotor, 127_power);
 }
 void scoringReady(){
     setMotorSpeed(clawTwistMotor, -1.0_x);

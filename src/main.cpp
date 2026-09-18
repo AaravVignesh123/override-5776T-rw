@@ -593,7 +593,7 @@ void opcontrol() {
 
 		// Claw controls
 		// after pollControllerDigital(...) calls
-		if (bButton.held) {
+		if (aButton.held) {
     		storePin();
 		} else if (yButton.held) {
     		releasePin();
@@ -616,9 +616,9 @@ void opcontrol() {
 			restPosition();
 		}
 		// Lift controls
-		if (upButton.held) {
+		if (bButton.held) {
 			liftUp();
-		} else if (downButton.held) {
+		} else if (rightButton.held) {
 			liftDown();
 		} else {
 			setMotorSpeed(liftMotor1, 0_x);

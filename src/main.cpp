@@ -307,6 +307,8 @@ void initialize() {
 	//trackingWheelLR.reset();
 	trackingWheelFB.reset();
 	chassis.calibrate();
+	translationTuning();
+	//turnTuning();
 
 
 	while (imu.is_calibrating()) {
@@ -328,7 +330,7 @@ void initialize() {
     pros::c::adi_pin_mode(kPneumaticMiddleDescorePort, OUTPUT);
 
 	autonSelector();
-	//translationTuning();
+	
 	delay(1_s);
 }
 
@@ -338,29 +340,11 @@ void competition_initialize() {}
 /*
 void autonomous() {
 	allMotors.set_brake_mode_all(pros::MotorBrake::hold); // for tighter movements
-    intakeTop.set_brake_mode(pros::MotorBrake::hold);
+    //intakeTop.set_brake_mode(pros::MotorBrake::hold);
 
     autonStartTime = getTime();
 
 	switch (auton) {
-		case LEFT:
-			left(specialAutonMode);
-			break;
-		case LEFT_AWP:
-			leftAwp(specialAutonMode);
-			break;
-		case RIGHT:
-			right(specialAutonMode);
-			break;
-		case RIGHT_AWP:
-			rightAwp(specialAutonMode);
-			break;
-		case SOLO_AWP:
-			soloAwp2();
-			break;
-		case SKILLS:
-		    skills(); //skillsBasic();
-			break;
 		case TURN_PID:
 			turnTuning();
 			break;

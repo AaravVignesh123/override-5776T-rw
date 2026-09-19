@@ -20,37 +20,10 @@ void hookDescoreWing(Length x, Length y) {
 #define ALIGN_TO_LONG_GOAL(time) do { (void)(time); } while (0)
 #define ALIGN_TO_MIDDLE_GOAL(time) do { (void)(time); } while (0)
 
-void left(bool secureLongGoal) {
-    (void)secureLongGoal;
-}
 
-void leftAwp(bool nineBall) {
-    (void)nineBall;
-}
 
-void right(bool secureLongGoal) {
-    (void)secureLongGoal;
-}
 
-void rightAwp(bool nineBall) {
-    (void)nineBall;
-}
 
-void soloAwp() {}
-
-void soloAwp2() {}
-
-void eighteenPointAuto() {}
-
-void skills() {}
-
-void turnTuning() {}
-
-void translationTuning() {}
-
-void maxSpeedMeasuring() {}
-
-void testingAuton() {}
 
 /*
 // Helper Functions ---------------------------------------
@@ -737,7 +710,7 @@ void eighteenPointAuto() {
     moveToPoint(0_ft, -4_ft, true, 0.4_x, 0.7_x, 0.75_s);
     //clamp function
 }
-*/
+
 void BlueAutoRight(){
     // Initiialize starting pos
     setChassisPose(0_ft, 0_ft, 0_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
@@ -756,6 +729,7 @@ void BlueAutoRight(){
     moveToPoint()
 
 }
+*/
 
 
 
@@ -873,4 +847,3 @@ void testingAuton() {
     // setChassisSpeed(0_x, 0_x);
 }
 
-}

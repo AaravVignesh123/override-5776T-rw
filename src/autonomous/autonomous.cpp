@@ -769,13 +769,6 @@ void RightBlueAuto(){
     moveToPose(-2_ft, 2_ft, 80_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to standing pin
 
     //pick up standing pin
-    Time startTime4 = getTime();
-    while(getTime() - startTime4 < 0.2_s) {
-        liftUp();
-        //releasePin();
-        //liftUp();
-        delay(100_ms);
-    }
     moveToPose(-2_ft - 6_in, 2_ft + 2_in, 80_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to standing pin
     Time startTime5 = getTime();
     while(getTime() - startTime5 < 0.5_s) {
@@ -784,7 +777,7 @@ void RightBlueAuto(){
         //liftUp();
         delay(250_ms);
     }
-    releasePin();
+    
     rest();
     scoringReadyPosition();
     Time startTime6 = getTime();
@@ -797,12 +790,6 @@ void RightBlueAuto(){
 
     //move to goal
     
-    while (getTime() - startTime < 1.5_s) {
-        liftUp();
-        releasePin();
-        //liftUp();
-        delay(250_ms);
-    }
         
     turnToAngle(180_deg, 0.5_x);
     moveToPose(-1.6_ft, 0_ft + 1_in, 0_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to blue goal

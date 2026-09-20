@@ -720,7 +720,7 @@ void RightBlueAuto(){
     
     // toggle
     relative(-0.5_ft, 1.5_x);
-    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to startining point plus a bit of y
+    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
     relative(-0.5_ft, 1.5_x);
     moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
 
@@ -739,7 +739,7 @@ void RightBlueAuto(){
     setMotorSpeed(liftMotor2, 0_x);
     scoringReadyPosition();
     turnToAngle(90_deg, 0.5_x);
-    moveToPose(-1.6_ft - 3_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to black goal
+    moveToPose(-1.6_ft - 3_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to blue goal
     delay(650_ms);
     Time startTime2 = getTime();
     while (getTime() - startTime2 < 0.4_s) {
@@ -762,7 +762,6 @@ void RightBlueAuto(){
     turnToAngle(-90_deg, 0.5_x);
 
     /*
-
     relative(6_in, 0.4_x);
     turnToAngle(65_deg, 0.5_x);
     moveToPose(-1_ft, -2_ft, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to standing pin
@@ -840,11 +839,50 @@ void LeftBlueAuto(){
 
     
     // toggle
-    relative(-0.5_ft, 1_x);
-    moveToPoint(0_ft, -1.1_ft - 3_in, true, 1_x, 1.3_x, 1.5_s); // move to startining point plus a bit of y
     relative(-0.5_ft, 1.5_x);
-    moveToPoint(0_ft, -1.1_ft - 5_in, true, 1.5_x, 1.6_x, 1.5_s); // move to starting point plus a bit of y
+    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to startining point plus a bit of y
+    relative(-0.5_ft, 1.5_x);
+    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
 
+
+    moveToPoint(0_ft, 0_ft, false, 0.4_x, 0.7_x, 1.5_s); 
+    //releasePin();
+    Time startTime = getTime();
+    while (getTime() - startTime < 0.7_s) {
+        liftUp();
+        //releasePin();
+        //liftUp();
+        delay(100_ms);
+    }
+
+    setMotorSpeed(liftMotor1, 0_x);
+    setMotorSpeed(liftMotor2, 0_x);
+    scoringReadyPosition();
+    turnToAngle(-90_deg, 0.5_x);
+    moveToPose(1.6_ft + 3_in, 0_ft + 1_in, -90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to blue goal
+    delay(650_ms);
+    Time startTime2 = getTime();
+    while (getTime() - startTime2 < 0.4_s) {
+        liftDown();
+        //releasePin();
+        //liftUp();
+        delay(100_ms);
+    }
+    setMotorSpeed(liftMotor1, 0_x);
+    setMotorSpeed(liftMotor2, 0_x);
+    storePin();
+
+    // go to closest matchloader
+    moveToPoint(0_ft + 4_in, 0_ft, false, 0.4_x, 0.7_x, 1.5_s);
+    turnToAngle(-115_deg, 0.5_x);
+    moveToPose(2_ft, -1_ft, -115_deg, false, 0.5, 0.6_x, 1_x, 2_s);
+    // moveToPoint(-2_ft, -1_ft, false, 0.4_x, 0.7_x, 1.5_s);
+    // turnToAngle(90_deg, 0.5_x);
+    moveToPoint(4_ft, -1_ft, false, 0.4_x, 0.7_x, 1.5_s);
+    turnToAngle(90_deg, 0.5_x);
+
+
+    /*
     // move to black goal
     moveToPoint(0_ft, -0.5_ft, false, 0.4_x, 0.7_x, 1.5_s); 
     //releasePin();
@@ -877,6 +915,7 @@ void LeftBlueAuto(){
     turnToAngle(0_deg, 0.5_x);
     intakePins();
     moveToPose(1.8_ft, 2_ft, 30_deg, true, 0.5, 0.6_x, 1_x, 2_s); // move to flat pins
+    */
 
 
 }

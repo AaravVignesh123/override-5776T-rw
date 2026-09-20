@@ -62,6 +62,7 @@ void rest2(){
 
 const double TWIST_REST_POSITION = 0.0;
 const double TWIST_SCORING_POSITION = -900.0;  // Adjust this value based on the actual scoring position
+const double TWIST_MAX_POSITION = -1500.0;     // Tune this for the physical upper limit
 const int TWIST_POSITION_SPEED = 100;
 
 // Run this once after the claw is physically placed in its rest position.
@@ -70,6 +71,12 @@ const int TWIST_POSITION_SPEED = 100;
 void scoringReadyPosition() {
     clawTwistMotor.set_brake_mode(pros::MotorBrake::hold);
     clawTwistMotor.move_absolute(TWIST_SCORING_POSITION,
+                                 TWIST_POSITION_SPEED);
+}
+
+void clawTwistMaxPosition() {
+    clawTwistMotor.set_brake_mode(pros::MotorBrake::hold);
+    clawTwistMotor.move_absolute(TWIST_MAX_POSITION,
                                  TWIST_POSITION_SPEED);
 }
 

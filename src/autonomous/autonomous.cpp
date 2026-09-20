@@ -1,9 +1,10 @@
 #include "autonomous/odometry.hpp"
 #include "subsystems/chassis.hpp"
 #include "subsystems/intake.hpp"
-#include "subsystems/pneumatics.hpp"
 #include "autonomous/autonomous.hpp"
 #include "autonomous/odomDistance.hpp"
+#include "subsystems/lift.hpp"
+#include "subsystems/claw.hpp"
 
 // Temporary stubs while the old autonomous logic is kept as reference.
 void unloadMatchloader(Length x, bool useDelay, Angle angleOffset) {
@@ -710,26 +711,180 @@ void eighteenPointAuto() {
     moveToPoint(0_ft, -4_ft, true, 0.4_x, 0.7_x, 0.75_s);
     //clamp function
 }
-
-void BlueAutoRight(){
+*/
+void RightBlueAuto(){
     // Initiialize starting pos
-    setChassisPose(0_ft, 0_ft, 0_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
+    setChassisPose(0_ft, -1.1_ft, 180_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
     // needa set up distance sensors when ready
 
     
     // toggle
-    relative(-0.5_ft, 0.4_x);
-    moveToPoint(0_ft, 0.2_ft, true, 0.4_x, 0.7_x, 1.5_s); // move to startining point plus a bit of y
-    relative(-0.5_ft, 0.4_x);
-    moveToPoint(0_ft, 0.2_ft, true, 0.4_x, 0.7_x, 1.5_s); // move to starting point plus a bit of y
+    relative(-0.5_ft, 1.5_x);
+    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to startining point plus a bit of y
+    relative(-0.5_ft, 1.5_x);
+    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
 
-    // move to black goal
-    movetoPoint(0_ft, -0.1_ft, false, 0.4_x, 0.7_x, 1.5_s); // move to black goal
-    turnToAngle(-30_deg, 0.5_x); // turn to face goal
-    moveToPoint()
+    
+    moveToPoint(0_ft, 0_ft, false, 0.4_x, 0.7_x, 1.5_s); 
+    //releasePin();
+    Time startTime = getTime();
+    while (getTime() - startTime < 0.7_s) {
+        liftUp();
+        //releasePin();
+        //liftUp();
+        delay(100_ms);
+    }
+
+    setMotorSpeed(liftMotor1, 0_x);
+    setMotorSpeed(liftMotor2, 0_x);
+    scoringReadyPosition();
+    turnToAngle(90_deg, 0.5_x);
+    moveToPose(-1.6_ft - 3_in, 0_ft+1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to black goal
+    delay(650_ms);
+    Time startTime2 = getTime();
+    while (getTime() - startTime2 < 0.4_s) {
+        liftDown();
+        //releasePin();
+        //liftUp();
+        delay(100_ms);
+    }
+    setMotorSpeed(liftMotor1, 0_x);
+    setMotorSpeed(liftMotor2, 0_x);
+    storePin();
+
+    /*
+
+    relative(6_in, 0.4_x);
+    turnToAngle(65_deg, 0.5_x);
+    moveToPose(-1_ft, -2_ft, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to standing pin
+    turnToAngle(45_deg, 0.5_x);
+    moveToPose(-4_ft, 0_ft, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to standing pin
+    turnToAngle(-90_deg, 0.5_x);
+    
+    
+    //turnToAngle(-30_deg, 0.5_x);  turn to face goal
+    
+    relative(6_in, 0.4_x);
+    turnToAngle(80_deg, 0.5_x);
+    moveToPose(-2_ft, 2_ft, 80_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to standing pin
+
+    //pick up standing pin
+    Time startTime4 = getTime();
+    while(getTime() - startTime4 < 0.2_s) {
+        liftUp();
+        //releasePin();
+        //liftUp();
+        delay(100_ms);
+    }
+    moveToPose(-2_ft - 6_in, 2_ft + 2_in, 80_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to standing pin
+    Time startTime5 = getTime();
+    while(getTime() - startTime5 < 0.5_s) {
+        liftDown();
+        releasePin();
+        //liftUp();
+        delay(250_ms);
+    }
+    releasePin();
+    rest();
+    scoringReadyPosition();
+    Time startTime6 = getTime();
+    while(getTime() - startTime6 < 0.5_s) {
+        liftUp();
+        //releasePin();
+        //liftUp();
+        delay(250_ms);
+    }
+
+    //move to goal
+    
+    while (getTime() - startTime < 1.5_s) {
+        liftUp();
+        releasePin();
+        //liftUp();
+        delay(250_ms);
+    }
+        
+    turnToAngle(180_deg, 0.5_x);
+    moveToPose(-1.6_ft, 0_ft + 1_in, 0_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to blue goal
+    storePin();
+    
+    // ready to go to right standing pin
+    clawTwistMaxPosition();
+    relative(3_in, 0.4_x);
+    rest();
+
+    //Go to right standing pin
+    turnToAngle(20_deg, 0.5_x);
+    //neeed to look for lift up and release pin functions
+    moveToPose(-4_ft, 0_ft, -90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to right standing pin
+    Time startTime7 = getTime();
+    while (getTime() - startTime7 < 1.5_s) {
+        liftDown();
+        releasePin();
+        //liftUp();
+        delay(250_ms);
+    }
+    turnToAngle(90_deg, 0.5_x);
+    Time startTime8 = getTime();
+    while (getTime() - startTime8 < 1.5_s) {
+        liftUp();
+        //releasePin();
+        //liftUp();
+        delay(250_ms);
+    }
+    moveToPose(-1.6_ft, 0_ft + 1_in, -90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to blue goal
+    storePin();
+    */
 
 }
-*/
+void LeftBlueAuto(){
+    // Initiialize starting pos
+    setChassisPose(0_ft, -1.1_ft, 180_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
+    // needa set up distance sensors when ready
+
+    
+    // toggle
+    relative(-0.5_ft, 1_x);
+    moveToPoint(0_ft, -1.1_ft - 3_in, true, 1_x, 1.3_x, 1.5_s); // move to startining point plus a bit of y
+    relative(-0.5_ft, 1.5_x);
+    moveToPoint(0_ft, -1.1_ft - 5_in, true, 1.5_x, 1.6_x, 1.5_s); // move to starting point plus a bit of y
+
+    // move to black goal
+    moveToPoint(0_ft, -0.5_ft, false, 0.4_x, 0.7_x, 1.5_s); 
+    //releasePin();
+    Time startTime = getTime();
+    while (getTime() - startTime < 1.5_s) {
+        liftUp();
+        releasePin();
+        //liftUp();
+        delay(250_ms);
+    }
+
+    setMotorSpeed(liftMotor1, 0_x);
+    setMotorSpeed(liftMotor2, 0_x);
+    scoringReadyPosition();
+    moveToPose(-1.6_ft, 0_ft + 1_in, -90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to black goal
+    storePin();
+    delay(500_ms);
+    //turnToAngle(-30_deg, 0.5_x);  turn to face goal
+
+    scoringReady2();
+    relative(3_in, 0.4_x);
+    rest();
+
+    while (getTime() - startTime < 1.5_s) {
+        liftDown();
+        //releasePin();
+        //liftUp();
+        delay(250_ms);
+    }
+    turnToAngle(0_deg, 0.5_x);
+    intakePins();
+    moveToPose(1.8_ft, 2_ft, 30_deg, true, 0.5, 0.6_x, 1_x, 2_s); // move to flat pins
+
+
+}
+
 
 
 

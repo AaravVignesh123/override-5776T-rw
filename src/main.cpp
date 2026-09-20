@@ -50,174 +50,14 @@ double arrMean(double arr[], int arrLength) {
 
 
 enum AutonChars {
-	LEFT = 'l',
-	LEFT_AWP = 'L',
-	RIGHT = 'r',
-	RIGHT_AWP = 'R',
-	SOLO_AWP = 'W',
-	SKILLS = 's',
-	TURN_PID = 't',
-	DRIVE_PID = 'd',
-    MAX_SPEED_AUTON = 'S',
-	TESTING_AUTON = 'e',
+	RIGHT_BLUE_AUTO = 'b'
 };
 
-char auton = SOLO_AWP;
-bool specialAutonMode = false;
-
-// Initialize auton selector menus
-void autonSelector();
-void matchAutons();
-void leftAuton();
-void rightAuton();
-void debugAutons();
-void noneButton();
-void setSpecialAutonMode();
-void unsetSpecialAutonMode();
-
-// Auton selector callback functions
-void leftSelect() {
-	pros::lcd::set_text(2, "Selected Left");
-	pros::lcd::set_text(3, "Back / 4 ball / 7 ball");
-    pros::lcd::set_text(4, specialAutonMode ? "Mode: <<<<<" : "Mode: >>>>>");
-	pros::lcd::register_btn0_cb(leftAuton);
-	pros::lcd::register_btn1_cb(setSpecialAutonMode);
-	pros::lcd::register_btn2_cb(unsetSpecialAutonMode);
-	auton = LEFT;
-}
-void leftAwpSelect() {
-	pros::lcd::set_text(2, "Selected Left AWP");
-	pros::lcd::set_text(3, "Back / 9 ball / 7 ball");
-    pros::lcd::set_text(4, specialAutonMode ? "Mode: <<<<<" : "Mode: >>>>>");
-	pros::lcd::register_btn0_cb(leftAuton);
-	pros::lcd::register_btn1_cb(setSpecialAutonMode);
-	pros::lcd::register_btn2_cb(unsetSpecialAutonMode);
-	auton = LEFT_AWP;
-}
-void rightSelect() {
-	pros::lcd::set_text(2, "Selected Right");
-	pros::lcd::set_text(3, "Back / 4 ball / 7 ball");
-    pros::lcd::set_text(4, specialAutonMode ? "Mode: <<<<<" : "Mode: >>>>>");
-	pros::lcd::register_btn0_cb(rightAuton);
-	pros::lcd::register_btn1_cb(setSpecialAutonMode);
-	pros::lcd::register_btn2_cb(unsetSpecialAutonMode);
-	auton = RIGHT;
-}
-void rightAwpSelect() {
-	pros::lcd::set_text(2, "Selected Right AWP");
-	pros::lcd::set_text(3, "Back / 9 ball / 7 ball");
-	pros::lcd::register_btn0_cb(rightAuton);
-	pros::lcd::register_btn1_cb(noneButton);
-	pros::lcd::register_btn2_cb(noneButton);
-	auton = RIGHT_AWP;
-}
-void soloAwpSelect() {
-	pros::lcd::set_text(2, "Selected Solo AWP");
-	pros::lcd::set_text(3, "Back /    /");
-	pros::lcd::register_btn0_cb(matchAutons);
-	pros::lcd::register_btn1_cb(noneButton);
-	pros::lcd::register_btn2_cb(noneButton);
-	auton = SOLO_AWP;
-}
-void skillsSelect() {
-	pros::lcd::set_text(2, "Selected Skills");
-	pros::lcd::set_text(3, "Back /    /");
-	pros::lcd::register_btn0_cb(autonSelector);
-	pros::lcd::register_btn1_cb(noneButton);
-	pros::lcd::register_btn2_cb(noneButton);
-	auton = SKILLS;
-}
-void turnTuningSelect() {
-	pros::lcd::set_text(2, "Selected Turn Tuning");
-	pros::lcd::set_text(3, "Back /    /");
-	pros::lcd::register_btn0_cb(debugAutons);
-	pros::lcd::register_btn1_cb(noneButton);
-	pros::lcd::register_btn2_cb(noneButton);
-	auton = TURN_PID;
-}
-void driveTuningSelect() {
-	pros::lcd::set_text(2, "Selected Drive Tuning");
-	pros::lcd::set_text(3, "Back /    /");
-	pros::lcd::register_btn0_cb(debugAutons);
-	pros::lcd::register_btn1_cb(noneButton);
-	pros::lcd::register_btn2_cb(noneButton);
-	auton = DRIVE_PID;
-}
-void testingSelect() {
-	pros::lcd::set_text(2, "Selected Testing Auton");
-	pros::lcd::set_text(3, "Back /    /");
-	pros::lcd::register_btn0_cb(debugAutons);
-	pros::lcd::register_btn1_cb(noneButton);
-	pros::lcd::register_btn2_cb(noneButton);
-	auton = TESTING_AUTON;
-}
-
-// Auton selector menus
+char auton = RIGHT_BLUE_AUTO; 
+bool fullScoringPosition = false;
 void autonSelector() {
-	pros::lcd::set_text(1, "Auton mode selector panel:");
-	pros::lcd::set_text(2, "Match / Skills / Debug");
-	pros::lcd::clear_line(3);
-	pros::lcd::register_btn0_cb(matchAutons);
-	pros::lcd::register_btn1_cb(skillsSelect);
-	pros::lcd::register_btn2_cb(debugAutons);
-}
-
-void withAllianceAutons() {
-	pros::lcd::set_text(1, "Single side auton selector panel:");
-	pros::lcd::set_text(2, "Left / Right / Back");
-	pros::lcd::clear_line(3);
-	pros::lcd::register_btn0_cb(leftAuton);
-	pros::lcd::register_btn1_cb(rightAuton);
-	pros::lcd::register_btn2_cb(matchAutons);
-}
-
-void matchAutons() {
-	pros::lcd::set_text(1, "Match auton selector panel:");
-	pros::lcd::set_text(2, "Other / Solo AWP / Back");
-	pros::lcd::clear_line(3);
-	pros::lcd::register_btn0_cb(withAllianceAutons);
-	pros::lcd::register_btn1_cb(soloAwpSelect);
-	pros::lcd::register_btn2_cb(autonSelector);
-}
-
-void leftAuton() {
-	pros::lcd::set_text(1, "Left auton selector panel:");
-	pros::lcd::set_text(2, "Normal / AWP / Back");
-	pros::lcd::clear_line(3);
-    pros::lcd::clear_line(4);
-	pros::lcd::register_btn0_cb(leftSelect);
-	pros::lcd::register_btn1_cb(leftAwpSelect);
-	pros::lcd::register_btn2_cb(withAllianceAutons);
-}
-
-void rightAuton() {
-	pros::lcd::set_text(1, "Right auton selector panel:");
-	pros::lcd::set_text(2, "Normal / AWP / Back");
-	pros::lcd::clear_line(3);
-    pros::lcd::clear_line(4);
-	pros::lcd::register_btn0_cb(rightSelect);
-	pros::lcd::register_btn1_cb(rightAwpSelect);
-	pros::lcd::register_btn2_cb(withAllianceAutons);
-}
-
-void debugAutons() {
-	pros::lcd::set_text(1, "Debug auton selector panel:");
-	pros::lcd::set_text(2, "Turn PID / Drive PID / Testing");
-	pros::lcd::clear_line(3);
-	pros::lcd::register_btn0_cb(turnTuningSelect);
-	pros::lcd::register_btn1_cb(driveTuningSelect);
-	pros::lcd::register_btn2_cb(testingSelect);
-}
-
-void noneButton() {}
-
-void setSpecialAutonMode() {
-    specialAutonMode = true;
-    pros::lcd::set_text(4, specialAutonMode ? "Mode: <<<<<" : "Mode: >>>>>");
-}
-void unsetSpecialAutonMode() {
-    specialAutonMode = false;
-    pros::lcd::set_text(4, specialAutonMode ? "Mode: <<<<<" : "Mode: >>>>>");
+	pros::lcd::set_text(1, "Selected auton:");
+	pros::lcd::set_text(2, "Right Blue");
 }
 
 
@@ -307,6 +147,8 @@ void initialize() {
 	//trackingWheelLR.reset();
 	trackingWheelFB.reset();
 	chassis.calibrate();
+	//translationTuning();
+	//turnTuning();
 
 
 	while (imu.is_calibrating()) {
@@ -328,54 +170,24 @@ void initialize() {
     pros::c::adi_pin_mode(kPneumaticMiddleDescorePort, OUTPUT);
 
 	autonSelector();
-	//translationTuning();
+	
 	delay(1_s);
 }
 
 void disabled() {}
 
 void competition_initialize() {}
-/*
+
 void autonomous() {
 	allMotors.set_brake_mode_all(pros::MotorBrake::hold); // for tighter movements
-    intakeTop.set_brake_mode(pros::MotorBrake::hold);
-
     autonStartTime = getTime();
 
 	switch (auton) {
-		case LEFT:
-			left(specialAutonMode);
-			break;
-		case LEFT_AWP:
-			leftAwp(specialAutonMode);
-			break;
-		case RIGHT:
-			right(specialAutonMode);
-			break;
-		case RIGHT_AWP:
-			rightAwp(specialAutonMode);
-			break;
-		case SOLO_AWP:
-			soloAwp2();
-			break;
-		case SKILLS:
-		    skills(); //skillsBasic();
-			break;
-		case TURN_PID:
-			turnTuning();
-			break;
-		case DRIVE_PID:
-			translationTuning();
-			break;
-        case MAX_SPEED_AUTON:
-            maxSpeedMeasuring();
-            break;
-		case TESTING_AUTON:
-			testingAuton();
+        case RIGHT_BLUE_AUTO:
+            RightBlueAuto();
 			break;
 	}
 }
-*/
 
 void opcontrol() {
 	Time init = getTime() / 1000;
@@ -593,13 +405,14 @@ void opcontrol() {
 
 		// Claw controls
 		// after pollControllerDigital(...) calls
-		if (bButton.held) {
+		if (aButton.held) {
     		storePin();
 		} else if (yButton.held) {
     		releasePin();
 		} else {
     		setMotorSpeed(clawMotor, 0_x);
 		}
+		
 
 		// Intake controls
 		if (r1Button.held) {
@@ -610,15 +423,37 @@ void opcontrol() {
 			stopIntake();
 			intakeCommand = STOPPED;
 		}
+		
 		if (l1Button.held) {
 			scoringReadyPosition();
 		} else if (l2Button.held) {
 			restPosition();
+		} else if (xButton.held) {
+			clawTwistMaxPosition();
 		}
+			
+		/*	
+		if (l1Button.held) {
+			if (xButton.held) {
+				fullScoringPosition = true;
+			}
+
+			if (fullScoringPosition) {
+				scoringReady2();
+			} else {
+				scoringReadyPosition();
+			}
+		} else if (l2Button.held) {
+			fullScoringPosition = false;
+			restPosition();
+		} else {
+			fullScoringPosition = false;
+		}
+			*/
 		// Lift controls
-		if (upButton.held) {
+		if (bButton.held) {
 			liftUp();
-		} else if (downButton.held) {
+		} else if (rightButton.held) {
 			liftDown();
 		} else {
 			setMotorSpeed(liftMotor1, 0_x);
@@ -652,7 +487,7 @@ void opcontrol() {
         //     pneumaticToggle(kPneumaticDescorePort, true);
         // }
 
-        if (enableMacros && auton != SKILLS && leftButton.held) {
+        if (enableMacros && leftButton.held) {
             hookDescoreWing();
 
             // Effectively have a 1s timeout on the final wing motion

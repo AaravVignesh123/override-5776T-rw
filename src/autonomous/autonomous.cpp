@@ -739,7 +739,7 @@ void RightBlueAuto(){
     setMotorSpeed(liftMotor2, 0_x);
     scoringReadyPosition();
     turnToAngle(90_deg, 0.5_x);
-    moveToPose(-1.6_ft - 3_in, 0_ft+1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to black goal
+    moveToPose(-1.6_ft - 3_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to black goal
     delay(650_ms);
     Time startTime2 = getTime();
     while (getTime() - startTime2 < 0.4_s) {
@@ -751,6 +751,15 @@ void RightBlueAuto(){
     setMotorSpeed(liftMotor1, 0_x);
     setMotorSpeed(liftMotor2, 0_x);
     storePin();
+
+    // go to matchloader
+    moveToPoint(0_ft - 4_in, 0_ft, false, 0.4_x, 0.7_x, 1.5_s);
+    turnToAngle(65_deg, 0.5_x);
+    moveToPose(-2_ft, -1_ft, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s);
+    // moveToPoint(-2_ft, -1_ft, false, 0.4_x, 0.7_x, 1.5_s);
+    // turnToAngle(90_deg, 0.5_x);
+    moveToPoint(-4_ft, -1_ft, false, 0.4_x, 0.7_x, 1.5_s);
+    turnToAngle(-90_deg, 0.5_x);
 
     /*
 

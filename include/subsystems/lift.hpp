@@ -6,3 +6,5 @@ extern pros::Motor liftMotor2;
 
 void liftUp();
 void liftDown();
+void liftToPosition(double position, int32_t velocity = 100);
+void tareLiftPosition();

@@ -900,7 +900,58 @@ void RightAuto(){
 
 }
 
+void SoloAWP(){
+    // Initiialize starting pos
+    setChassisPose(0_ft, -1.1_ft, 180_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
+    // needa set up distance sensors when ready
 
+    
+    // toggle
+    relative(-0.5_ft, 1.8_x);
+    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to startining point plus a bit of y
+    relative(-0.5_ft, 1.8_x);
+    moveToPoint(0_ft, -1.1_ft - 9_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
+
+
+    moveToPoint(0_ft, 1_in, false, 0.4_x, 0.7_x, 1.5_s); 
+    //releasePin();
+    Time startTime = getTime();
+    while (getTime() - startTime < 0.3_s) {
+        liftUp();
+        //releasePin();
+        //liftUp();
+        delay(100_ms);
+    }
+
+    setMotorSpeed(liftMotor1, 0_x);
+    setMotorSpeed(liftMotor2, 0_x);
+    scoringReadyPosition();
+    turnToAngle(-90_deg, 0.5_x);
+    moveToPose(1.6_ft + 3_in, 0_ft + 3_in, -90_deg, false, 0.5, 0.6_x, 1_x, 1.5_s); // move to blue goal
+    delay(650_ms);
+    Time startTime2 = getTime();
+    while (getTime() - startTime2 < 0.4_s) {
+        liftDown();
+        //releasePin();
+        //liftUp();
+        delay(100_ms);
+    }
+    setMotorSpeed(liftMotor1, 0_x);
+    setMotorSpeed(liftMotor2, 0_x);
+    storePin();
+    moveToPoint(1.6_ft + 3_in, 0_ft + 8_in, false, 0.5, 0.6_x, 1_x, 0.5_s);
+    turnToAngle(-45_deg, 0.5_x);
+    moveToPose(3.8_ft, 0_ft + 3_in, false, 0.4_x, 0.7_x, 2_s);
+    delay(650_ms);
+    Time startTime2 = getTime();
+    while (getTime() - startTime2 < 0.4_s) {
+        liftUp();
+        //I need to intake the pin
+        //liftUp();
+        delay(100_ms);
+    }
+
+}
 
 
 // Skills Route -------------------------------------------

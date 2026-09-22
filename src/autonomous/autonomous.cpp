@@ -710,6 +710,7 @@ void eighteenPointAuto() {
     //clamp function
 }
 */
+
 void LeftAuto(){
     // Initiialize starting pos
     setChassisPose(0_ft, -1.1_ft+2_in, 180_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose

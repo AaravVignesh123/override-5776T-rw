@@ -24,8 +24,6 @@ void hookDescoreWing(Length x, Length y) {
 
 
 
-
-
 /*
 // Helper Functions ---------------------------------------
 void unloadMatchloader(Length x, bool useDelay, Angle angleOffset) {

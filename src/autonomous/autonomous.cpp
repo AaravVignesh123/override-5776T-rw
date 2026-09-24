@@ -938,18 +938,59 @@ void SoloAWP(){
     setMotorSpeed(liftMotor1, 0_x);
     setMotorSpeed(liftMotor2, 0_x);
     storePin();
-    moveToPoint(1.6_ft + 3_in, 0_ft + 8_in, false, 0.5, 0.6_x, 1_x, 0.5_s);
-    turnToAngle(-45_deg, 0.5_x);
-    moveToPose(3.8_ft, 0_ft + 3_in, false, 0.4_x, 0.7_x, 2_s);
+    relative(-5_in, 2_x); // added code
+    turnToAngle(-135_deg, 0.5_x);
+    moveToPose(2_ft, -1_ft, -90_deg, false, 0.4_x, 0.7_x, 0.5_s); // between alliance goal and the border
+    clawTwistMaxPosition();
+    moveToPose(0_ft, 1_ft + 10_in, -90_deg, false, 0.4_x, 0.7_x, 1.5_s); //at the cup and claw
+    storePin();
+    restPosition();
+    scoringreadyPostiion(); // uhh I'm not too sure if this is how you code it but it's supposed to be getting the cup with the pin at this point
     delay(650_ms);
     Time startTime2 = getTime();
     while (getTime() - startTime2 < 0.4_s) {
         liftUp();
-        //I need to intake the pin
         //liftUp();
         delay(100_ms);
     }
-
+    turnToAngle(90_deg, 0.5_x);
+    moveToPoint(2_ft + 3_in, 0_ft + 3_in, -90_deg, false, 0.5, 0.6_x, 1_x, 1.5_s); // move to alliance color goal
+    delay(650_ms);
+    Time startTime2 = getTime();
+    while (getTime() - startTime2 < 0.4_s) {
+        liftDown();
+        //releasePin();
+        //liftUp();
+        delay(100_ms);
+    }
+    setMotorSpeed(liftMotor1, 0_x);
+    setMotorSpeed(liftMotor2, 0_x);
+    storePin(); // pin and cup dropped in the alliance goal, hopefully
+    turnToAngle(0_deg, 0.5_x);
+    moveToPose(2_ft, 2_ft, 0_deg, false, 0.4_x, 0.7_x, 1.5_x); // at the pin and cup
+    storePin();
+    restPosition();
+    scoringreadyPostiion(); // once again not sure if this is how you code it but it's supposed to be getting the cup with the pin at this point
+    delay(650_ms);
+    Time startTime2 = getTime();
+    while (getTime() - startTime2 < 0.4_s) {
+        liftUp();
+        //liftUp();
+        delay(100_ms);
+    }
+    turnToAngle(135_deg, 0.5_x); // facing the black goal
+    turnToPose(-2_ft, 0_ft + 3_in, 90_deg, false, 0.4_x, 0.7_x, 1.5_s); // at the black goal
+    delay(650_ms);
+    Time startTime2 = getTime();
+    while (getTime() - startTime2 < 0.4_s) {
+        liftDown();
+        //releasePin();
+        //liftUp();
+        delay(100_ms);
+    }
+    setMotorSpeed(liftMotor1, 0_x);
+    setMotorSpeed(liftMotor2, 0_x);
+    storePin(); // should've released the pin...
 }
 
 

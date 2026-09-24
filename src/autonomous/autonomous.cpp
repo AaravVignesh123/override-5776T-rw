@@ -1,3 +1,4 @@
+#include "main.h"
 #include "autonomous/odometry.hpp"
 #include "subsystems/chassis.hpp"
 #include "subsystems/intake.hpp"
@@ -22,7 +23,25 @@ void hookDescoreWing(Length x, Length y) {
 #define ALIGN_TO_MIDDLE_GOAL(time) do { (void)(time); } while (0)
 
 
+//Helper Functions --------------
 
+// Lifting lift for a certain amount of time
+// sets defualt delay to 100_ms for convienience, but can be changed if needed
+// hmmmm should i make this function lift up and down sure
+
+
+
+void liftingLift(enum liftUP liftDirection, Time timeWanted, Time delayTime = 100_ms) {
+    Time startTime = getTime();
+    while (getTime() - startTime < timeWanted) {
+        if (liftDirection == LIFT_UP) {
+            liftUp();
+        } else {
+            liftDown();
+        }
+        delay(delayTime);
+    }
+}
 
 /*
 // Helper Functions ---------------------------------------
@@ -859,7 +878,7 @@ void RightAuto(){
     moveToPoint(0_ft, -1.1_ft - 9_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
 
 
-    moveToPoint(0_ft, 1_in, false, 0.4_x, 0.7_x, 1.5_s); 
+    moveToPoint(0_ft, 1_in, false, 0.4_x, 0.7_x, 1.5_s); //right alliance goal
     //releasePin();
     Time startTime = getTime();
     while (getTime() - startTime < 0.3_s) {
@@ -912,7 +931,7 @@ void SoloAWP(){
     moveToPoint(0_ft, -1.1_ft - 9_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
 
 
-    moveToPoint(0_ft, 1_in, false, 0.4_x, 0.7_x, 1.5_s); 
+    moveToPoint(0_ft, 1_in, false, 0.4_x, 0.7_x, 1.5_s); //right alliance goal
     //releasePin();
     Time startTime = getTime();
     while (getTime() - startTime < 0.3_s) {
@@ -935,29 +954,29 @@ void SoloAWP(){
         //liftUp();
         delay(100_ms);
     }
-    setMotorSpeed(liftMotor1, 0_x);
+    setMotorSpeed(liftMotor1, 0_x); 
     setMotorSpeed(liftMotor2, 0_x);
     storePin();
     relative(-5_in, 2_x); // added code
     turnToAngle(-135_deg, 0.5_x);
-    moveToPose(2_ft, -1_ft, -90_deg, false, 0.4_x, 0.7_x, 0.5_s); // between alliance goal and the border
+    moveToPose(2_ft, -1_ft, -90_deg, false, 0.4, 0.7_x, 1.0_x, 0.5_s); // between alliance goal and the border
     clawTwistMaxPosition();
-    moveToPose(0_ft, 1_ft + 10_in, -90_deg, false, 0.4_x, 0.7_x, 1.5_s); //at the cup and claw
+    moveToPose(0_ft, 1_ft + 10_in, -90_deg, false, 0.4, 0.7_x, 1.0_x, 1.5_s); //at the cup and claw
     storePin();
     restPosition();
-    scoringreadyPostiion(); // uhh I'm not too sure if this is how you code it but it's supposed to be getting the cup with the pin at this point
+    scoringReadyPosition(); // uhh I'm not too sure if this is how you code it but it's supposed to be getting the cup with the pin at this point
     delay(650_ms);
-    Time startTime2 = getTime();
-    while (getTime() - startTime2 < 0.4_s) {
+    Time startTime66 = getTime();
+    while (getTime() - startTime66 < 0.4_s) {
         liftUp();
         //liftUp();
         delay(100_ms);
     }
-    turnToAngle(90_deg, 0.5_x);
-    moveToPoint(2_ft + 3_in, 0_ft + 3_in, -90_deg, false, 0.5, 0.6_x, 1_x, 1.5_s); // move to alliance color goal
+    turnToAngle(90_deg, 0.5_x); // yo why the angles different
+    moveToPose(2_ft + 3_in, 0_ft + 3_in, -90_deg, false, 0.5, 0.6_x, 1_x, 1.5_s); // move to alliance color goal
     delay(650_ms);
-    Time startTime2 = getTime();
-    while (getTime() - startTime2 < 0.4_s) {
+    Time startTime67 = getTime();
+    while (getTime() - startTime67 < 0.4_s) {
         liftDown();
         //releasePin();
         //liftUp();
@@ -967,22 +986,21 @@ void SoloAWP(){
     setMotorSpeed(liftMotor2, 0_x);
     storePin(); // pin and cup dropped in the alliance goal, hopefully
     turnToAngle(0_deg, 0.5_x);
-    moveToPose(2_ft, 2_ft, 0_deg, false, 0.4_x, 0.7_x, 1.5_x); // at the pin and cup
+    moveToPose(2_ft, 2_ft, 90_deg, false, 0.4, 0.7_x, 1.0_x, 1.5_s); // at the pin and cup
     storePin();
     restPosition();
-    scoringreadyPostiion(); // once again not sure if this is how you code it but it's supposed to be getting the cup with the pin at this point
+    scoringReadyPosition(); // once again not sure if this is how you code it but it's supposed to be getting the cup with the pin at this point
     delay(650_ms);
-    Time startTime2 = getTime();
-    while (getTime() - startTime2 < 0.4_s) {
+    Time startTime88 = getTime();
+    while (getTime() - startTime88 < 0.4_s) {
         liftUp();
-        //liftUp();
         delay(100_ms);
     }
     turnToAngle(135_deg, 0.5_x); // facing the black goal
-    turnToPose(-2_ft, 0_ft + 3_in, 90_deg, false, 0.4_x, 0.7_x, 1.5_s); // at the black goal
+    moveToPose(-2_ft, 0_ft + 3_in, 90_deg, false, 0.4, 0.7_x, 1.0_x, 1.5_s); // at the black goal
     delay(650_ms);
-    Time startTime2 = getTime();
-    while (getTime() - startTime2 < 0.4_s) {
+    Time startTime68 = getTime();
+    while (getTime() - startTime68 < 0.4_s) {
         liftDown();
         //releasePin();
         //liftUp();

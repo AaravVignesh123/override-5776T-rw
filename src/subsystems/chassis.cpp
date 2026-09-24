@@ -6,10 +6,10 @@
 
 const int8_t kDriveLFPort = -16; //idk if negative
 //const int8_t kDriveLCPort = -13;
-const int8_t kDriveLBPort = -12;
+const int8_t kDriveLBPort = -13;
 const int8_t kDriveRFPort = 15;
 // const int8_t kDriveRCPort = 17;
-const int8_t kDriveRBPort = 14;
+const int8_t kDriveRBPort = 17;
 pros::Motor driveLF(kDriveLFPort);
 //pros::Motor driveLC(kDriveLCPort);
 pros::Motor driveLB(kDriveLBPort);

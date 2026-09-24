@@ -50,14 +50,16 @@ double arrMean(double arr[], int arrLength) {
 
 
 enum AutonChars {
-	RIGHT_BLUE_AUTO = 'b'
+	LEFT_AUTO = 'l',
+    RIGHT_AUTO = 'r'
 };
 
-char auton = RIGHT_BLUE_AUTO; 
+char auton = LEFT_AUTO; 
 bool fullScoringPosition = false;
 void autonSelector() {
 	pros::lcd::set_text(1, "Selected auton:");
-	pros::lcd::set_text(2, "Right Blue");
+	pros::lcd::set_text(2, "Left Auto");
+    pros::lcd::set_text(3, "Right Auto");
 }
 
 
@@ -149,6 +151,8 @@ void initialize() {
 	chassis.calibrate();
 	//translationTuning();
 	//turnTuning();
+    liftToPosition(720);
+
 
 
 	while (imu.is_calibrating()) {
@@ -183,9 +187,12 @@ void autonomous() {
     autonStartTime = getTime();
 
 	switch (auton) {
-        case RIGHT_BLUE_AUTO:
-            RightBlueAuto();
+        case LEFT_AUTO:
+            LeftAuto();
 			break;
+        case RIGHT_AUTO:
+            RightAuto();
+            break;
 	}
 }
 
@@ -487,13 +494,7 @@ void opcontrol() {
         //     pneumaticToggle(kPneumaticDescorePort, true);
         // }
 
-        if (enableMacros && leftButton.held) {
-            hookDescoreWing();
-
-            // Effectively have a 1s timeout on the final wing motion
-            delay(1_s);
-            chassis.cancelAllMotions();
-		}
+        
 		
 		// Anti tip protection macro
         // Anti tip is currently disabled

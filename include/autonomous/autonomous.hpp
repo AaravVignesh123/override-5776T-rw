@@ -10,8 +10,8 @@ void hookDescoreWing(Length x = 0_ft, Length y = 21_in);
 
 //Routes 
 void eighteenPointAuto();
-void RightBlueAuto();
-void LeftBlueAuto();
+void LeftAuto();
+void RightAuto();
 // For turn pid
 void turnTuning(); 
 
@@ -23,3 +23,5 @@ void maxSpeedMeasuring();
 
 // For testing experimental functions
 void testingAuton();
+
+void SoloAWP();

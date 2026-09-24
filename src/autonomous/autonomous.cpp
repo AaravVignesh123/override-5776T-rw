@@ -718,17 +718,10 @@ void LeftAuto(){
 
     
     // toggle
-<<<<<<< HEAD
-    relative(-0.5_ft, 1.5_x);
-    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
-    relative(-0.5_ft, 1.5_x);
-    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
-=======
     relative(-0.5_ft, 0.4_x);
     moveToPoint(0_ft, -1.1_ft - 10_in, true, 1.7_x, 1.8_x, 1_s); // move to startining point plus a bit of y
     relative(-0.5_ft, 0.4_x);
     moveToPoint(0_ft, -1.1_ft - 10_in, true, 1.7_x, 1.8_x, 1_s); // move to starting point plus a bit of y
->>>>>>> 701251d8f302c9d03e835f8b6f8682b7e2fbfd9c
 
     
     moveToPoint(0_ft, 1_in, false, 0.4_x, 0.7_x, 1.5_s); 
@@ -745,13 +738,8 @@ void LeftAuto(){
     setMotorSpeed(liftMotor2, 0_x);
     scoringReadyPosition();
     turnToAngle(90_deg, 0.5_x);
-<<<<<<< HEAD
-    moveToPose(-1.6_ft - 3_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to blue goal
-    delay(650_ms);
-=======
     moveToPose(-1.6_ft - 2_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to black goal
     //delay(750_s);
->>>>>>> 701251d8f302c9d03e835f8b6f8682b7e2fbfd9c
     Time startTime2 = getTime();
     while (getTime() - startTime2 < 0.3_s) {
         liftDown();
@@ -771,15 +759,6 @@ void LeftAuto(){
         delay(50_ms);
     }
     /*
-<<<<<<< HEAD
-    relative(6_in, 0.4_x);
-    turnToAngle(65_deg, 0.5_x);
-    moveToPose(-1_ft, -2_ft, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to standing pin
-    turnToAngle(45_deg, 0.5_x);
-    moveToPose(-4_ft, 0_ft, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to standing pin
-    turnToAngle(-90_deg, 0.5_x);
-=======
->>>>>>> 701251d8f302c9d03e835f8b6f8682b7e2fbfd9c
     
     
     relative(4_in, 0.4_x);
@@ -874,54 +853,6 @@ void RightAuto(){
 
     
     // toggle
-<<<<<<< HEAD
-    relative(-0.5_ft, 1.5_x);
-    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to startining point plus a bit of y
-    relative(-0.5_ft, 1.5_x);
-    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
-
-
-    moveToPoint(0_ft, 0_ft, false, 0.4_x, 0.7_x, 1.5_s); 
-    //releasePin();
-    Time startTime = getTime();
-    while (getTime() - startTime < 0.7_s) {
-        liftUp();
-        //releasePin();
-        //liftUp();
-        delay(100_ms);
-    }
-
-    setMotorSpeed(liftMotor1, 0_x);
-    setMotorSpeed(liftMotor2, 0_x);
-    scoringReadyPosition();
-    turnToAngle(-90_deg, 0.5_x);
-    moveToPose(1.6_ft + 3_in, 0_ft + 1_in, -90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to blue goal
-    delay(650_ms);
-    Time startTime2 = getTime();
-    while (getTime() - startTime2 < 0.4_s) {
-        liftDown();
-        //releasePin();
-        //liftUp();
-        delay(100_ms);
-    }
-    setMotorSpeed(liftMotor1, 0_x);
-    setMotorSpeed(liftMotor2, 0_x);
-    storePin();
-
-    // go to closest matchloader
-    moveToPoint(0_ft + 4_in, 0_ft, false, 0.4_x, 0.7_x, 1.5_s);
-    turnToAngle(-115_deg, 0.5_x);
-    moveToPose(2_ft, -1_ft, -115_deg, false, 0.5, 0.6_x, 1_x, 2_s);
-    // moveToPoint(-2_ft, -1_ft, false, 0.4_x, 0.7_x, 1.5_s);
-    // turnToAngle(90_deg, 0.5_x);
-    moveToPoint(4_ft, -1_ft, false, 0.4_x, 0.7_x, 1.5_s);
-    turnToAngle(90_deg, 0.5_x);
-
-
-    /*
-    // move to black goal
-    moveToPoint(0_ft, -0.5_ft, false, 0.4_x, 0.7_x, 1.5_s); 
-=======
     relative(-0.5_ft, 1.8_x);
     moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to startining point plus a bit of y
     relative(-0.5_ft, 1.8_x);
@@ -929,7 +860,6 @@ void RightAuto(){
 
 
     moveToPoint(0_ft, 1_in, false, 0.4_x, 0.7_x, 1.5_s); 
->>>>>>> 701251d8f302c9d03e835f8b6f8682b7e2fbfd9c
     //releasePin();
     Time startTime = getTime();
     while (getTime() - startTime < 0.3_s) {
@@ -952,11 +882,6 @@ void RightAuto(){
         //liftUp();
         delay(100_ms);
     }
-<<<<<<< HEAD
-    turnToAngle(0_deg, 0.5_x);
-    intakePins();
-    moveToPose(1.8_ft, 2_ft, 30_deg, true, 0.5, 0.6_x, 1_x, 2_s); // move to flat pins
-=======
     setMotorSpeed(liftMotor1, 0_x);
     setMotorSpeed(liftMotor2, 0_x);
     storePin();
@@ -969,7 +894,6 @@ void RightAuto(){
     // turnToAngle(90_deg, 0.5_x);
     moveToPoint(4_ft, -1_ft, false, 0.4_x, 0.7_x, 1.5_s);
     turnToAngle(90_deg, 0.5_x);
->>>>>>> 701251d8f302c9d03e835f8b6f8682b7e2fbfd9c
     */
 
 

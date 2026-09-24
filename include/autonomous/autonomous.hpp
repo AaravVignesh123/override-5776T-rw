@@ -12,6 +12,8 @@ void hookDescoreWing(Length x = 0_ft, Length y = 21_in);
 void eighteenPointAuto();
 void LeftAuto();
 void RightAuto();
+void SoloAWP();
+
 // For turn pid
 void turnTuning(); 
 
@@ -23,5 +25,3 @@ void maxSpeedMeasuring();
 
 // For testing experimental functions
 void testingAuton();
-
-void SoloAWP();

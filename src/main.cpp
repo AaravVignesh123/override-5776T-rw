@@ -193,6 +193,9 @@ void autonomous() {
         case RIGHT_AUTO:
             RightAuto();
             break;
+        /* case SOLO_AWP:
+            soloAwp();
+            break; */
 	}
 }
 
@@ -459,9 +462,9 @@ void opcontrol() {
 			*/
 		// Lift controls
 		if (bButton.held) {
-			liftUp();
-		} else if (rightButton.held) {
 			liftDown();
+		} else if (rightButton.held) {
+			liftUp();
 		} else {
 			setMotorSpeed(liftMotor1, 0_x);
 			setMotorSpeed(liftMotor2, 0_x);

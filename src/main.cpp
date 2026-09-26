@@ -509,7 +509,7 @@ void opcontrol() {
         
 		
         // Anti-tip protection
-        
+        /*
         tipAngle = imuTipping.get_roll();
         tipMagnitude = std::abs(tipAngle);
 		tipSign = std::signbit(tipAngle) ? 1 : -1;
@@ -534,6 +534,7 @@ void opcontrol() {
 			lastTipAngles[i] = lastTipAngles[i - 1];
 		}
 		lastTipAngles[0] = tipAngle;
+        */
         
 
 		// Tank controls

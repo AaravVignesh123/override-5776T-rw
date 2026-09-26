@@ -54,7 +54,7 @@ enum AutonChars {
     RIGHT_AUTO = 'r'
 };
 
-char auton = LEFT_AUTO; 
+char auton = RIGHT_AUTO; 
 bool fullScoringPosition = false;
 void autonSelector() {
 	pros::lcd::set_text(1, "Selected auton:");

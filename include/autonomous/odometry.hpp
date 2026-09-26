@@ -18,6 +18,7 @@ extern pros::Rotation trackingWheelFBSensor;
 extern lemlib::TrackingWheel trackingWheelLR; // Left-right motion tracking
 extern lemlib::TrackingWheel trackingWheelFB; // Forward-back motion tracking
 extern pros::Imu imu;
+extern pros::Imu imuTipping;
 extern lemlib::OdomSensors sensors;
 
 // Movement PIDs

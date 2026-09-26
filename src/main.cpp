@@ -150,12 +150,14 @@ void initialize() {
 	trackingWheelFB.reset();
 	chassis.calibrate();
 	//translationTuning();
-	//turnTuning();
-    liftToPosition(720);
+    //turnTuning();
+    //tareLiftPosition();
+    //setMotorSpeed(liftMotor1, 0_x);
+    //setMotorSpeed(liftMotor2, 0_x);
 
 
 
-	while (imu.is_calibrating()) {
+    while (imu.is_calibrating() || imuTipping.is_calibrating()) {
         pros::delay(10);
     }
     
@@ -197,7 +199,7 @@ void autonomous() {
 }
 
 void opcontrol() {
-	Time init = getTime() / 1000;
+    Time init = getTime();
 
     // Set control variables
     scraperToggle = false; //pros::c::adi_digital_read(kPneumaticScraperPort);
@@ -289,6 +291,16 @@ void opcontrol() {
                     pros::lcd::set_text(3, "RB Power Draw: " + std::to_string(driveRB.get_current_draw()));
                     pros::lcd::set_text(4, "Tipping angle: " + std::to_string(chassisPitch().convert(degree)));
                     pros::lcd::set_text(5, "Untip command: " + std::to_string(antiTipCommand));
+                    break;
+                } case 6: {
+                    pros::lcd::set_text(0, "Lift 1: " + std::to_string(liftMotor1.get_position()) + " deg");
+                    pros::lcd::set_text(1, "Lift 2: " + std::to_string(liftMotor2.get_position()) + " deg");
+                    pros::lcd::set_text(2, "B = lift up");
+                    pros::lcd::set_text(3, "Right = lift down");
+                    pros::lcd::set_text(4, "Current zero = startup");
+                    pros::lcd::clear_line(5);
+                    pros::lcd::clear_line(6);
+                    pros::lcd::clear_line(7);
                     break;
                 } case 0: {
                     for (int i = 0; i <= 7; i++) {
@@ -398,7 +410,7 @@ void opcontrol() {
         pollControllerDigital(r2Button, pros::E_CONTROLLER_DIGITAL_R2);
 
 		// Macros
-		/* enableMacros = aButton.held;
+		/* enableMacros = upButton.held;
 		if (rightButton.held){
 			storePin();
 			intakePins();
@@ -459,9 +471,9 @@ void opcontrol() {
 			*/
 		// Lift controls
 		if (bButton.held) {
-			liftUp();
-		} else if (rightButton.held) {
 			liftDown();
+		} else if (rightButton.held) {
+			liftUp();
 		} else {
 			setMotorSpeed(liftMotor1, 0_x);
 			setMotorSpeed(liftMotor2, 0_x);
@@ -487,7 +499,7 @@ void opcontrol() {
 
 		// Debug things
 		if (xButton.pressed) {
-			showDebug = (showDebug + 1) % 6;
+            showDebug = (showDebug + 1) % 7;
 		}
 
         // if (auton == SKILLS) {
@@ -496,24 +508,23 @@ void opcontrol() {
 
         
 		
-		// Anti tip protection macro
-        // Anti tip is currently disabled
-		tipAngle = 0; //imuTipping.controllerGet();
-		tipMagnitude = abs(tipAngle);
+        // Anti-tip protection
+        
+        tipAngle = imuTipping.get_roll();
+        tipMagnitude = std::abs(tipAngle);
 		tipSign = std::signbit(tipAngle) ? 1 : -1;
-		tipVelocity = (tipAngle - arrMean(lastTipAngles, lastTipAnglesSize)) * tipSign;  // Positive if tipping, negative if untipping
+        tipVelocity = (tipAngle - arrMean(lastTipAngles, lastTipAnglesSize)) * -tipSign * 10.0;
 
-		// Lock out anti tip after 75 seconds (30 seconds remaining)
+        // Disable anti-tip for the final 30 seconds of driver control.
 		if (tipMagnitude > 10 && currentTime < 75_s) {
-			// Calculate anti tip command
-			// Untip harder if we're tipping faster (velocity * 0.1)
-			// Untip harder if we're tipped further from zero (angle * 0.05)
-			antiTipCommand = std::max(0.0, tipVelocity) * 0.03 + tipMagnitude * 0.05;
-			antiTipCommand *= tipSign;
+            double correctionMagnitude = std::clamp(
+                (tipMagnitude - 10.0) * 2.0 + std::max(0.0, tipVelocity) * 0.1,
+                0.0,
+                80.0
+            );
+            antiTipCommand = tipSign * correctionMagnitude;
 
-			// Send anti tip command to drive controls
-			leftY = antiTipCommand;
-			rightY = antiTipCommand;
+            leftY = static_cast<int>(antiTipCommand);
 		} else {
 			antiTipCommand = 0;
 		}
@@ -523,6 +534,7 @@ void opcontrol() {
 			lastTipAngles[i] = lastTipAngles[i - 1];
 		}
 		lastTipAngles[0] = tipAngle;
+        
 
 		// Tank controls
         //chassis.tank(leftY, rightY);

@@ -39,7 +39,7 @@ lemlib::ControllerSettings chassisDrivePid(
     0 // maximum acceleration (slew), was 20 before changing
 );
 lemlib::ControllerSettings chassisTurnPid(
-    2.55, // kP
+    2.5, // kP
     0, // kI
     15, // kD
     3, // anti windup

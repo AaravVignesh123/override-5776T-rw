@@ -9,7 +9,7 @@
 #include "autonomous/odomDistance.hpp"
 #include "lemlib/api.hpp"
 #include "subsystems/claw.hpp"
-
+#include "subsystems/toggle.hpp"
 
 // ----------------------------------------------------------------------------------------------------
 // --- Miscellaneous functions ------------------------------------------------------------------------
@@ -435,8 +435,15 @@ void opcontrol() {
     		setMotorSpeed(clawMotor, 0_x);
 		}
 		
+        // Toggle controls
+        if (r1Button.held) {
+            toggle();
+		} else {
+			setMotorSpeed(leftToggleMotor, 0_x);
+            setMotorSpeed(rightToggleMotor, 0_x);
+		}
 
-		// Intake controls
+		/* // Intake controls
 		if (r1Button.held) {
             intakePins();
 		} else if (r2Button.held) {
@@ -444,7 +451,7 @@ void opcontrol() {
 		} else {
 			stopIntake();
 			intakeCommand = STOPPED;
-		}
+		} */
 		
 		if (l1Button.held) {
 			scoringReadyPosition();

@@ -16,7 +16,7 @@ pros::Rotation trackingWheelFBSensor(-19);
 // lemlib::TrackingWheel trackingWheelFB(&trackingWheelLRSensor, lemlib::Omniwheel::NEW_275, -0.4);
 lemlib::TrackingWheel trackingWheelFB(&trackingWheelFBSensor, lemlib::Omniwheel::NEW_2, -1.5);
 pros::Imu imu(12);
-pros::Imu imuTipping(18);
+// pros::Imu imuTipping(18);
 
 lemlib::OdomSensors sensors(
     &trackingWheelFB, //&trachkingWheelFB,

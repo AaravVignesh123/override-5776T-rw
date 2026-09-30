@@ -5,6 +5,8 @@
 
 pros::Motor liftMotor1(11);
 pros::Motor liftMotor2(20);
+//change later, get inches lifted per motor revolution
+constexpr double LIFT_INCHES_PER_MOTOR_REV = 1; 
 
 void liftUp() {
     setMotorSpeed(liftMotor1, -127_power);
@@ -16,6 +18,7 @@ void liftDown() {
 }
 
 void liftToPosition(double position, int32_t velocity) {
+    const double motorDegrees = position * 360.0 / LIFT_INCHES_PER_MOTOR_REV;
     liftMotor1.set_brake_mode(pros::MotorBrake::hold);
     liftMotor2.set_brake_mode(pros::MotorBrake::hold);
     liftMotor1.move_absolute(position, velocity);

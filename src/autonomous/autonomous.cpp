@@ -747,8 +747,9 @@ void LeftAuto(){
     moveToPoint(0_ft, -1.1_ft - 10_in, true, 1.7_x, 1.8_x, 1_s); // move to starting point plus a bit of y
 
     
-    moveToPoint(0_ft, -3_in, false, 0.4_x, 0.7_x, 1.5_s); 
+    //moveToPoint(0_ft, -3_in, false, 0.4_x, 0.7_x, 1.5_s); 
     //releasePin();
+    moveToPose(-1.6_ft - 3_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s, true);
     liftingLift(LIFT_UP, 150_ms);
     /*
     Time startTime = getTime();
@@ -764,9 +765,9 @@ void LeftAuto(){
     setMotorSpeed(liftMotor2, 0_x);
     scoringReadyPosition();
     turnToAngle(90_deg, 0.5_x);
-    moveToPose(-1.6_ft - 3_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to blue goal
+     // move to blue goal
     delay(650_ms);
-    moveToPose(-1.6_ft - 2_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to black goal
+    //moveToPose(-1.6_ft - 2_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to black goal
     //delay(750_s);
     Time startTime2 = getTime();
     while (getTime() - startTime2 < 0.6_s) {

@@ -1,6 +1,10 @@
 #pragma once
 #include "main.h"
 
+enum liftUP {
+    LIFT_UP,
+    LIFT_DOWN
+};
 
 // Helper Functions
 // Unload matchloader

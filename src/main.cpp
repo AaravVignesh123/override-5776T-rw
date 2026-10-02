@@ -186,6 +186,7 @@ void competition_initialize() {}
 
 void autonomous() {
 	allMotors.set_brake_mode_all(pros::MotorBrake::hold); // for tighter movements
+    tareLiftPosition();
     autonStartTime = getTime();
 
 	switch (auton) {

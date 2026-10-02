@@ -154,7 +154,7 @@ void initialize() {
     //tareLiftPosition();
     //setMotorSpeed(liftMotor1, 0_x);
     //setMotorSpeed(liftMotor2, 0_x);
-
+    pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
 
 
     while (imu.is_calibrating() || imuTipping.is_calibrating()) {
@@ -169,11 +169,8 @@ void initialize() {
 	clawTwistMotor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 	// Initialize pneumatics
-	pros::c::adi_pin_mode(kPneumaticScraperPort, OUTPUT);
-	pros::c::adi_pin_mode(kPneumaticDescorePort, OUTPUT);
-	pros::c::adi_pin_mode(kPneumaticGatePort, OUTPUT);
     // pros::c::adi_pin_mode(kPneumaticIntakePort, OUTPUT);
-    pros::c::adi_pin_mode(kPneumaticMiddleDescorePort, OUTPUT);
+    pros::c::adi_pin_mode(kPneumaticClawPort, OUTPUT);
 
 	autonSelector();
 	
@@ -230,10 +227,10 @@ void opcontrol() {
 					double angle = chassisAngle().convert(degree);
 					double imuHeading = imu.get_heading();
                     pros::lcd::set_text(0, "LF: " + std::to_string(driveLF.get_position()));
-                    //pros::lcd::set_text(1, "LC: " + std::to_string(driveLC.get_position()));
+                    pros::lcd::set_text(1, "LC: " + std::to_string(driveLC.get_position()));
                     pros::lcd::set_text(2, "LB: " + std::to_string(driveLB.get_position()));
                     pros::lcd::set_text(3, "RF: " + std::to_string(driveRF.get_position()));
-                    //pros::lcd::set_text(4, "RC: " + std::to_string(driveRC.get_position()));
+                    pros::lcd::set_text(4, "RC: " + std::to_string(driveRC.get_position()));
                     pros::lcd::set_text(5, "RB: " + std::to_string(driveRB.get_position()));
 					//pros::lcd::set_text(4, "IMU hdg: " + std::to_string(imuHeading));
 					//pros::lcd::set_text(5, "Wheel:   " + std::to_string(wheelPos));

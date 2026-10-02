@@ -5,7 +5,7 @@
 #include "main.h"
 
 // change ports --> ports need to be defined
-pros::Motor leftToggleMotor(-7);
+pros::Motor leftToggleMotor(7);
 pros::Motor rightToggleMotor(8);
 
 void toggle() {

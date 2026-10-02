@@ -16,7 +16,7 @@ pros::Rotation trackingWheelFBSensor(-19);
 // lemlib::TrackingWheel trackingWheelFB(&trackingWheelLRSensor, lemlib::Omniwheel::NEW_275, -0.4);
 lemlib::TrackingWheel trackingWheelFB(&trackingWheelFBSensor, lemlib::Omniwheel::NEW_2, -1.5);
 pros::Imu imu(12);
-// pros::Imu imuTipping(18);
+pros::Imu imuTipping(18);
 
 lemlib::OdomSensors sensors(
     &trackingWheelFB, //&trachkingWheelFB,
@@ -60,10 +60,10 @@ lemlib::ControllerSettings chassisTurnPid(
 bool isOverheating() {
     return 
         driveLF.is_over_temp() || 
-        //driveLC.is_over_temp() ||
+        driveLC.is_over_temp() ||
         driveLB.is_over_temp() || 
         driveRF.is_over_temp() ||
-        //driveRC.is_over_temp() || 
+        driveRC.is_over_temp() ||
         driveRB.is_over_temp();
 }
 

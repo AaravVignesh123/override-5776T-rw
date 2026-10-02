@@ -749,7 +749,7 @@ void LeftAuto(){
     
     //moveToPoint(0_ft, -3_in, false, 0.4_x, 0.7_x, 1.5_s); 
     //releasePin();
-    moveToPose(-1.6_ft - 3_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s, true);
+    moveToPose(-1.6_ft - 3_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s, 0_in, true);
     liftingLift(LIFT_UP, 150_ms);
     /*
     Time startTime = getTime();
@@ -992,7 +992,6 @@ void RightAuto(){
         //releasePin();
         //liftUp();
         delay(250_ms);
-    }
     setMotorSpeed(liftMotor1, 0_x);
     setMotorSpeed(liftMotor2, 0_x);
 

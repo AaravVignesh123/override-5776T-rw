@@ -4,4 +4,5 @@
 extern pros::Motor rightToggleMotor;
 extern pros::Motor leftToggleMotor;
 
-void toggle();
+void toggleRollers();
+void toggleOnce();

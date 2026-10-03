@@ -54,7 +54,7 @@ enum AutonChars {
     RIGHT_AUTO = 'r'
 };
 
-char auton = RIGHT_AUTO; 
+char auton = LEFT_AUTO; 
 bool fullScoringPosition = false;
 void autonSelector() {
 	pros::lcd::set_text(1, "Selected auton:");
@@ -66,7 +66,7 @@ void autonSelector() {
 // ----------------------------------------------------------------------------------------------------
 // --- Driver Code Variables --------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------
-
+bool clawToggle;
 
 struct controllerButton {
 	bool pressed = false;
@@ -151,11 +151,9 @@ void initialize() {
 	chassis.calibrate();
 	//translationTuning();
     //turnTuning();
-    //tareLiftPosition();
-    //setMotorSpeed(liftMotor1, 0_x);
-    //setMotorSpeed(liftMotor2, 0_x);
-    pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
-
+    tareLiftPosition();
+    //liftToPosition(5.3, 100);
+    //int32_t modeResult = pros::c::adi_pin_mode(kPneumaticClawPort, OUTPUT);
 
     while (imu.is_calibrating() || imuTipping.is_calibrating()) {
         pros::delay(10);
@@ -203,9 +201,7 @@ void opcontrol() {
     Time init = getTime();
 
     // Set control variables
-    scraperToggle = false; //pros::c::adi_digital_read(kPneumaticScraperPort);
-    descoreToggle = false;
-    middleDescoreToggle = false;
+    clawToggle = false;
 	
 	// Setting all motors to coast
 	allMotors.set_brake_mode_all(pros::MotorBrake::coast);
@@ -425,20 +421,14 @@ void opcontrol() {
 
 		// Claw controls
 		// after pollControllerDigital(...) calls
-		if (aButton.held) {
-    		storePin();
-		} else if (yButton.held) {
-    		releasePin();
-		} else {
-    		setMotorSpeed(clawMotor, 0_x);
-		}
-		
+		if (aButton.pressed) {
+            clawToggle = !clawToggle;
+        }
+        pneumaticToggle(kPneumaticClawPort, clawToggle);
+
         // Toggle controls
-        if (r1Button.held) {
-            toggle();
-		} else {
-			setMotorSpeed(leftToggleMotor, 0_x);
-            setMotorSpeed(rightToggleMotor, 0_x);
+        if (r1Button.pressed) {
+            toggleOnce();
 		}
 
 		/* // Intake controls

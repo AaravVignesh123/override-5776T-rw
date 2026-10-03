@@ -6,6 +6,8 @@
 #include "autonomous/odomDistance.hpp"
 #include "subsystems/lift.hpp"
 #include "subsystems/claw.hpp"
+#include "subsystems/toggle.hpp"
+#include "subsystems/pneumatics.hpp"
  
 // Temporary stubs while the old autonomous logic is kept as reference.
 void unloadMatchloader(Length x, bool useDelay, Angle angleOffset) {
@@ -732,61 +734,28 @@ void eighteenPointAuto() {
 
 void LeftAuto(){
     // Initiialize starting pos
-    setChassisPose(0_ft, -1.1_ft, 180_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
+    setChassisPose(0.15_ft, -1.37_ft-2_in, -55_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
     // needa set up distance sensors when ready
 
     
     // toggle
-    relative(-0.5_ft, 1.5_x);
-    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
-    relative(-0.5_ft, 1.5_x);
-    moveToPoint(0_ft, -1.1_ft - 7_in, true, 1.5_x, 1.6_x, 1_s); // move to starting point plus a bit of y
-    relative(-0.5_ft, 0.4_x);
-    moveToPoint(0_ft, -1.1_ft - 4_in, true, 1_x, 1.2_x, 1_s); // move to startining point plus a bit of y
-    relative(-0.5_ft, 0.4_x);
-    moveToPoint(0_ft, -1.1_ft - 10_in, true, 1.7_x, 1.8_x, 1_s); // move to starting point plus a bit of y
-
+    toggleOnce();
+    delay(800_ms);
     
     //moveToPoint(0_ft, -3_in, false, 0.4_x, 0.7_x, 1.5_s); 
     //releasePin();
-    moveToPose(-1.6_ft - 3_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s, 0_in, true);
-    liftingLift(LIFT_UP, 150_ms);
-    /*
-    Time startTime = getTime();
-    while (getTime() - startTime < 0.5_s) {
-        liftUp();
-        //releasePin();
-        //liftUp();
-        delay(100_ms);
-    }
-        */
-
-    setMotorSpeed(liftMotor1, 0_x);
-    setMotorSpeed(liftMotor2, 0_x);
-    scoringReadyPosition();
-    turnToAngle(90_deg, 0.5_x);
-     // move to blue goal
-    delay(650_ms);
-    //moveToPose(-1.6_ft - 2_in, 0_ft + 1_in, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to black goal
-    //delay(750_s);
-    Time startTime2 = getTime();
-    while (getTime() - startTime2 < 0.6_s) {
-        liftDown();
-        //releasePin();
-        //liftUp();
-        delay(100_ms);
-    }
+    liftToPosition(2,100);
+    moveToPose(-1.6_ft - 5_in, -0.5_ft-5_in, -90_deg, true, 0.5, 0.6_x, 1_x, 2_s, 0_in, false);
     
-    setMotorSpeed(liftMotor1, 0_x);
-    setMotorSpeed(liftMotor2, 0_x);
-    delay(100_ms);
-    Time startTime9 = getTime();
-    while (getTime() - startTime9 < 0.45_s) {
-        storePin();
-        //releasePin();
-        //liftUp();
-        delay(50_ms);
-    }
+
+    //turnToAngle(90_deg, 0.5_x);
+     // move to blue goal
+    delay(200_ms); 
+    pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+
+    delay(650_ms);
+    
+
     /*
     relative(6_in, 0.4_x);
     turnToAngle(65_deg, 0.5_x);
@@ -794,7 +763,7 @@ void LeftAuto(){
     turnToAngle(45_deg, 0.5_x);
     moveToPose(-4_ft, 0_ft, 90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to standing pin
     turnToAngle(-90_deg, 0.5_x);
-    */
+    
     
     
     relative(4_in, 0.4_x);
@@ -890,7 +859,7 @@ void LeftAuto(){
     }
     moveToPose(-1.6_ft, 0_ft + 3_in, -90_deg, false, 0.5, 0.6_x, 1_x, 2_s); // move to blue goal
     storePin(); 
-    
+    */
     
     
 

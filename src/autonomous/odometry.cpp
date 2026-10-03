@@ -11,10 +11,10 @@
 
 // Odom sensors
 //pros::Rotation trackingWheelLRSensor(2);
-pros::Rotation trackingWheelFBSensor(-19);
+pros::Rotation trackingWheelFBSensor(19);
 //lemlib::TrackingWheel trackingWheelLR(&trackingWheelLRSensor, lemlib::Omniwheel::NEW_275, -2.4);
 // lemlib::TrackingWheel trackingWheelFB(&trackingWheelLRSensor, lemlib::Omniwheel::NEW_275, -0.4);
-lemlib::TrackingWheel trackingWheelFB(&trackingWheelFBSensor, lemlib::Omniwheel::NEW_2, -1.5);
+lemlib::TrackingWheel trackingWheelFB(&trackingWheelFBSensor, lemlib::Omniwheel::NEW_2, 2.4);
 pros::Imu imu(12);
 pros::Imu imuTipping(18);
 
@@ -28,9 +28,9 @@ lemlib::OdomSensors sensors(
 
 // PIDs
 lemlib::ControllerSettings chassisDrivePid(
-    10, // kP
+    8, // kP
     0, // kI
-    14, // kD, can be 11 or 1
+    15, // kD, can be 11 or 1
     3, // anti windup
     2, // small error range, in inches, org 2
     100, // small error range timeout, in milliseconds, 100
@@ -39,9 +39,9 @@ lemlib::ControllerSettings chassisDrivePid(
     0 // maximum acceleration (slew), was 20 before changing
 );
 lemlib::ControllerSettings chassisTurnPid(
-    2.5, // kP
+    4.5, // kP
     0, // kI
-    15, // kD
+    44.5, // kD
     3, // anti windup
     0.3, // small error range, in degrees
     100, // small error range timeout, in milliseconds

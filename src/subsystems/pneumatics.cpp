@@ -2,4 +2,4 @@
 #include "subsystems/pneumatics.hpp"
 
 
-int kPneumaticClawPort = 2; // HIGH - open, LOW - closed
+int kPneumaticClawPort = 'A'; // HIGH - closed

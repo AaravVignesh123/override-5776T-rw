@@ -734,7 +734,7 @@ void eighteenPointAuto() {
 
 void LeftAuto(){
     // Initiialize starting pos
-    setChassisPose(0.15_ft, -1.37_ft-2_in, -55_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
+    setChassisPose(0.13_ft, -1.48_ft, -50_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
     // needa set up distance sensors when ready
 
     
@@ -745,15 +745,22 @@ void LeftAuto(){
     //moveToPoint(0_ft, -3_in, false, 0.4_x, 0.7_x, 1.5_s); 
     //releasePin();
     liftToPosition(2,100);
-    moveToPose(-1.6_ft - 5_in, -0.5_ft-5_in, -90_deg, true, 0.5, 0.6_x, 1_x, 2_s, 0_in, false);
+    moveToPose(-1.6_ft - 7_in, -7_in, -90_deg, true, 0.5, 0.6_x, 1_x, 2_s, 0_in, false);
     
 
     //turnToAngle(90_deg, 0.5_x);
      // move to blue goal
     delay(200_ms); 
+    liftToPosition(0,100);
+    delay(200_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
 
-    delay(650_ms);
+    //delay(650_ms);
+    relative(-5_in, 0.4_x);
+    turnToAngle(-45_deg, 0.5_x);
+    moveToPoint(-1.5_ft, 1_ft-5_in, true, 0.5_x, 0.6_x, 1.5_s); // move to standing pin
+    pros::c::adi_digital_write(kPneumaticClawPort, LOW);
+    //moveToPose(-1.3_ft, 1_ft, -45_deg, true, 0.5, 0.6_x, 1_x, 2_s);
     
 
     /*

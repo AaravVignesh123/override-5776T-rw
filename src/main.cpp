@@ -427,8 +427,8 @@ void opcontrol() {
         pneumaticToggle(kPneumaticClawPort, clawToggle);
 
         // Toggle controls
-        if (r1Button.pressed) {
-            toggleOnce();
+        if (r1Button.held) {
+            toggleRollers();
 		}
 
 		/* // Intake controls

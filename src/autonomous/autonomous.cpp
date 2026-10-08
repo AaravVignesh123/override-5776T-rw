@@ -767,7 +767,7 @@ void LeftAuto(){
     liftToPosition(8,100);
     turnToAngle(175_deg, 0.5_x);
     delay(250_ms);
-    moveToPoint(-2_ft, 0_in, true, 0.6_x, 1_x, 2_s); // move to blue goal
+    moveToPoint(-2_ft, 0_in, true, 0.6_x, 0.8_x, 2_s); // move to blue goal
     delay(200_ms);
     liftToPosition(5,100);
     delay(200_ms);
@@ -785,10 +785,27 @@ void LeftAuto(){
     turnToAngle(90_deg, 0.5_x);
     delay(310_ms);
     
-    moveToPoint(-2_ft-6_in, -4_in, true, 0.4_x, 0.4_x, 1.5_s); // move to blue goal
+    moveToPoint(-2_ft-6_in, -4_in, true, 0.6_x, 0.6_x, 1.5_s); // move to blue goal
 
     liftToPosition(10,100);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+
+    liftToPosition(0,100);
+    relative(-3_in, 0.4_x);
+    turnToAngle(135_deg, 0.5_x);
+    moveToPoint(-2_ft-2_in, -1_ft, true, 0.4_x, 0.4_x, 1.5_s); // move to standing pin
+
+    swingToAngle(180_deg, lemlib::DriveSide::LEFT, 0.8_x);
+    pros::c::adi_digital_write(kPneumaticClawPort, LOW);
+    relative(-3_in, 0.4_x);
+    turnToAngle(30_deg, 0.5_x);
+
+    moveToPose(0_ft, 0_ft, 90_deg, true, 0.5, 0.8_x, 1_x, 2_s); // move to standing pin
+    liftToPosition(4,100);
+    moveToPose(6_in, 0_ft, 90_deg, true, 0.5, 0.6_x, 0.7_x, 2_s); // move to standing pin
+    liftToPosition(2,100);
+    pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+    
 
     /*
     relative(6_in, 0.4_x);

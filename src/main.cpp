@@ -421,7 +421,7 @@ void opcontrol() {
 
 		// Claw controls
 		// after pollControllerDigital(...) calls
-		if (aButton.pressed) {
+		if (yButton.pressed) {
             clawToggle = !clawToggle;
         }
         pneumaticToggle(kPneumaticClawPort, clawToggle);

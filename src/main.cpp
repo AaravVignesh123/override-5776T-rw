@@ -290,10 +290,10 @@ void opcontrol() {
                     pros::lcd::set_text(5, "Untip command: " + std::to_string(antiTipCommand));
                     break;
                 } case 6: {
-                    pros::lcd::set_text(0, "Lift 1: " + std::to_string(liftMotor1.get_position()) + " deg");
-                    pros::lcd::set_text(1, "Lift 2: " + std::to_string(liftMotor2.get_position()) + " deg");
-                    pros::lcd::set_text(2, "B = lift up");
-                    pros::lcd::set_text(3, "Right = lift down");
+                    pros::lcd::set_text(0, "Dist Forward: " + std::to_string(odomDistanceForward.getDistance().convert(inch)) + " in");
+                    pros::lcd::set_text(1, "Dist Left: " + std::to_string(odomDistanceLeft.getDistance().convert(inch)) + " in");
+                    pros::lcd::set_text(2, "Dist Right: " + std::to_string(odomDistanceRight.getDistance().convert(inch)) + " in");
+                    pros::lcd::set_text(3, "Dist Backwards: " + std::to_string(odomDistanceBackwards.getDistance().convert(inch)) + " in");
                     pros::lcd::set_text(4, "Current zero = startup");
                     pros::lcd::clear_line(5);
                     pros::lcd::clear_line(6);
@@ -429,7 +429,10 @@ void opcontrol() {
         // Toggle controls
         if (r1Button.held) {
             toggleRollers();
-		}
+		} else {
+            setMotorSpeed(leftToggleMotor, 0_x);
+            setMotorSpeed(rightToggleMotor, 0_x);
+        }
 
 		/* // Intake controls
 		if (r1Button.held) {

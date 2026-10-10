@@ -749,8 +749,7 @@ void LeftAuto(){
     //releasePin();
     liftToPosition(2,100);
     //move to alliance goal to score preload
-    moveToPose(-1.5_ft - 6.5_in, -9_in, -90_deg, true, 0.6, 0.6_x, 0.9_x, 2_s, 0_in, false);
-    
+    moveToPose(-1.5_ft - 6.5_in, -9_in, -90_deg, true, 0.6, 0.6_x, 0.8_x, 2_s, 0_in, false);
 
     //turnToAngle(90_deg, 0.5_x);
     //score preload
@@ -759,7 +758,6 @@ void LeftAuto(){
     delay(350_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
     odomDistanceLeft.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
-
 
     //delay(650_ms);
     //go to standing pin #1 and grab pin
@@ -772,7 +770,6 @@ void LeftAuto(){
     delay(200_ms); //needed delay
 
     // go to alliance goal to score pin
-    
     liftToPosition(8,100);
     turnToAngle(175_deg, 0.35_x);
     delay(250_ms);
@@ -782,7 +779,6 @@ void LeftAuto(){
     delay(200_ms);
     odomDistanceBackwards.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
-
 
     // move to second standing pin
     relative(-5_in, 0.4_x);
@@ -811,30 +807,30 @@ void LeftAuto(){
     delay(250_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
 
-
     //move into position for wall pin
     liftToPosition(0,100);
     relative(-6_in, 0.4_x);
-    turnToAngle(135_deg, 0.5_x);
-    moveToPoint(-2_ft, -1_ft-2_in, true, 0.4_x, 0.4_x, 1.5_s); // move to standing pin
-
+    turnToAngle(143_deg, 0.5_x);
+    moveToPoint(-2_ft-4.5_in, -1_ft+2.5_in, true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
+    delay(350_ms);
 
     // do the method of spinning one side of drive to get in prime posiition to pick pin
-    swingToAngle(180_deg, lemlib::DriveSide::RIGHT, 0.8_x);
+    swingToAngle(180_deg, lemlib::DriveSide::RIGHT, 0.3_x);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
+    relative(1.5_in, 0.4_x);
+    delay(500_ms);
 
     //move back and turn towards neutral goal
-    relative(-1_in, 0.4_x);
+    // relative(-1_in, 0.4_x);
     turnToAngle(90_deg, 0.5_x);
 
-    moveToPose(0_ft, 0_ft, 90_deg, true, 0.5, 0.8_x, 1_x, 2_s); // move to neutral goal - function 1 - intermediate
+    moveToPoint(-1_ft, -1_ft, true, 0.5_x, 0.8_x, 1.5_s); // move to neutral goal - p1
+    moveToPose(0_ft, 0_ft, 90_deg, true, 0.5, 0.8_x, 1_x, 2_s); // move to neutral goal - p2 - function 1 - intermediate
     liftToPosition(4,100);
     moveToPose(6_in, 0_ft, 90_deg, true, 0.5, 0.6_x, 0.7_x, 2_s); // move to neutral goal
     liftToPosition(2,100);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH); //score wall pin
     
-    
-
 }
 void RightAuto(){
     // Initiialize starting pos

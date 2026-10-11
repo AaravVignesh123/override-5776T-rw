@@ -407,7 +407,20 @@ void opcontrol() {
         pollControllerDigital(r2Button, pros::E_CONTROLLER_DIGITAL_R2);
 
 		// Macros
-		/* enableMacros = upButton.held;
+		enableMacros = aButton.held;
+        if (enableMacros && r2Button.pressed) {
+            farSideMatchloader(0_in, 0_in);
+        }
+        if (enableMacros && upButton.pressed) {
+            scoreFarSide(0_in, 0_in, 2);
+        }
+        if (enableMacros && downButton.pressed) {
+            scoreFarSide(0_in, 0_in, 4);
+        }
+        if (enableMacros && r1Button.pressed){
+            scoreFarSide(0_in, 0_in, 3);
+        }
+        /*
 		if (rightButton.held){
 			storePin();
 			intakePins();
@@ -427,7 +440,7 @@ void opcontrol() {
         pneumaticToggle(kPneumaticClawPort, clawToggle);
 
         // Toggle controls
-        if (r1Button.held) {
+        if (!enableMacros && r1Button.held) {
             toggleRollers();
 		} else {
             setMotorSpeed(leftToggleMotor, 0_x);

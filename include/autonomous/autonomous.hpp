@@ -11,7 +11,8 @@ enum liftUP {
 void unloadMatchloader(Length x, bool useDelay = true, Angle angleOffset = 0_deg);
 // Put descore wing in goal from long goal scoring position
 void hookDescoreWing(Length x = 0_ft, Length y = 21_in);
-
+void farSideMatchloader(Length x, Length y);
+void scoreFarSide(Length x, Length y, int pinStack);
 //Routes 
 void eighteenPointAuto();
 void LeftAuto();

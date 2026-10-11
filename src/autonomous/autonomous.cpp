@@ -1,7 +1,7 @@
 #include "main.h"
 #include "autonomous/odometry.hpp"
 #include "subsystems/chassis.hpp"
-#include "subsystems/intake.hpp"
+// #include "subsystems/intake.hpp"
 #include "autonomous/autonomous.hpp"
 #include "autonomous/odomDistance.hpp"
 #include "subsystems/lift.hpp"
@@ -71,6 +71,27 @@ void hookDescoreWing(Length x, Length y) {
     moveToPoint(x + 9_in, y + 23_in, false, 0_x, 0.6_x, 15_s, 0_in, true);  // No timeout to continue reversing until auton time ends
 }
 
+*/
+void farSideMatchloader(Length x, Length y) {
+    // Initialize matchloader position
+    setChassisPose(x, y, 0_deg);
+    // Get into matchloader
+    relative(-3_in, 0.5_x);
+    moveToPose(x+1.3_ft, y-1.37_ft, 180_deg, false, 0.4, 0.5_x, 1_x, 1_s);
+    turnToAngle(180_deg, 0.4_x);
+    moveToPose(x+1.52_ft, y-2.6_ft, 180_deg, true, 0.4, 0.5_x, 1_x, 1_s);
+}
+void scoreFarSide(Length x, Length y, int pinStack) {
+    setChassisPose(x, y, 180_deg);
+    // get to far side 
+    moveToPose(x+1.3_ft, y-1.37_ft, 180_deg, false, 0.4, 0.5_x, 1_x, 1_s);
+    turnToAngle(0_deg, 0.4_x);
+    moveToPose(x-1.52_ft, y-2.6_ft-3_in, 0_deg, true, 0.4, 0.5_x, 1_x, 1_s, 0_in, true);
+    liftToPosition(pinStack*4, 100);
+    pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+
+}
+/*
 // Macro to align into the long goal using driveStraightAtAngle(-0.5_x, 0.08_x, 180_deg, [time]);
 #define ALIGN_TO_LONG_GOAL(time) driveStraightAtAngle(-0.6_x, 0.1_x, 180_deg, time);
 #define ALIGN_TO_MIDDLE_GOAL(time) driveStraightAtAngle(-0.15_x, 0.02_x, -135_deg, time);
@@ -734,7 +755,7 @@ void eighteenPointAuto() {
 
 void LeftAuto(){
     // Initiialize starting pos
-    setChassisPose(0.13_ft, -1.48_ft, -50_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
+    setChassisPose(0.13_ft, -1.48_ft+1_in, -50_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
     // needa change these positions & offsets  (including reading)
     odomDistanceForward.setOriginPosition(4_in, -10_in);
     odomDistanceLeft.setOriginPosition(1_ft, -4_ft);
@@ -811,17 +832,29 @@ void LeftAuto(){
     liftToPosition(0,100);
     relative(-6_in, 0.4_x);
     turnToAngle(143_deg, 0.5_x);
-    moveToPoint(-2_ft-4.5_in, -1_ft+2.5_in, true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
+    turnToAngle(135_deg, 0.5_x);
+    // moveToPoint(-2_ft-4.5_in, -1_ft+2.5_in, true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
+    moveToPoint(-2_ft-6_in+0.34_ft, -2_in - 0.75_ft,true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
     delay(350_ms);
 
     // do the method of spinning one side of drive to get in prime posiition to pick pin
     swingToAngle(180_deg, lemlib::DriveSide::RIGHT, 0.3_x);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     relative(1.5_in, 0.4_x);
-    delay(500_ms);
+    delay(250_ms);
+
+    relative(-1.5_in, 0.4_x);
+    swingToAngle(135_deg, lemlib::DriveSide::RIGHT, 0.3_x);
+    moveToPose(-3_ft-4_in, 0_in, 135_deg, false, 0.4, 0.4_x, 0.5_x, 1.5_s);
+    liftToPosition(8,100);
+    turnToAngle(0_deg,0.5_x);
+    moveToPose(-3_ft-4_in,1_ft, 0_deg, true, 0.4, 0.4_x, 0.5_x, 1.5_s);
+    pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+
 
     //move back and turn towards neutral goal
     // relative(-1_in, 0.4_x);
+    /*
     turnToAngle(90_deg, 0.5_x);
 
     moveToPoint(-1_ft, -1_ft, true, 0.5_x, 0.8_x, 1.5_s); // move to neutral goal - p1
@@ -830,7 +863,9 @@ void LeftAuto(){
     moveToPose(6_in, 0_ft, 90_deg, true, 0.5, 0.6_x, 0.7_x, 2_s); // move to neutral goal
     liftToPosition(2,100);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH); //score wall pin
-    
+
+    //0.75 0.34 43.11
+    */
 }
 void RightAuto(){
     // Initiialize starting pos

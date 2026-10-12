@@ -753,7 +753,7 @@ void eighteenPointAuto() {
 }
 */
 
-void LeftAuto(){
+void LeftAuto(bool awp){
     // Initiialize starting pos
     setChassisPose(0.13_ft, -1.48_ft+1_in, -50_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
     // needa change these positions & offsets  (including reading)
@@ -813,43 +813,50 @@ void LeftAuto(){
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     delay(150_ms);
 
-    //lift up and position towards goal
-    liftToPosition(11,100);
-    //turnToAngle(90_deg, 0.35_x);
-    turnToAngle(90_deg, 0.35_x);
-    delay(310_ms);
-    
-    //move to alliance/blue goal
-    moveToPoint(-2_ft-6_in, -2_in, true, 0.4_x, 0.5_x, 1.5_s); // move to blue goal
-    
-    //score second standing pin - end of four pin auto (next steps is getting wall pin)
-    liftToPosition(10,100);
-    odomDistanceRight.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
-    delay(250_ms);
-    pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+    if (awp){ // putting in alliance blue goal for awp
+        liftToPosition(7,100);
+        turnToAngle(0_deg, 0.4_x);
+        moveToPoint(-3_ft-7_in, 1_ft, true, 0.4_x, 0.45_x, 1.5_s);
+        pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+    } else { // putting in our alliance goal for elims
+        //lift up and position towards goal
+        liftToPosition(11,100);
+        //turnToAngle(90_deg, 0.35_x);
+        turnToAngle(90_deg, 0.35_x);
+        delay(310_ms);
+        
+        //move to alliance/blue goal
+        moveToPoint(-2_ft-6_in, -2_in, true, 0.4_x, 0.5_x, 1.5_s); // move to blue goal
+        
+        //score second standing pin - end of four pin auto (next steps is getting wall pin)
+        liftToPosition(10,100);
+        odomDistanceRight.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
+        delay(250_ms);
+        pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
 
-    //move into position for wall pin
-    liftToPosition(0,100);
-    relative(-6_in, 0.4_x);
-    turnToAngle(143_deg, 0.5_x);
-    turnToAngle(135_deg, 0.5_x);
-    // moveToPoint(-2_ft-4.5_in, -1_ft+2.5_in, true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
-    moveToPoint(-2_ft-6_in+0.34_ft, -2_in - 0.75_ft,true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
-    delay(350_ms);
+        //move into position for wall pin
+        liftToPosition(0,100);
+        relative(-6_in, 0.4_x);
+        turnToAngle(143_deg, 0.5_x);
+        turnToAngle(135_deg, 0.5_x);
+        // moveToPoint(-2_ft-4.5_in, -1_ft+2.5_in, true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
+        moveToPoint(-2_ft-6_in+0.34_ft, -2_in - 0.75_ft,true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
+        delay(350_ms);
 
-    // do the method of spinning one side of drive to get in prime posiition to pick pin
-    swingToAngle(180_deg, lemlib::DriveSide::RIGHT, 0.3_x);
-    pros::c::adi_digital_write(kPneumaticClawPort, LOW);
-    relative(1.5_in, 0.4_x);
-    delay(250_ms);
+        // do the method of spinning one side of drive to get in prime posiition to pick pin
+        swingToAngle(180_deg, lemlib::DriveSide::RIGHT, 0.3_x);
+        pros::c::adi_digital_write(kPneumaticClawPort, LOW);
+        relative(1.5_in, 0.4_x);
+        delay(250_ms);
 
-    relative(-1.5_in, 0.4_x);
-    swingToAngle(135_deg, lemlib::DriveSide::RIGHT, 0.3_x);
-    moveToPose(-3_ft-4_in, 0_in, 135_deg, false, 0.4, 0.4_x, 0.5_x, 1.5_s);
-    liftToPosition(8,100);
-    turnToAngle(0_deg,0.5_x);
-    moveToPose(-3_ft-4_in,1_ft, 0_deg, true, 0.4, 0.4_x, 0.5_x, 1.5_s);
-    pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+        relative(-1.5_in, 0.4_x);
+        swingToAngle(135_deg, lemlib::DriveSide::RIGHT, 0.3_x);
+        moveToPose(-3_ft-4_in, 0_in, 135_deg, false, 0.4, 0.4_x, 0.5_x, 1.5_s);
+        liftToPosition(15,100);
+        moveToPose(-2_ft-6_in, -8_in, 90_deg,false, 0.4, 0.4_x, 0.5_x, 1.5_s);
+        relative(6_in, 0.5_x);
+        pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+    }
 
 
     //move back and turn towards neutral goal

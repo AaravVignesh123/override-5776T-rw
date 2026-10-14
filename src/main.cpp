@@ -187,7 +187,7 @@ void autonomous() {
 
 	switch (auton) {
         case LEFT_AUTO:
-            LeftAuto();
+            LeftAuto(awp);
 			break;
         case RIGHT_AUTO:
             RightAuto();
@@ -200,6 +200,10 @@ void autonomous() {
 
 void opcontrol() {
     Time init = getTime();
+    const double tipAngleOffset = imuTipping.get_roll();
+    for (int i = 0; i < lastTipAnglesSize; i++) {
+        lastTipAngles[i] = 0.0;
+    }
 
     // Set control variables
     clawToggle = false;
@@ -410,7 +414,7 @@ void opcontrol() {
 		// Macros
 		enableMacros = aButton.held;
         if (enableMacros && r2Button.pressed) {
-            farSideMatchloader(0_in, 0_in);
+            farSideMatchloader(0_in, 0_in, chassis.getPose());
         }
         if (enableMacros && upButton.pressed) {
             scoreFarSide(0_in, 0_in, 2);
@@ -524,11 +528,11 @@ void opcontrol() {
         
 		
         // Anti-tip protection
-        /*
-        tipAngle = imuTipping.get_roll();
+
+        tipAngle = std::remainder(imuTipping.get_roll() - tipAngleOffset, 360.0);
         tipMagnitude = std::abs(tipAngle);
 		tipSign = std::signbit(tipAngle) ? 1 : -1;
-        tipVelocity = (tipAngle - arrMean(lastTipAngles, lastTipAnglesSize)) * -tipSign * 10.0;
+        tipVelocity = (tipAngle - arrMean(lastTipAngles, lastTipAnglesSize)) * tipSign * 10.0;
 
         // Disable anti-tip for the final 30 seconds of driver control.
 		if (tipMagnitude > 10 && currentTime < 75_s) {
@@ -549,7 +553,7 @@ void opcontrol() {
 			lastTipAngles[i] = lastTipAngles[i - 1];
 		}
 		lastTipAngles[0] = tipAngle;
-        */
+
         
 
 		// Tank controls

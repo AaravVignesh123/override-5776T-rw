@@ -414,7 +414,7 @@ void opcontrol() {
 		// Macros
 		enableMacros = aButton.held;
         if (enableMacros && r2Button.pressed) {
-            farSideMatchloader(0_in, 0_in, chassis.getPose());
+            farSideMatchloader(0_in, 0_in);
         }
         if (enableMacros && upButton.pressed) {
             scoreFarSide(0_in, 0_in, 2);

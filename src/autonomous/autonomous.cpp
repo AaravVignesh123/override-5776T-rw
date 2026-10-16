@@ -865,6 +865,7 @@ void LeftAuto(bool awp){
         swingToAngle(135_deg, lemlib::DriveSide::RIGHT, 0.3_x);
         moveToPose(-3_ft-4_in, 0_in, 135_deg, false, 0.4, 0.4_x, 0.5_x, 1.5_s, 0_in, true);
         liftToPosition(15,127);
+        delay(500_ms);
         
         moveToPose(-2_ft-9_in, 0_in, 90_deg,true, 0.4, 0.6_x, 0.6_x, 1.5_s);
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
@@ -899,13 +900,14 @@ void RightAuto(){
     
     // toggle
     toggleOnce();
-    delay(500_ms);
+    delay(1000_ms);
     
     //moveToPoint(0_ft, -3_in, false, 0.4_x, 0.7_x, 1.5_s); 
     //releasePin();
     liftToPosition(2,100);
     //move to alliance goal to score preload
-    moveToPose(1.5_ft + 6.5_in, -9_in, 90_deg, true, 0.6, 0.6_x, 0.8_x, 2_s, 0_in, false);
+    moveToPose(1.5_ft + 6.5_in, -9_in, 90_deg, true, 0.6, 0.7_x, 0.8_x, 1.5_s, 2_in, false);
+    moveToPose(1.5_ft + 6.5_in, -9_in, 90_deg, true, 0.6, 0.2_x, 0.6_x, 1.5_s, 0_in, false);
 
     //turnToAngle(90_deg, 0.5_x);
     //score preload
@@ -941,9 +943,9 @@ void RightAuto(){
     relative(-5_in, 0.4_x);
     turnToAngle(-130_deg, 0.5_x);
     delay(250_ms);
-    liftToPosition(0,100);
-    moveToPoint(-3_ft+2_in, 4_in+2_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
-    moveToPoint(-3_ft-3_in, 1_in, true, 0.4_x, 0.45_x, 1.5_s); // move to standing pin
+    liftToPosition(0.5,100);
+    moveToPoint(-3_ft+1_in, 4_in+2_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
+    moveToPoint(-3_ft-4_in, 1_in, true, 0.4_x, 0.45_x, 1.5_s); // move to standing pin
 
     //grab second standing pin
     delay(150_ms);
@@ -974,7 +976,7 @@ void RightAuto(){
         //move into position for wall pin
         liftToPosition(0,100);
         relative(-6_in, 0.4_x);
-        turnToAngle(143_deg, 0.5_x);
+        //turnToAngle(143_deg, 0.5_x);
         turnToAngle(135_deg, 0.5_x);
         // moveToPoint(-2_ft-4.5_in, -1_ft+2.5_in, true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
         moveToPoint(-2_ft-6_in+0.34_ft, -2_in - 0.75_ft,true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
@@ -988,8 +990,9 @@ void RightAuto(){
 
         //relative(-1.5_in, 0.4_x);
         swingToAngle(135_deg, lemlib::DriveSide::RIGHT, 0.3_x);
-        moveToPose(-3_ft-4_in, 0_in, 135_deg, false, 0.4, 0.4_x, 0.5_x, 1.5_s);
+        moveToPose(-3_ft-4_in, 0_in, 135_deg, false, 0.4, 0.4_x, 0.5_x, 1.5_s, 0_in, true);
         liftToPosition(15,127);
+        delay(250_ms);
         moveToPose(-2_ft-6_in, -8_in, 90_deg,false, 0.4, 0.4_x, 0.5_x, 1.5_s);
         relative(6_in, 0.5_x);
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH);

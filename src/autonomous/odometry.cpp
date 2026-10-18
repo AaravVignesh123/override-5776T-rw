@@ -41,7 +41,7 @@ lemlib::ControllerSettings chassisDrivePid(
 lemlib::ControllerSettings chassisTurnPid(
     4.5, // kP
     0, // kI
-    44.5, // kD
+    40, // kD
     3, // anti windup
     0.3, // small error range, in degrees
     100, // small error range timeout, in milliseconds

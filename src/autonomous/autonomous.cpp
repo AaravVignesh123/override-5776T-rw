@@ -774,28 +774,25 @@ void LeftAuto(bool awp){
     toggleOnce();
     delay(175_ms);
     
-    //moveToPoint(0_ft, -3_in, false, 0.4_x, 0.7_x, 1.5_s); 
-    //releasePin();
-    liftToPosition(2,100);
+    liftToPosition(2.5,100);
     //move to alliance goal to score preload
-    moveToPose(-1.5_ft - 6.5_in, -8_in, -90_deg, true, 0.6, 0.6_x, 0.6_x, 2_s, 0_in, false);
+    moveToPose(-1.5_ft - 6.5_in, -8_in, -90_deg, true, 0.6, 0.6_x, 0.8_x, 0.5_s, 3_in, false);
+    moveToPose(-1.5_ft - 6.5_in, -8_in, -90_deg, true, 0.6, 0.4_x, 0.6_x, 0.4_s, 0_in, false);
 
-    //turnToAngle(90_deg, 0.5_x);
     //score preload
     delay(200_ms); 
-    liftToPosition(0,100);
+    liftToPosition(0.5,100);
     delay(100_ms); //350 originally
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
     odomDistanceLeft.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
 
-    //delay(650_ms);
     //go to standing pin #1 and grab pin
     relative(-5_in, 0.4_x);
     turnToAngle(-35_deg, 0.5_x);
-    moveToPoint(-2_ft + 3_in, 1_ft-2_in, true, 0.8_x, 0.8_x, 1.5_s); // move to standing pin intermediately
+    moveToPoint(-2_ft -3_in, 1_ft-2_in, true, 0.8_x, 0.8_x, 1.5_s); // move to standing pin intermediately
     moveToPoint(-2_ft-0.5_in, 1_ft+0.5_in, true, 0.5_x, 0.55_x, 1.5_s); // move to standing pin
+    delay(100_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
-    //moveToPose(-1.3_ft, 1_ft, -45_deg, true, 0.5, 0.6_x, 1_x, 2_s);
 
     delay(190_ms); //needed delay was 200 before
 
@@ -803,7 +800,6 @@ void LeftAuto(bool awp){
     liftToPosition(8,100);
     turnToAngle(177_deg, 0.35_x);
     delay(150_ms);
-    //moveToPose(-2_ft, 5_in, 175_deg, true, 0.6, 0.6_x, 0.6_x, 2_s, 0_in, true); // move to blue goal
     moveToPoint(-2_ft, 5_in, true, 0.6_x, 0.6_x, 2_s); // move to blue goal
     delay(175_ms); //needed delays
     liftToPosition(5,100);
@@ -815,19 +811,19 @@ void LeftAuto(bool awp){
     relative(-5_in, 0.4_x);
     turnToAngle(-130_deg, 0.5_x);
     delay(250_ms);
-    liftToPosition(0,100);
-    moveToPoint(-3_ft+2_in, 4_in+2_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
-    moveToPoint(-3_ft-3_in, 1_in, true, 0.4_x, 0.45_x, 1.5_s); // move to standing pin
+    liftToPosition(0.5,100);
+    moveToPoint(-3_ft-3_in, 6_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
+    moveToPoint(-3_ft+3_in, 0_in, true, 0.4_x, 0.45_x, 1.5_s); // move to standing pin
 
     //grab second standing pin
     delay(125_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     delay(175_ms);
 
-    if (awp){ // putting in alliance blue goal for awp
+    if (awp == true){ // putting in alliance blue goal for awp
         liftToPosition(7,100);
         turnToAngle(0_deg, 0.4_x);
-        moveToPoint(-3_ft-3_in, 1_ft, true, 0.4_x, 0.45_x, 1.5_s);
+        moveToPose(-4_ft, 2_ft, 0_deg, true, 0.6, 0.4_x, 0.45_x, 1.5_s);
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
     } else { // putting in our alliance goal for elims
         //lift up and position towards goal

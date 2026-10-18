@@ -16,7 +16,7 @@ void scoreFarSide(Length x, Length y, int pinStack);
 //Routes 
 void eighteenPointAuto();
 void LeftAuto(bool awp);
-void RightAuto();
+void RightAuto(bool awp);
 void SoloAWP();
 
 // For turn pid

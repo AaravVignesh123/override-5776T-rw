@@ -54,7 +54,7 @@ enum AutonChars {
     RIGHT_AUTO = 'r'
 };
 
-char auton = LEFT_AUTO; 
+char auton = RIGHT_AUTO; 
 bool awp = false;
 bool fullScoringPosition = false;
 void autonSelector() {
@@ -150,7 +150,7 @@ void initialize() {
 	//trackingWheelLR.reset();
 	trackingWheelFB.reset();
 	chassis.calibrate();
-	//translationTuning();
+	//dtranslationTuning();
     //turnTuning();
     tareLiftPosition();
     //liftToPosition(5.3, 100);

@@ -30,3 +30,5 @@ void maxSpeedMeasuring();
 
 // For testing experimental functions
 void testingAuton();
+
+void matchloading();

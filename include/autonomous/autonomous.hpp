@@ -6,6 +6,12 @@ enum liftUP {
     LIFT_DOWN
 };
 
+enum whichGoal {
+    R_SIDE_ALLIANCE_GOAL,
+    L_SIDE_ALLIANCE_GOAL,
+    MIDDLE_GOAL
+};
+
 // Helper Functions
 // Unload matchloader
 void unloadMatchloader(Length x, bool useDelay = true, Angle angleOffset = 0_deg);
@@ -13,11 +19,16 @@ void unloadMatchloader(Length x, bool useDelay = true, Angle angleOffset = 0_deg
 void hookDescoreWing(Length x = 0_ft, Length y = 21_in);
 void farSideMatchloader(Length x, Length y); // lemlib::Pose pose is the current pose of the robot, used to set the initial pose of the robot when starting the auton
 void scoreFarSide(Length x, Length y, int pinStack);
+
+// Override Helper Functions
+void matchloadingRight(float objectHeight, enum whichGoal goal = R_SIDE_ALLIANCE_GOAL);
+
 //Routes 
 void eighteenPointAuto();
 void LeftAuto(bool awp);
 void RightAuto(bool awp);
 void SoloAWP();
+void skills();
 
 // For turn pid
 void turnTuning(); 

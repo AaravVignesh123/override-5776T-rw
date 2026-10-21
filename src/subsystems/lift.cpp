@@ -19,7 +19,7 @@ void liftDown() {
     setMotorSpeed(liftMotor2, -127_power);
 }
 
-void liftToPosition(double position, int32_t velocity) {
+void liftToPosition(float position, int32_t velocity) {
     const double motorDegrees = position * 360.0 / LIFT_INCHES_PER_MOTOR_REV;
     liftMotor1.set_brake_mode(pros::MotorBrake::hold);
     liftMotor2.set_brake_mode(pros::MotorBrake::hold);
@@ -27,7 +27,7 @@ void liftToPosition(double position, int32_t velocity) {
     liftMotor2.move_absolute(motorDegrees, velocity);
 }
 
-void waitForLiftPosition(double position) {
+void waitForLiftPosition(float position) {
     const double motorDegrees = position * 360.0 / LIFT_INCHES_PER_MOTOR_REV;
     while (std::abs(liftMotor1.get_position() + motorDegrees) > LIFT_POSITION_TOLERANCE_DEGREES ||
            std::abs(liftMotor2.get_position() - motorDegrees) > LIFT_POSITION_TOLERANCE_DEGREES) {

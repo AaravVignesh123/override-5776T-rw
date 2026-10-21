@@ -21,13 +21,51 @@ void hookDescoreWing(Length x, Length y) {
     (void)y;
 }
 
-void matchloadingRight() {
+//NEEDS TO BE TUNED
+// Enter in cupHeight and whichGoal to go to
+// R_SIDE_ALLIANCE_GOAL, L_SIDE_ALLIANCE_GOAL, MIDDLE_GOAL
+void matchloadingRight(float objectHeight, enum whichGoal goal) {
+    relative(-5_in, 0.4_x);
     moveToPose(2_ft - 5_in, -6_in, 180_deg, true, 0.6, 0.6_x, 0.8_x, 0.5_s); // goes to matchloader
     pros::c::adi_digital_write(kPneumaticClawPort, LOW); // closes claw
     delay(100_ms);
     relative(2_in, 0.4_x);
     liftToPosition(5,100); //goes up to 5 inches, barely above the floor, to avoid hitting the matchloader
-   // Placeholder for matchloading autonomous routine
+   
+    if (goal == R_SIDE_ALLIANCE_GOAL) {
+        //go to right alliance goal
+        turnToAngle(-90_deg, 0.35_x);
+        delay(150_ms);
+        moveToPoint(2_ft, 4_in, true, 0.5_x, 0.55_x, 2_s);
+
+        delay(175_ms); //needed delays
+        liftToPosition(objectHeight,100); // should be at correct height for pin
+        delay(175_ms);
+        odomDistanceBackwards.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
+        pros::c::adi_digital_write(kPneumaticClawPort, HIGH); // release pin, hopefully
+    } else if (goal == L_SIDE_ALLIANCE_GOAL) {
+        //go to left alliance goal
+        turnToAngle(-90_deg, 0.35_x);
+        delay(150_ms);
+        moveToPoint(4_ft, 2_in, true, 0.5_x, 0.55_x, 2_s);
+
+        delay(175_ms); //needed delays
+        liftToPosition(objectHeight,100); // should be at correct height for pin
+        delay(175_ms);
+        odomDistanceBackwards.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
+        pros::c::adi_digital_write(kPneumaticClawPort, HIGH); // release pin, hopefully
+    } else if (goal == MIDDLE_GOAL) {
+        turnToAngle(0_deg, 0.35_x);
+        delay(150_ms);
+        moveToPoint(0_ft, 4_ft, true, 0.5_x, 0.55_x, 2_s);
+
+        delay(175_ms); //needed delays
+        liftToPosition(objectHeight,100); // should be at correct height for pin
+        delay(175_ms);
+        odomDistanceBackwards.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
+        pros::c::adi_digital_write(kPneumaticClawPort, HIGH); // release pin, hopefully
+    }
+    
 }
 
 #define ALIGN_TO_LONG_GOAL(time) do { (void)(time); } while (0)
@@ -920,17 +958,17 @@ void RightAuto(bool awp){
     
     //moveToPoint(0_ft, -3_in, false, 0.4_x, 0.7_x, 1.5_s); 
     //releasePin();
-    liftToPosition(2.5,100);
+    liftToPosition(3.5,100);
     //move to alliance goal to score preload
-    moveToPose(1.5_ft + 11_in, -1_in, 90_deg, true, 0.6, 0.6_x, 0.8_x, 0.5_s);
-    moveToPose(1.5_ft +11_in, -1_in, 90_deg, true, 0.6, 0.4_x, 0.6_x, 0.4_s);
+    moveToPose(2.5_ft + 2_in, -1_in, 90_deg, true, 0.6, 0.6_x, 0.8_x, 0.5_s, 4_in, true);
+    moveToPose(2.5_ft +4.5_in, -1_in, 90_deg, true, 0.6, 0.2_x, 0.4_x, 0.4_s);
     //moveToPose(1.5_ft + 6.5_in, -8_in, 90_deg, true, 0.6, 0.6_x, 0.6_x, 2_s, 0_in, false);
 
     //turnToAngle(90_deg, 0.5_x);
     //score preload
     delay(200_ms); 
-    liftToPosition(0,100);
-    delay(100_ms); //350 originally
+    liftToPosition(1,100);
+    delay(200_ms); //350 originally
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
     odomDistanceRight.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
 
@@ -938,8 +976,8 @@ void RightAuto(bool awp){
     //go to standing pin #1 and grab pin
     relative(-5_in, 0.4_x);
     turnToAngle(38_deg, 0.5_x);
-    moveToPoint(2_ft-6_in, 1_ft-1.5_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
-    moveToPoint(2_ft-4_in, 1_ft+2_in, true, 0.4_x, 0.4_x, 1.5_s);
+    moveToPoint(2_ft-6_in, 1_ft-1.5_in, true, 0.8_x,0.8_x, 2_s, 5_in, true); // move to standing pin intermediately
+    moveToPoint(2_ft-3_in, 1_ft+6_in, true, 0.4_x, 0.6_x, 1.5_s);
     //moveToPoint(2_ft - 3_in, 1_ft-2_in, true, 0.8_x, 0.8_x, 1.5_s); // move to standing pin intermediately
     //moveToPoint(2_ft+0.5_in, 1_ft+0.5_in, true, 0.5_x, 0.55_x, 1.5_s); // move to standing pin
     delay(150_ms);
@@ -947,7 +985,7 @@ void RightAuto(bool awp){
     //moveToPose(-1.3_ft, 1_ft, -45_deg, true, 0.5, 0.6_x, 1_x, 2_s);
 
     liftToPosition(8,100);
-    turnToAngle(180_deg, 0.35_x);
+    turnToAngle(180_deg, 0_x);
     delay(150_ms);
     moveToPoint(2_ft+8_in, 5_in, true, 0.5_x, 0.55_x, 2_s); // move to blue goal
     
@@ -956,21 +994,23 @@ void RightAuto(bool awp){
     delay(175_ms);
     odomDistanceForward.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
-    /*
-    // move to second standing pin
-    relative(-5_in, 0.4_x);
+    
+    //move to second standing pin
+    relative(-7_in, 0.4_x);
     turnToAngle(132_deg, 0.5_x);
     delay(250_ms);
     liftToPosition(0,127);
-    moveToPoint(3_ft+0.5_in, 3.5_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
-    moveToPoint(3_ft+3.5_in, 0_in, true, 0.4_x, 0.4_x, 1.5_s); // move to standing pin
+    //moveToPoint(3_ft+0.5_in, 8_in, true, 0.9_x,0.9_x, 1.5_s); // move to standing pin intermediately
+    //moveToPoint(4_ft+0.5_in, 3.5_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
+    moveToPoint(4_ft+3.5_in, 0_in, true, 0.8_x, 0.8_x, 1.5_s, 5_in, true); // move to standing pin
+    moveToPoint(4_ft+3.5_in, 0_in, true, 0.3_x, 0.5_x, 1.5_s); // move to standing pin
 
     //grab second standing pin
     //delay(125_ms);
     delay(125_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     
-
+    
     if (awp){ // putting in alliance blue goal for awp
         liftToPosition(7,100);
         turnToAngle(25_deg, 0.4_x);
@@ -993,6 +1033,7 @@ void RightAuto(bool awp){
         delay(175_ms);
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
 
+        /*
         //move into position for wall pin
         liftToPosition(0,100);
         relative(-6_in, 0.4_x);
@@ -1026,9 +1067,9 @@ void RightAuto(bool awp){
         //moveToPose(-2_ft-9_in, 0_in, 90_deg,true, 0.4, 0.6_x, 0.6_x, 1.5_s);
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
         //relative(6_in, 1_x);
-        
-    }
         */
+    }
+    
 }
 
 void SoloAWP(){
@@ -1225,31 +1266,23 @@ void skills() {
     //     delay(175_ms);
     //     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
     // }
-    relative(-5_in, 0.4_x);
-    matchloadingRight();
 
-    turnToAngle(-90_deg, 0.35_x);
-    delay(150_ms);
-    moveToPoint(2_ft, 4_in, true, 0.5_x, 0.55_x, 2_s); // move to red goal
-    delay(175_ms); //needed delays
-    liftToPosition(12,100); // should be at correct height for 3rd pin
-    delay(175_ms);
-    odomDistanceBackwards.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
-    pros::c::adi_digital_write(kPneumaticClawPort, HIGH); // just released 3rd pin, hopefully
-    
-    relative(-5_in, 0.4_x);
-    matchloadingRight(); // should be at correct height for 4th pin
-    turnToAngle(-90_deg, 0.35_x);
-    delay(150_ms);
-    moveToPoint(2_ft, 5_in, true, 0.5_x, 0.55_x, 2_s); // move to red goal
-    delay(175_ms); //needed delays
-    liftToPosition(14,100); // should be at correct height for 4th pin
-    delay(175_ms);
-    odomDistanceBackwards.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
-    pros::c::adi_digital_write(kPneumaticClawPort, HIGH); // just released 4th pin, hopefully
+    //third pin, right alliance goal
+    matchloadingRight(12);
+    //fourth pin, right alliance goal
+    matchloadingRight(14);
 
-    relative(-5_in, 0.4_x);
-    matchloadingRight(); // should be at correct height for next pin for other alliance goal
+    //start on left alliance red goal
+    //get one pin 
+    matchloadingRight(2.5, L_SIDE_ALLIANCE_GOAL); // should be at correct height for next pin for other alliance goal
+
+    //cups and pins 
+    matchloadingRight(2.5, L_SIDE_ALLIANCE_GOAL); //2nd pin
+    matchloadingRight(10, L_SIDE_ALLIANCE_GOAL); //third pin
+    matchloadingRight(14, L_SIDE_ALLIANCE_GOAL); //fourth pin
+
+    //middle goal pin
+    matchloadingRight(14, MIDDLE_GOAL); //middle goal pin
 }
 
 // Misc Autons --------------------------------------------

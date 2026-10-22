@@ -425,6 +425,11 @@ void opcontrol() {
         if (enableMacros && r1Button.pressed){
             scoreFarSide(0_in, 0_in, 3);
         }
+
+        //macro for skills standing pins part
+        if (enableMacros && leftButton.pressed) {
+            RightAuto(false);
+        }
         /*
 		if (rightButton.held){
 			storePin();

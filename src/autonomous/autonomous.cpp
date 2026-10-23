@@ -1013,7 +1013,7 @@ void RightAuto(bool awp){
 
     //grab second standing pin
     //delay(125_ms);
-    delay(15_ms);
+    delay(25_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     
     
@@ -1025,18 +1025,18 @@ void RightAuto(bool awp){
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
     } else { // putting in our alliance goal for elims
         //lift up and position towards goal
-        liftToPosition(11,127);
+        liftToPosition(14,127);
         //turnToAngle(90_deg, 0.35_x);
         turnToAngle(-125_deg, 0.35_x);
         delay(175_ms);
         
         //move to alliance/blue goal
-        moveToPoint(2_ft+3_in, -8_in, true, 0.4_x, 0.5_x, 1.5_s); // move to blue goal
+        moveToPoint(3_ft+3_in, -8_in, true, 0.6_x, 0.7_x, 1.5_s); // move to blue goal
         
         //score second standing pin - end of four pin auto (next steps is getting wall pin)
-        liftToPosition(10,100);
+        liftToPosition(12,100);
         odomDistanceRight.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
-        delay(175_ms);
+        delay(100_ms);
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
 
         /*

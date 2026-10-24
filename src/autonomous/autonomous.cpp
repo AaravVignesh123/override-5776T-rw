@@ -824,8 +824,8 @@ void LeftAuto(bool awp){
     
     liftToPosition(3,127);
     //move to alliance goal to score preload
-    moveToPose(-1.4_ft - 7_in, -8.5_in, -90_deg, true, 0.6, 0.6_x, 0.8_x, 0.5_s);
-    moveToPose(-1.4_ft - 9_in, -7_in, -90_deg, true, 0.6, 0.4_x, 0.6_x, 0.4_s);
+    moveToPose(-1.4_ft - 9_in, -8.5_in, -90_deg, true, 0.6, 0.6_x, 0.6_x, 0.5_s);
+    moveToPose(-1.4_ft - 11_in, -6.5_in, -90_deg, true, 0.6, 0.4_x, 0.4_x, 0.4_s);
 
     //score preload
     delay(175_ms); 
@@ -833,12 +833,10 @@ void LeftAuto(bool awp){
     delay(100_ms); //350 originally
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
     odomDistanceLeft.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
-
-    //go to standing pin #1 and grab pin
-    relative(-5_in, 0.4_x);
+    /*
     turnToAngle(-38_deg, 0.5_x);
-    moveToPoint(-2_ft+3_in, 1_ft-2.5_in, true, 0.8_x, 0.8_x, 1.5_s); // move to standing pin intermediately
-    moveToPoint(-2_ft, 1_ft-0.5_in, true, 0.5_x, 0.5_x, 1.5_s); // move to standing pin
+    moveToPoint(-2_ft+1_in, 1_ft-2.5_in, true, 0.8_x, 0.8_x, 1.5_s); // move to standing pin intermediately
+    moveToPoint(-2_ft - 2_in, 1_ft-0.5_in, true, 0.5_x, 0.5_x, 1.5_s); // move to standing pin
     delay(30_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     relative(2_in,0.4_x);
@@ -851,8 +849,8 @@ void LeftAuto(bool awp){
     delay(150_ms);
     moveToPoint(-2_ft+2_in, 5_in, true, 0.5_x, 0.55_x, 2_s); // move to blue goal
     delay(175_ms); //needed delays
-    liftToPosition(5,127);
-    delay(175_ms);
+    liftToPosition(3,127);
+    delay(225_ms);
     odomDistanceBackwards.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
 
@@ -861,12 +859,12 @@ void LeftAuto(bool awp){
     turnToAngle(-132_deg, 0.5_x);
     delay(250_ms);
     liftToPosition(0,127);
-    moveToPoint(-3_ft-0.5_in, 0.5_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
-    moveToPoint(-3_ft-4.5_in, -2.5_in, true, 0.4_x, 0.4_x, 1.5_s); // move to standing pin
+    moveToPoint(-3_ft-0.5_in, 2_in, true, 0.5_x,0.5_x, 1.5_s); // move to standing pin intermediately
+    moveToPoint(-3_ft-4.5_in, 1_in, true, 0.2_x, 0.2_x, 1.5_s); // move to standing pin
 
     //grab second standing pin
     //delay(125_ms);
-    delay(125_ms);
+    delay(75_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     relative(2_in, 0.4_x);
     
@@ -935,7 +933,7 @@ void LeftAuto(bool awp){
 
     //move back and turn towards neutral goal
     // relative(-1_in, 0.4_x);
-    /*
+    //commented
     turnToAngle(90_deg, 0.5_x);
 
     moveToPoint(-1_ft, -1_ft, true, 0.5_x, 0.8_x, 1.5_s); // move to neutral goal - p1
@@ -984,7 +982,7 @@ void RightAuto(bool awp){
     relative(-5_in, 0.4_x);
     turnToAngle(38_deg, 0.5_x);
     //moveToPoint(2_ft-6_in, 1_ft-1.5_in, true, 0.8_x,0.8_x, 2_s, 5_in, true); // move to standing pin intermediately
-    moveToPoint(1_ft+10_in, 1_ft+2_in, true, 0.4_x, 0.6_x, 1.5_s);
+    moveToPoint(1_ft+9.5_in, 1_ft+2.5_in, true, 0.4_x, 0.4_x, 1.5_s);
     
     //moveToPoint(2_ft - 3_in, 1_ft-2_in, true, 0.8_x, 0.8_x, 1.5_s); // move to standing pin intermediately
     //moveToPoint(2_ft+0.5_in, 1_ft+0.5_in, true, 0.5_x, 0.55_x, 1.5_s); // move to standing pin
@@ -997,7 +995,7 @@ void RightAuto(bool awp){
     liftToPosition(8,100);
     turnToAngle(180_deg, 0_x);
     delay(150_ms);
-    moveToPoint(2_ft+8_in, 2_in, true, 0.4_x, 0.4_x, 2_s); // move to blue goal
+    moveToPoint(2_ft+7.5_in, 2_in, true, 0.4_x, 0.4_x, 2_s); // move to blue goal
     
     delay(175_ms); //needed delays
     liftToPosition(3,100);
@@ -1013,8 +1011,8 @@ void RightAuto(bool awp){
     //moveToPoint(3_ft+0.5_in, 8_in, true, 0.9_x,0.9_x, 1.5_s); // move to standing pin intermediately
     //moveToPoint(4_ft+0.5_in, 3.5_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
     //moveToPoint(4_ft+3.5_in, 0_in, true, 0.8_x, 0.8_x, 1.5_s, 5_in, true); // move to standing pin
-    moveToPoint(4_ft-3_in, 3_in, true, 0.6_x, 0.6_x, 1.5_s); // move to standing pin
-    moveToPoint(4_ft-1_in, 2_in, true, 0.4_x, 0.5_x, 1.5_s); // move to standing pin
+    moveToPoint(4_ft-0.5_in, 3_in, true, 0.5_x, 0.55_x, 1.5_s); // move to standing pin
+    moveToPoint(4_ft+0.5_in, 2.5_in, true, 0.4_x, 0.4_x, 1.5_s); // move to standing pin
 
     //grab second standing pin
     //delay(125_ms);

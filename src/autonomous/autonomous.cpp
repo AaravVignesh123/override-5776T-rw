@@ -824,8 +824,8 @@ void LeftAuto(bool awp){
     
     liftToPosition(3,127);
     //move to alliance goal to score preload
-    moveToPose(-1.5_ft - 6.5_in, -7_in, -90_deg, true, 0.6, 0.6_x, 0.8_x, 0.5_s);
-    moveToPose(-1.4_ft - 6.5_in, -7_in, -90_deg, true, 0.6, 0.4_x, 0.6_x, 0.4_s);
+    moveToPose(-1.4_ft - 7_in, -8.5_in, -90_deg, true, 0.6, 0.6_x, 0.8_x, 0.5_s);
+    moveToPose(-1.4_ft - 9_in, -7_in, -90_deg, true, 0.6, 0.4_x, 0.6_x, 0.4_s);
 
     //score preload
     delay(175_ms); 
@@ -837,10 +837,11 @@ void LeftAuto(bool awp){
     //go to standing pin #1 and grab pin
     relative(-5_in, 0.4_x);
     turnToAngle(-38_deg, 0.5_x);
-    moveToPoint(-2_ft+3_in, 1_ft-2_in, true, 0.8_x, 0.8_x, 1.5_s); // move to standing pin intermediately
-    moveToPoint(-2_ft, 1_ft+1_in, true, 0.5_x, 0.5_x, 1.5_s); // move to standing pin
+    moveToPoint(-2_ft+3_in, 1_ft-2.5_in, true, 0.8_x, 0.8_x, 1.5_s); // move to standing pin intermediately
+    moveToPoint(-2_ft, 1_ft-0.5_in, true, 0.5_x, 0.5_x, 1.5_s); // move to standing pin
     delay(30_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
+    relative(2_in,0.4_x);
 
     delay(180_ms); //needed delay was 200 before
 
@@ -848,7 +849,7 @@ void LeftAuto(bool awp){
     liftToPosition(9,127);
     turnToAngle(177_deg, 0.35_x);
     delay(150_ms);
-    moveToPoint(-2_ft, 5_in, true, 0.5_x, 0.55_x, 2_s); // move to blue goal
+    moveToPoint(-2_ft+2_in, 5_in, true, 0.5_x, 0.55_x, 2_s); // move to blue goal
     delay(175_ms); //needed delays
     liftToPosition(5,127);
     delay(175_ms);
@@ -860,8 +861,8 @@ void LeftAuto(bool awp){
     turnToAngle(-132_deg, 0.5_x);
     delay(250_ms);
     liftToPosition(0,127);
-    moveToPoint(-3_ft+0.5_in, 4_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
-    moveToPoint(-3_ft-2.6_in, 0.5_in, true, 0.4_x, 0.4_x, 1.5_s); // move to standing pin
+    moveToPoint(-3_ft-0.5_in, 0.5_in, true, 0.8_x,0.8_x, 1.5_s); // move to standing pin intermediately
+    moveToPoint(-3_ft-4.5_in, -2.5_in, true, 0.4_x, 0.4_x, 1.5_s); // move to standing pin
 
     //grab second standing pin
     //delay(125_ms);
@@ -885,7 +886,7 @@ void LeftAuto(bool awp){
         delay(175_ms);
         
         //move to alliance/blue goal
-        moveToPoint(-2_ft-7_in, 0_in, true, 0.4_x, 0.5_x, 1.5_s); // move to blue goal
+        moveToPoint(-2_ft-5_in, 0_in, true, 0.4_x, 0.5_x, 1.5_s); // move to blue goal
         
         //score second standing pin - end of four pin auto (next steps is getting wall pin)
         liftToPosition(10,100);
@@ -894,12 +895,13 @@ void LeftAuto(bool awp){
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
 
         //move into position for wall pin
-        liftToPosition(0,100);
+        //liftToPosition(0,127);
         relative(-6_in, 0.4_x);
+        liftToPosition(0,127);
         //turnToAngle(143_deg, 0.5_x);
         turnToAngle(129_deg, 0.5_x);
         // moveToPoint(-2_ft-4.5_in, -1_ft+2.5_in, true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
-        moveToPoint(-2_ft-6_in+0.32_ft, -2_in - 0.76_ft,true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
+        moveToPoint(-2_ft-6_in+0.32_ft+2_in, -2_in - 0.76_ft,true, 0.3_x, 0.4_x, 1.5_s); // move to standing pin
         delay(125_ms); //200 before
 
         // the method of spinning one side of drive to get in prime posiition to pick pin
@@ -1156,7 +1158,7 @@ void RightAwp(){
     delay(175_ms);
         
     //move to alliance/blue goal
-    moveToPose(4_ft+1_in, -8_in, 0_deg, true, 0.4, 0.4_x, 0.5_x, 2_s); // move to blue goal
+    moveToPose(4_ft+1_in, 0_in, 0_deg, true, 0.4, 0.4_x, 0.5_x, 2_s); // move to blue goal
     //moveToPoint(3_ft+3_in, 0_ft, true, 0.5_x, 0.5_x, 2_s); // move to blue goal
         
     //score second standing pin - end of four pin auto (next steps is getting wall pin)

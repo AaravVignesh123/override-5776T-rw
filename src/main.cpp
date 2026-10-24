@@ -55,7 +55,7 @@ enum AutonChars {
     RIGHT_AWP = 'a',
 };
 
-char auton = RIGHT_AWP; 
+char auton = RIGHT_AUTO; 
 bool awp = false;
 bool fullScoringPosition = false;
 void autonSelector() {

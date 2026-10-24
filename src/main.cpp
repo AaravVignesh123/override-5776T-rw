@@ -51,10 +51,11 @@ double arrMean(double arr[], int arrLength) {
 
 enum AutonChars {
 	LEFT_AUTO = 'l',
-    RIGHT_AUTO = 'r'
+    RIGHT_AUTO = 'r',
+    RIGHT_AWP = 'a',
 };
 
-char auton = RIGHT_AUTO; 
+char auton = RIGHT_AWP; 
 bool awp = false;
 bool fullScoringPosition = false;
 void autonSelector() {
@@ -192,9 +193,9 @@ void autonomous() {
         case RIGHT_AUTO:
             RightAuto(awp);
             break;
-        /* case SOLO_AWP:
-            soloAwp();
-            break; */
+        case RIGHT_AWP:
+            RightAwp();
+            break; 
 	}
 }
 

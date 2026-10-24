@@ -28,6 +28,7 @@ void eighteenPointAuto();
 void LeftAuto(bool awp);
 void RightAuto(bool awp);
 void SoloAWP();
+void RightAwp();
 void skills();
 
 // For turn pid

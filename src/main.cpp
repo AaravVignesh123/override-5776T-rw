@@ -149,7 +149,6 @@ void initialize() {
 	allMotors.set_brake_mode_all(pros::MotorBrake::hold);
     // Reset tracking wheel position
 	//trackingWheelLR.reset();
-	trackingWheelFB.reset();
 	chassis.calibrate();
 	//dtranslationTuning();
     //turnTuning();
@@ -224,10 +223,9 @@ void opcontrol() {
 
             switch (showDebug) {
                 case 1: {
-					lemlib::Pose debugPose = chassis.getPose();
-					double wheelPos = trackingWheelFBSensor.get_position();
-					double angle = chassisAngle().convert(degree);
-					double imuHeading = imu.get_heading();
+            		lemlib::Pose debugPose = chassis.getPose();
+            		double angle = chassisAngle().convert(degree);
+            		double imuHeading = imu.get_heading();
                     pros::lcd::set_text(0, "LF: " + std::to_string(driveLF.get_position()));
                     pros::lcd::set_text(1, "LC: " + std::to_string(driveLC.get_position()));
                     pros::lcd::set_text(2, "LB: " + std::to_string(driveLB.get_position()));

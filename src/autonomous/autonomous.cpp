@@ -948,7 +948,7 @@ void LeftAuto(bool awp){
 }
 void RightAuto(bool awp){
     // Initiialize starting pos
-    setChassisPose(-0.0236_ft, -1.1916_ft, 44.56_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
+    setChassisPose(-0.5_ft, -1.04_ft, 42.74[]\;_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
     // needa change these positions & offsets  (including reading)
     odomDistanceForward.setOriginPosition(4_in, -10_in);
     odomDistanceLeft.setOriginPosition(-8_in, -1_ft);

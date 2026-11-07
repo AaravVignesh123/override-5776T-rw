@@ -150,7 +150,7 @@ void initialize() {
     // Reset tracking wheel position
 	//trackingWheelLR.reset();
 	chassis.calibrate();
-	//dtranslationTuning();
+	//translationTuning();
     //turnTuning();
     tareLiftPosition();
     //liftToPosition(5.3, 100);
@@ -564,7 +564,7 @@ void opcontrol() {
         //chassis.tank(leftY, rightY);
         // 2-stick arcade controls
         // chassis.arcade(leftY, rightX);
-		chassis.arcade(leftY, rightX * 1.4);
+		chassis.arcade(leftY, rightX);
 
 		delay(10_ms);
 	}

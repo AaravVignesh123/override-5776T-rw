@@ -28,7 +28,7 @@ lemlib::OdomSensors sensors(
 
 // PIDs
 lemlib::ControllerSettings chassisDrivePid(
-    8, // kP
+    8.5, // kP
     0, // kI
     15, // kD, can be 11 or 1
     3, // anti windup
@@ -39,8 +39,8 @@ lemlib::ControllerSettings chassisDrivePid(
     0 // maximum acceleration (slew), was 20 before changing
 );
 lemlib::ControllerSettings chassisTurnPid(
-    4.5, // kP
-    0, // kI
+    4.7, // kP
+    0.03, // kI
     40, // kD
     3, // anti windup
     0.3, // small error range, in degrees

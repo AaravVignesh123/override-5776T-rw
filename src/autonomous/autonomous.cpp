@@ -833,7 +833,7 @@ void LeftAuto(bool awp){
     delay(100_ms); //350 originally
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
     odomDistanceLeft.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
-    /*
+    
     turnToAngle(-38_deg, 0.5_x);
     moveToPoint(-2_ft+1_in, 1_ft-2.5_in, true, 0.8_x, 0.8_x, 1.5_s); // move to standing pin intermediately
     moveToPoint(-2_ft - 2_in, 1_ft-0.5_in, true, 0.5_x, 0.5_x, 1.5_s); // move to standing pin
@@ -944,11 +944,11 @@ void LeftAuto(bool awp){
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH); //score wall pin
 
     //0.75 0.34 43.11
-    */
+    
 }
 void RightAuto(bool awp){
     // Initiialize starting pos
-    setChassisPose(-0.5_ft, -1.04_ft, 42.74[]\;_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
+    setChassisPose(-0.5_ft, -1.04_ft, 42.74_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
     // needa change these positions & offsets  (including reading)
     odomDistanceForward.setOriginPosition(4_in, -10_in);
     odomDistanceLeft.setOriginPosition(-8_in, -1_ft);

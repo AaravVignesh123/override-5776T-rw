@@ -5,14 +5,12 @@
 #include "main.h"
 
 // change ports --> ports need to be defined
-pros::Motor leftToggleMotor(-7);
+//pros::Motor leftToggleMotor(-7);
 pros::Motor rightToggleMotor(8);
 
 void toggleRollers() {
-    setMotorSpeed(leftToggleMotor, 63_power);
-    setMotorSpeed(rightToggleMotor, 63_power);
+    setMotorSpeed(rightToggleMotor, 100_power);
 }
 void toggleOnce(){
-    leftToggleMotor.move_relative(720, 200);
     rightToggleMotor.move_relative(720, 200);
 }

@@ -55,8 +55,8 @@ enum AutonChars {
     RIGHT_AWP = 'a',
 };
 
-char auton = RIGHT_AUTO; 
-bool awp = true;
+char auton = LEFT_AUTO; 
+bool awp = false;
 bool fullScoringPosition = false;
 void autonSelector() {
 	pros::lcd::set_text(1, "Selected auton:");
@@ -452,7 +452,7 @@ void opcontrol() {
         if (!enableMacros && r1Button.held) {
             toggleRollers();
 		} else {
-            setMotorSpeed(leftToggleMotor, 0_x);
+            //setMotorSpeed(leftToggleMotor, 0_x);
             setMotorSpeed(rightToggleMotor, 0_x);
         }
 

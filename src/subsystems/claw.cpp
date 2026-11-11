@@ -3,7 +3,7 @@
 #include "autonomous/odometry.hpp"
 
 pros::Motor clawMotor(-10);
-pros::Motor clawTwistMotor(7);
+pros::Motor clawTwistMotor(14);
 const double TWIST_UP_LIMIT = -400.0;
 const double TWIST_START_POSITION = 0.0;
 const double TWIST_SLOW_ZONE = 100.0;

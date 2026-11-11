@@ -164,8 +164,13 @@ void initialize() {
 	chassis.setPose(lemlib::Pose(0, 0, 0));
 
     pros::lcd::print(0, "IMU ready");
+
+    const std::int32_t opticalInitResult = initializeToggleColorSensor();
+    if (opticalInitResult != PROS_SUCCESS) {
+		pros::lcd::print(1, "Optical init failed: %d", opticalInitResult);
+    }
 	
-	clawTwistMotor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    clawTwistMotor.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 	// Initialize pneumatics
     // pros::c::adi_pin_mode(kPneumaticIntakePort, OUTPUT);
@@ -449,7 +454,7 @@ void opcontrol() {
         pneumaticToggle(kPneumaticClawPort, clawToggle);
 
         // Toggle controls
-        if (!enableMacros && r1Button.held) {
+        if (!enableMacros && (r1Button.held || isNonAllianceColorDetected())) {
             toggleRollers();
 		} else {
             //setMotorSpeed(leftToggleMotor, 0_x);

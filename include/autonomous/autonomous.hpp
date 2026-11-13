@@ -25,7 +25,7 @@ void matchloadingRight(float objectHeight, enum whichGoal goal = R_SIDE_ALLIANCE
 
 //Routes 
 void eighteenPointAuto();
-void LeftAuto(bool awp);
+void LeftAuto(bool awp, bool noPreload);
 void RightAuto(bool awp);
 void SoloAWP();
 void RightAwp();

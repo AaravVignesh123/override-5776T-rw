@@ -56,7 +56,8 @@ enum AutonChars {
 };
 
 char auton = LEFT_AUTO; 
-bool awp = false;
+bool awp = true;
+bool noPreload = false;
 bool fullScoringPosition = false;
 void autonSelector() {
 	pros::lcd::set_text(1, "Selected auton:");
@@ -192,7 +193,7 @@ void autonomous() {
 
 	switch (auton) {
         case LEFT_AUTO:
-            LeftAuto(awp);
+            LeftAuto(awp, noPreload);
 			break;
         case RIGHT_AUTO:
             RightAuto(awp);

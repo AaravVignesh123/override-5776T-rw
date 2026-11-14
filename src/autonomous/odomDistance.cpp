@@ -207,5 +207,5 @@ void OdomDistance::correctPositionUntilEnd(OdomDistance::ForceToWall forceToWall
 // Initialize distance odom correction sensors
 OdomDistance odomDistanceForward(4, 11_holes, 4.5_holes,0_deg, 0.8_in);
 OdomDistance odomDistanceLeft(2, -9.5_holes, -5_holes,-90_deg, 0.2_in); 
-OdomDistance odomDistanceRight(10, 9.5_holes, -5_holes,90_deg, 0.04_in);
+OdomDistance odomDistanceRight(19, 9.5_holes, -5_holes,90_deg, 0.04_in);
 OdomDistance odomDistanceBackwards(1, -7.5_holes, -5.5_holes,180_deg, 0.4_in);

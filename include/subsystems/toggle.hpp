@@ -9,6 +9,7 @@ enum class ToggleAllianceColor {
 extern pros::Motor rightToggleMotor;
 extern pros::Motor leftToggleMotor;
 extern ToggleAllianceColor toggleAllianceColor;
+extern bool toggleColorSortEnabled;
 
 std::int32_t initializeToggleColorSensor();
 bool isNonAllianceColorDetected();

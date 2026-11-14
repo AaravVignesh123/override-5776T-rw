@@ -11,6 +11,7 @@ pros::Optical toggleColorSensor(3);
 
 // Change this to Red or Blue before the match.
 ToggleAllianceColor toggleAllianceColor = ToggleAllianceColor::Red;
+bool toggleColorSortEnabled = true;
 
 namespace {
 constexpr std::int32_t kMinimumColorProximity = 100;
@@ -19,7 +20,7 @@ constexpr double kRedHueUpperBound = 30.0;
 constexpr double kRedHueLowerBound = 330.0;
 constexpr double kBlueHueLowerBound = 190.0;
 constexpr double kBlueHueUpperBound = 260.0;
-constexpr std::int32_t kToggleOnceVelocity = 120;
+constexpr std::int32_t kToggleOnceVelocity = 130;
 }
 
 std::int32_t initializeToggleColorSensor() {
@@ -27,6 +28,10 @@ std::int32_t initializeToggleColorSensor() {
 }
 
 bool isNonAllianceColorDetected() {
+    if (!toggleColorSortEnabled) {
+        return false;
+    }
+
     if (toggleColorSensor.get_proximity() < kMinimumColorProximity) {
         return false;
     }
@@ -44,8 +49,8 @@ bool isNonAllianceColorDetected() {
 }
 
 void toggleRollers() {
-    setMotorSpeed(rightToggleMotor, 60_power);
+    setMotorSpeed(rightToggleMotor, 100_power);
 }
 void toggleOnce(){
-    rightToggleMotor.move_relative(720, kToggleOnceVelocity);
+    rightToggleMotor.move_relative(1260, kToggleOnceVelocity);
 }

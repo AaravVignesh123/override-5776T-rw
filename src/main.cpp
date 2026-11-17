@@ -55,10 +55,11 @@ enum AutonChars {
     RIGHT_AWP = 'a',
 };
 
-char auton = LEFT_AUTO; 
+char auton = RIGHT_AUTO; 
 bool awp = false;
 bool noPreload = false;
 bool fullScoringPosition = false;
+
 void autonSelector() {
 	pros::lcd::set_text(1, "Selected auton:");
 	pros::lcd::set_text(2, "Left Auto");
@@ -196,7 +197,7 @@ void autonomous() {
             LeftAuto(awp, noPreload);
 			break;
         case RIGHT_AUTO:
-            RightAuto(awp);
+            RightAuto();
             break;
         case RIGHT_AWP:
             RightAwp();
@@ -431,10 +432,6 @@ void opcontrol() {
             scoreFarSide(0_in, 0_in, 3);
         }
 
-        //macro for skills standing pins part
-        if (enableMacros && leftButton.pressed) {
-            RightAuto(false);
-        }
         /*
 		if (rightButton.held){
 			storePin();

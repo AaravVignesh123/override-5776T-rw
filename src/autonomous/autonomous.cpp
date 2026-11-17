@@ -24,8 +24,9 @@ void hookDescoreWing(Length x, Length y) {
 //NEEDS TO BE TUNED
 // Enter in cupHeight and whichGoal to go to
 // R_SIDE_ALLIANCE_GOAL, L_SIDE_ALLIANCE_GOAL, MIDDLE_GOAL
-void matchloadingRight(float objectHeight, enum whichGoal goal, enum whichGoal previousGoal) {
+void matchloadingRight(float objectHeight, enum whichGoal goal) {
     moveToPoint(4_ft+10_in, 4_in, false, 0.5_x, 0.7_x, 1_s);
+    delay(50_ms);
     turnToAngle(-180_deg, 0.4_x);
     delay(50_ms);
     moveToPoint(4_ft+10_in, -10_in, true, 0.6_x, 0.8_x, 0.6_s); // goes to matchloader

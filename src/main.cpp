@@ -71,6 +71,7 @@ void autonSelector() {
 // --- Driver Code Variables --------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------
 bool clawToggle;
+bool autoGrabEnabled;
 
 struct controllerButton {
 	bool pressed = false;
@@ -214,6 +215,7 @@ void opcontrol() {
 
     // Set control variables
     clawToggle = false;
+    autoGrabEnabled = true;
 	
 	// Setting all motors to coast
 	allMotors.set_brake_mode_all(pros::MotorBrake::coast);
@@ -392,6 +394,9 @@ void opcontrol() {
   	});
 	*/
 
+
+
+
 	// Main loop
 	while (true) {
 		currentTime = getTime() - init;
@@ -432,17 +437,7 @@ void opcontrol() {
             scoreFarSide(0_in, 0_in, 3);
         }
 
-        /*
-		if (rightButton.held){
-			storePin();
-			intakePins();
-		} else if (leftButton.held) {
-			releasePin();
-			outtakePins();
-		} else {
-			setMotorSpeed(clawMotor, 0_x);
-			stopIntake();
-		} */
+
 
 		// Claw controls
 		// after pollControllerDigital(...) calls
@@ -459,43 +454,15 @@ void opcontrol() {
             setMotorSpeed(rightToggleMotor, 0_x);
         }
 
-		/* // Intake controls
-		if (r1Button.held) {
-            intakePins();
-		} else if (r2Button.held) {
-			outtakePins();
-		} else {
-			stopIntake();
-			intakeCommand = STOPPED;
-		} */
-		
-		if (l1Button.held) {
-			scoringReadyPosition();
-		} else if (l2Button.held) {
-			restPosition();
-		} else if (xButton.held) {
-			clawTwistMaxPosition();
-		}
-			
-		/*	
-		if (l1Button.held) {
-			if (xButton.held) {
-				fullScoringPosition = true;
-			}
+        // autoGrab
+        if (l1Button.pressed) {
+            autoGrabEnabled = !autoGrabEnabled;
+        }
+        if (autoGrabEnabled) {
+            autoGrab();
+        }
 
-			if (fullScoringPosition) {
-				scoringReady2();
-			} else {
-				scoringReadyPosition();
-			}
-		} else if (l2Button.held) {
-			fullScoringPosition = false;
-			restPosition();
-		} else {
-			fullScoringPosition = false;
-		}
-			*/
-		// Lift controls
+        // Lift controls
 		if (bButton.held) {
 			liftDown();
 		} else if (rightButton.held) {
@@ -505,35 +472,11 @@ void opcontrol() {
 			setMotorSpeed(liftMotor2, 0_x);
 		}
 
-		// Scraper toggle
-		/*
-		if (!enableMacros && bButton.pressed) {
-			scraperToggle = !scraperToggle;
-			pneumaticToggle(kPneumaticScraperPort, scraperToggle);
-		}
-		*/
-
-		// Descore toggle
-		/*
-        descoreToggle = rightButton.held;
-        pneumaticToggle(kPneumaticDescorePort, descoreToggle);
-
-        // Middle descore toggle
-        middleDescoreToggle = l2Button.held;
-        pneumaticToggle(kPneumaticMiddleDescorePort, middleDescoreToggle);
-		*/
-
-		// Debug things
+        // Debug things
 		if (xButton.pressed) {
             showDebug = (showDebug + 1) % 7;
 		}
 
-        // if (auton == SKILLS) {
-        //     pneumaticToggle(kPneumaticDescorePort, true);
-        // }
-
-        
-		
         // Anti-tip protection
 
         tipAngle = std::remainder(imuTipping.get_roll() - tipAngleOffset, 360.0);
@@ -570,5 +513,82 @@ void opcontrol() {
 		chassis.arcade(leftY, rightX);
 
 		delay(10_ms);
+
+
+
+        /*
+		if (rightButton.held){
+			storePin();
+			intakePins();
+		} else if (leftButton.held) {
+			releasePin();
+			outtakePins();
+		} else {
+			setMotorSpeed(clawMotor, 0_x);
+			stopIntake();
+		} */
+
+		/* // Intake controls
+		if (r1Button.held) {
+            intakePins();
+		} else if (r2Button.held) {
+			outtakePins();
+		} else {
+			stopIntake();
+			intakeCommand = STOPPED;
+		} */
+		
+		/* if (l1Button.held) {
+			scoringReadyPosition();
+		} else if (l2Button.held) {
+			restPosition();
+		} else if (xButton.held) {
+			clawTwistMaxPosition();
+		} */
+			
+		/*	
+		if (l1Button.held) {
+			if (xButton.held) {
+				fullScoringPosition = true;
+			}
+
+			if (fullScoringPosition) {
+				scoringReady2();
+			} else {
+				scoringReadyPosition();
+			}
+		} else if (l2Button.held) {
+			fullScoringPosition = false;
+			restPosition();
+		} else {
+			fullScoringPosition = false;
+		}
+			*/
+		
+
+		// Scraper toggle
+		/*
+		if (!enableMacros && bButton.pressed) {
+			scraperToggle = !scraperToggle;
+			pneumaticToggle(kPneumaticScraperPort, scraperToggle);
+		}
+		*/
+
+		// Descore toggle
+		/*
+        descoreToggle = rightButton.held;
+        pneumaticToggle(kPneumaticDescorePort, descoreToggle);
+
+        // Middle descore toggle
+        middleDescoreToggle = l2Button.held;
+        pneumaticToggle(kPneumaticMiddleDescorePort, middleDescoreToggle);
+		*/
+
+
+        // if (auton == SKILLS) {
+        //     pneumaticToggle(kPneumaticDescorePort, true);
+        // }
+
+        
 	}
 }

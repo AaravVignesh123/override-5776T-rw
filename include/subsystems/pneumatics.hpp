@@ -3,3 +3,4 @@
 
 
 extern int kPneumaticClawPort;
+void autoGrab();

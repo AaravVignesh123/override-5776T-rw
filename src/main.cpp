@@ -53,17 +53,17 @@ enum AutonChars {
 	LEFT_AUTO = 'l',
     RIGHT_AUTO = 'r',
     RIGHT_AWP = 'a',
+    SKILLS_AUTO = 's',
 };
 
-char auton = RIGHT_AUTO; 
+char auton = SKILLS_AUTO;
 bool awp = false;
 bool noPreload = false;
 bool fullScoringPosition = false;
 
 void autonSelector() {
 	pros::lcd::set_text(1, "Selected auton:");
-	pros::lcd::set_text(2, "Left Auto");
-    pros::lcd::set_text(3, "Right Auto");
+	pros::lcd::set_text(2, "Skills");
 }
 
 
@@ -204,6 +204,9 @@ void autonomous() {
         case RIGHT_AWP:
             RightAwp();
             break; 
+        case SKILLS_AUTO:
+            skills();
+            break;
 	}
 }
 
@@ -460,7 +463,9 @@ void opcontrol() {
             autoGrabEnabled = !autoGrabEnabled;
         }
         if (autoGrabEnabled) {
-            autoGrab();
+            if (autoGrab()) {
+                clawToggle = true;
+            }
         }
 
         // Lift controls

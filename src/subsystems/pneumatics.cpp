@@ -7,10 +7,15 @@ pros::Distance claw_distance_sensor(10);
 
 bool autoGrab() {
     int currentDistance = claw_distance_sensor.get();
+    static bool cupAlreadyIn = false;
 
     if (0 < currentDistance && currentDistance < 30) {
-        pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
-        return true;
+        if (!cupAlreadyIn) {
+            cupAlreadyIn = true;
+            return true;
+        }
+    } else {
+        cupAlreadIn = false;
     }
     return false;
 }

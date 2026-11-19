@@ -34,13 +34,15 @@ void matchloadingRight(float objectHeight, enum whichGoal goal) {
     delay(100_ms);
     relative(-1_ft, 0.4_x);
     liftToPosition(2,100); //goes up to 2 inches, barely above the floor, to avoid hitting the matchloader
+    delay(200_ms);
+
 
     if (goal == R_SIDE_ALLIANCE_GOAL) {
         //go to right alliance goal
         liftToPosition(objectHeight,100);
         turnToAngle(-90_deg, 0.4_x);
         delay(125_ms);
-        moveToPoint(2_ft+3_in, 4_in, true, 0.5_x, 0.55_x, 2_s);
+        moveToPoint(2_ft+6_in, 4_in, true, 0.5_x, 0.55_x, 2_s);
         delay(125_ms); //needed delays
         odomDistanceBackwards.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH); // release pin, hopefully
@@ -49,7 +51,7 @@ void matchloadingRight(float objectHeight, enum whichGoal goal) {
         liftToPosition(objectHeight,100);
         turnToAngle(-150_deg, 0.35_x);
         delay(125_ms);
-        moveToPoint(4_ft, 1_ft+10_in, true, 0.5_x, 0.55_x, 2_s);
+        moveToPoint(4_ft+3_in, 1_ft+10_in, true, 0.5_x, 0.55_x, 2_s);
         delay(125_ms); //needed delays
         odomDistanceBackwards.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH); // release pin, hopefully
@@ -1308,84 +1310,88 @@ void SoloAWP(){
 // Skills Route -------------------------------------------
 void skills() {
     // Initiialize starting pos
-    setChassisPose(-0.0236_ft, -1.1916_ft, 44.56_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
-    // needa change these positions & offsets  (including reading)
-    odomDistanceForward.setOriginPosition(4_in, -10_in);
-    odomDistanceLeft.setOriginPosition(-8_in, -1_ft);
-    odomDistanceRight.setOriginPosition(0_in, -1_ft-7_in);
-    odomDistanceBackwards.setOriginPosition(0_in, -18_in);
+    setChassisPose(-0.18_ft, 0.06_ft, 44_deg); // spin bot find center of rotation find distance from odom and set that as chassis pose
+    odomDistanceForward.setOriginPosition(6_in, 7_in); // 5 in, -1 ft
+    odomDistanceLeft.setOriginPosition(-7_in, 1_ft); //-4 in, -1.5 ft + 2 in
+    odomDistanceRight.setOriginPosition(2_in, 5_in); // 5 in, -1.5 ft + 2 in
+    odomDistanceBackwards.setOriginPosition(-6_in, 9_in); // -3 in, -1.5 ft + 1 in
     
-    // toggle
+    // Toggle
     toggleOnce();
-    delay(175_ms);
+    delay(510_ms);
+    liftToPosition(3,127);
+
+    // Move to alliance goal to score preload
+    moveToPose(1_ft, 1_ft-0.5_in, 80_deg, true, 0.65, 0.6_x, 0.65_x, 2_s);
+    moveToPose(2_ft,1_ft+2_in, 90_deg, true, 0.65, 0.4_x, 0.42_x, 2_s);
     
-    //moveToPoint(0_ft, -3_in, false, 0.4_x, 0.7_x, 1.5_s); 
-    //releasePin();
-    liftToPosition(3.5,100);
-    //move to alliance goal to score preload
-    //moveToPose(2.5_ft + 2_in, -1_in, 90_deg, true, 0.6, 0.6_x, 0.8_x, 0.5_s, 4_in, true);
-    moveToPose(2_ft+3_in, -1_in, 90_deg, true, 0.58, 0.5_x, 0.5_x, 1.5_s);
-    //moveToPose(1.5_ft + 6.5_in, -8_in, 90_deg, true, 0.6, 0.6_x, 0.6_x, 2_s, 0_in, false);
-    //turnToAngle(90_deg, 0.5_x);
-    //score preload
-    delay(250_ms); 
-    liftToPosition(1,100);
-    delay(100_ms);
-     //350 originally
+    // Score preload
+    delay(180_ms); 
+    liftToPosition(0,100);
+    delay(185_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
-    odomDistanceRight.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
+    odomDistanceLeft.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
+    
+    // Relative back
+    relative(-8_in, 0.4_x);
+    turnToAngle(39_deg, 0.5_x);
+    
+    // First standing pin
+    moveToPoint(2_ft-8_in, 2_ft+3_in , true, 0.6_x, 0.6_x, 2_s); // move to standing pin
+    moveToPoint(2_ft-5_in, 2_ft+9_in, true, 0.4_x, 0.4_x, 2_s); // move to standing pin
+    delay(25_ms);
+    pros::c::adi_digital_write(kPneumaticClawPort, LOW);
+    liftToPosition(1,127);
+    relative(4_in,0.4_x);
 
-
-
-    //delay(650_ms);
-    //go to standing pin #1 and grab pin
+    delay(180_ms);
+    
+    // Go to alliance goal to score first standing pin
+    liftToPosition(8,127);
+    turnToAngle(180_deg, 0.35_x);
     delay(150_ms);
-    relative(-5_in, 0.4_x);
-    turnToAngle(38_deg, 0.5_x);
-    //moveToPoint(2_ft-6_in, 1_ft-1.5_in, true, 0.8_x,0.8_x, 2_s, 5_in, true); // move to standing pin intermediately
-    moveToPoint(1_ft+8_in, 1_ft+2_in, true, 0.4_x, 0.6_x, 1.5_s);
-    //moveToPoint(2_ft - 3_in, 1_ft-2_in, true, 0.8_x, 0.8_x, 1.5_s); // move to standing pin intermediately
-    //moveToPoint(2_ft+0.5_in, 1_ft+0.5_in, true, 0.5_x, 0.55_x, 1.5_s); // move to standing pin
+    moveToPoint(2_ft, 2_ft-5_in, true, 0.4_x, 0.4_x, 2_s); // move to blue goal
+    delay(175_ms);
+    liftToPosition(3,127);
+    delay(225_ms);
+    odomDistanceForward.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
+    odomDistanceRight.correctPosition(OdomDistance::ForceToWall::LEFT_RIGHT);
+    pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+
+    // Move to second standing pin
+    relative(-6.5_in, 0.4_x);
+    turnToAngle(135_deg, 0.5_x);
+    delay(125_ms);
+    liftToPosition(-1,127);
+    moveToPoint(3_ft+6.5_in, 1_ft+8_in, true, 0.4_x, 0.45_x, 2_s); // move to standing pin
+
+    // Grab second standing pin
     delay(75_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     relative(2_in, 0.4_x);
-    //moveToPose(-1.3_ft, 1_ft, -45_deg, true, 0.5, 0.6_x, 1_x, 2_s);
+     //lift up and position towards goal
+    liftToPosition(13,127);
+    //turnToAngle(90_deg, 0.35_x);
+    turnToAngle(90_deg, 0.35_x);
+    delay(175_ms);
+    odomDistanceRight.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
+        
+    //move to alliance/blue goal
+    // moveToPoint(-2_ft-6_in, 1_ft+0.5_in, true, 0.4_x, 0.4_x, 1.5_s); // move to blue goal
+    moveToPose(2_ft,1_ft+2_in, 90_deg, true, 0.65, 0.4_x, 0.42_x, 2_s);
+        
+    //score second standing pin - end of four pin auto (next steps is getting wall pin)
     liftToPosition(8,100);
-    turnToAngle(180_deg, 0_x);
-    delay(150_ms);
-    moveToPoint(2_ft+6_in, 5_in, true, 0.5_x, 0.55_x, 2_s); // move to blue goal
-    delay(175_ms); //needed delays
-    liftToPosition(5,100);
-    delay(175_ms);
-    odomDistanceForward.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
-    pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
-    
-
-
-    //move to second standing pin
-    relative(-7_in, 0.4_x);
-    turnToAngle(142_deg, 0.5_x);
-    delay(250_ms);
-    liftToPosition(0,127);
-    moveToPoint(4_ft-5_in, 5_in, true, 0.6_x, 0.6_x, 1.5_s); // move to standing pin
-    moveToPoint(4_ft-1_in, 1_in, true, 0.4_x, 0.5_x, 1.5_s); // move to standing pin
-    //grab second standing pin
-    //delay(125_ms);
-    delay(15_ms);
-    pros::c::adi_digital_write(kPneumaticClawPort, LOW);
-    //lift up and position towards goal
-    liftToPosition(11,127);
-    turnToAngle(-125_deg, 0.35_x);
-    delay(175_ms);
-    moveToPoint(2_ft+3_in, 1_in, true, 0.4_x, 0.5_x, 1.5_s); // move to alliance goal
-    //score second standing pin - two cups in the alliance goal
-    liftToPosition(9,100);
     odomDistanceRight.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
     delay(175_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
    
     //third pin, right alliance goal
     matchloadingRight(12, R_SIDE_ALLIANCE_GOAL);
+    
+    //TUNING CODE ABOVE RN
+    
+    /*
     //fourth pin, right alliance goal
     matchloadingRight(14, R_SIDE_ALLIANCE_GOAL);
 
@@ -1414,6 +1420,7 @@ void skills() {
     odomDistanceRight.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
     delay(175_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
+    */
 }
 
 // Misc Autons --------------------------------------------

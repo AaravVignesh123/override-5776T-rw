@@ -71,7 +71,6 @@ void autonSelector() {
 // --- Driver Code Variables --------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------
 bool clawToggle;
-bool autoGrabEnabled;
 
 struct controllerButton {
 	bool pressed = false;
@@ -219,7 +218,6 @@ void opcontrol() {
 
     // Set control variables
     clawToggle = false;
-    autoGrabEnabled = true;
 	
 	// Setting all motors to coast
 	allMotors.set_brake_mode_all(pros::MotorBrake::coast);
@@ -309,7 +307,7 @@ void opcontrol() {
                 } case 6: {
                     pros::lcd::set_text(0, "Dist Forward: " + std::to_string(odomDistanceForward.getDistance().convert(inch)) + " in");
                     pros::lcd::set_text(1, "Dist Left: " + std::to_string(odomDistanceLeft.getDistance().convert(inch)) + " in");
-                    pros::lcd::set_text(2, "Dist Right: " + std::to_string(odomDistanceRight.getDistance().convert(inch)) + " in");
+                    pros::lcd::set_text(2, "Dist Claw: " + std::to_string(getClawDistanceMm()) + " mm");
                     pros::lcd::set_text(3, "Dist Backwards: " + std::to_string(odomDistanceBackwards.getDistance().convert(inch)) + " in");
                     pros::lcd::set_text(4, "Current zero = startup");
                     pros::lcd::clear_line(5);
@@ -458,14 +456,10 @@ void opcontrol() {
             setMotorSpeed(rightToggleMotor, 0_x);
         }
 
-        // autoGrab
-        if (l1Button.pressed) {
-            autoGrabEnabled = !autoGrabEnabled;
-        }
-        if (autoGrabEnabled) {
-            if (autoGrab()) {
-                clawToggle = true;
-            }
+        // Auto-grab stays active and closes the claw while an object is in range.
+        if (autoGrab()) {
+            clawToggle = false;
+            pneumaticToggle(kPneumaticClawPort, clawToggle);
         }
 
         // Lift controls
@@ -516,7 +510,7 @@ void opcontrol() {
         //chassis.tank(leftY, rightY);
         // 2-stick arcade controls
         // chassis.arcade(leftY, rightX);
-		chassis.arcade(leftY, rightX);
+		chassis.arcade(leftY, rightX / 2);
 
 		delay(10_ms);
 

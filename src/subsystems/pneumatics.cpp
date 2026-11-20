@@ -2,20 +2,25 @@
 #include "subsystems/pneumatics.hpp"
 
 
-int kPneumaticClawPort = 'A'; // HIGH - closed
+int kPneumaticClawPort = 'A'; // LOW - closed
 pros::Distance claw_distance_sensor(10);
+
+int getClawDistanceMm() {
+    return claw_distance_sensor.get();
+}
 
 bool autoGrab() {
     int currentDistance = claw_distance_sensor.get();
     static bool cupAlreadyIn = false;
 
-    if (0 < currentDistance && currentDistance < 30) {
+    if (currentDistance > 0 && currentDistance < 20) {
         if (!cupAlreadyIn) {
             cupAlreadyIn = true;
             return true;
         }
     } else {
-        cupAlreadIn = false;
+        cupAlreadyIn = false;
     }
+
     return false;
 }

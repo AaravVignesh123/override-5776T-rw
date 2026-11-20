@@ -4,3 +4,4 @@
 
 extern int kPneumaticClawPort;
 bool autoGrab();
+int getClawDistanceMm();

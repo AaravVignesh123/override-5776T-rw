@@ -71,6 +71,7 @@ void autonSelector() {
 // --- Driver Code Variables --------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------
 bool clawToggle;
+bool macroActive = false;
 
 struct controllerButton {
 	bool pressed = false;
@@ -462,14 +463,24 @@ void opcontrol() {
             pneumaticToggle(kPneumaticClawPort, clawToggle);
         }
 
+        // Lift macro
+        if (l1Button.pressed) {
+            macroActive = true;
+            liftToPosition(0, 127);
+        }
+
         // Lift controls
 		if (bButton.held) {
 			liftDown();
+            macroActive = false;
 		} else if (rightButton.held) {
 			liftUp();
+            macroActive = false;
 		} else {
-			setMotorSpeed(liftMotor1, 0_x);
-			setMotorSpeed(liftMotor2, 0_x);
+			if (!macroActive) {
+                setMotorSpeed(liftMotor1, 0_x);
+			    setMotorSpeed(liftMotor2, 0_x);
+            }
 		}
 
         // Debug things

@@ -7,8 +7,8 @@
 pros::Motor liftMotor1(11);
 pros::Motor liftMotor2(20);
 //change later, get inches lifted per motor revolution
-constexpr double LIFT_INCHES_PER_MOTOR_REV = 3; 
-constexpr double LIFT_POSITION_TOLERANCE_DEGREES = 5;
+constexpr double LIFT_INCHES_PER_MOTOR_REV = 3.2; 
+constexpr double LIFT_POSITION_TOLERANCE_DEGREES = 4;
 
 void liftUp() {
     setMotorSpeed(liftMotor1, -127_power);

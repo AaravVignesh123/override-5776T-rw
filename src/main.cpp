@@ -446,6 +446,7 @@ void opcontrol() {
 		// after pollControllerDigital(...) calls
 		if (yButton.pressed) {
             clawToggle = !clawToggle;
+            liftToPosition(1, 127);
         }
         pneumaticToggle(kPneumaticClawPort, clawToggle);
 
@@ -521,7 +522,7 @@ void opcontrol() {
         //chassis.tank(leftY, rightY);
         // 2-stick arcade controls
         // chassis.arcade(leftY, rightX);
-		chassis.arcade(leftY, rightX / 2);
+		chassis.arcade(leftY, rightX / 1.5);
 
 		delay(10_ms);
 

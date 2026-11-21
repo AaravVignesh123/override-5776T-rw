@@ -26,13 +26,13 @@ void hookDescoreWing(Length x, Length y) {
 // R_SIDE_ALLIANCE_GOAL, L_SIDE_ALLIANCE_GOAL, MIDDLE_GOAL
 void matchloadingRight(float objectHeight, enum whichGoal goal) {
     liftToPosition(-3,127); // goes up to 1 inch, barely above the floor, to avoid hitting the matchloader
-    moveToPoint(5_ft+9_in, 1_ft+2_in, false, 0.5_x, 0.7_x, 1_s);
+    moveToPoint(5_ft+9_in, 1_ft+2_in, false, 0.5_x, 0.7_x, 1.5_s);
     delay(150_ms);
     turnToAngle(180_deg, 0.4_x);
     odomDistanceLeft.correctPosition(OdomDistance::ForceToWall::LEFT_RIGHT);
     odomDistanceForward.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
     delay(150_ms);
-    moveToPoint(5_ft+9_in, 4_in, true, 0.6_x, 0.8_x, 0.6_s); // goes to matchloader
+    moveToPoint(5_ft+9_in, 0_in, true, 0.6_x, 0.8_x, 1.5_s); // goes to matchloader
     pros::c::adi_digital_write(kPneumaticClawPort, LOW); // closes claw
     delay(100_ms);
     relative(-1_ft, 0.4_x);
@@ -42,10 +42,10 @@ void matchloadingRight(float objectHeight, enum whichGoal goal) {
 
     if (goal == R_SIDE_ALLIANCE_GOAL) {
         //go to right alliance goal
-        liftToPosition(objectHeight,100);
+        liftToPosition(objectHeight,127);
         turnToAngle(-90_deg, 0.4_x);
         delay(125_ms);
-        moveToPoint(2_ft+6_in, 1_ft+2_in, true, 0.5_x, 0.55_x, 2_s);
+        moveToPoint(2_ft+6_in, 1_ft+5_in, true, 0.5_x, 0.55_x, 2_s);
         delay(125_ms); //needed delays
         odomDistanceLeft.correctPosition(OdomDistance::ForceToWall::FRONT_BACK);
         pros::c::adi_digital_write(kPneumaticClawPort, HIGH); // release pin, hopefully
@@ -1325,8 +1325,8 @@ void skills() {
     liftToPosition(3,127);
 
     // Move to alliance goal to score preload
-    moveToPose(1_ft, 1_ft+1.5_in, 75_deg, true, 0.5, 0.6_x, 0.65_x, 2_s);
-    moveToPose(2_ft-1.5_in,1_ft+2_in, 90_deg, true, 0.65, 0.4_x, 0.42_x, 2_s);
+    moveToPose(1_ft, 1_ft+1.25_in, 75_deg, true, 0.5, 0.6_x, 0.65_x, 2_s);
+    moveToPose(2_ft-1.5_in,1_ft+1.75_in, 90_deg, true, 0.65, 0.4_x, 0.42_x, 2_s);
     
     // Score preload
     delay(180_ms); 
@@ -1340,8 +1340,8 @@ void skills() {
     turnToAngle(39.25_deg, 0.5_x);
     
     // First standing pin
-    moveToPoint(2_ft-9.5_in, 2_ft+3.75_in , true, 0.6_x, 0.6_x, 2_s); // move to standing pin
-    moveToPoint(2_ft-7_in, 2_ft+10_in, true, 0.4_x, 0.4_x, 2_s); // move to standing pin
+    moveToPoint(2_ft-9.75_in, 2_ft+3.5_in , true, 0.6_x, 0.6_x, 2_s); // move to standing pin
+    moveToPoint(2_ft-7.25_in, 2_ft+9.75_in, true, 0.4_x, 0.4_x, 2_s); // move to standing pin
     delay(25_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     liftToPosition(1,127);
@@ -1366,7 +1366,7 @@ void skills() {
     turnToAngle(132.5_deg, 0.5_x);
     delay(125_ms);
     liftToPosition(-1,127);
-    moveToPoint(3_ft+7_in, 1_ft+8_in, true, 0.4_x, 0.45_x, 2_s); // move to standing pin
+    moveToPoint(3_ft+6.5_in, 1_ft+8_in, true, 0.4_x, 0.45_x, 2_s); // move to standing pin
 
     // Grab second standing pin
     delay(75_ms);
@@ -1391,16 +1391,17 @@ void skills() {
     pros::c::adi_digital_write(kPneumaticClawPort, HIGH);
    
     //third pin, right alliance goal
-    matchloadingRight(12, R_SIDE_ALLIANCE_GOAL);
+    matchloadingRight(14, R_SIDE_ALLIANCE_GOAL);
     
     //TUNING CODE ABOVE RN
     
-    /*
+    
     //fourth pin, right alliance goal
-    matchloadingRight(14, R_SIDE_ALLIANCE_GOAL);
+    matchloadingRight(17, R_SIDE_ALLIANCE_GOAL);
 
     //start on left alliance red goal
     //get one pin 
+    /*
     matchloadingRight(2.5, L_SIDE_ALLIANCE_GOAL); // should be at correct height for next pin for other alliance goal
 
     //cups and pins 

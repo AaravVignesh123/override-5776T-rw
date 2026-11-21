@@ -854,7 +854,7 @@ void LeftAuto(bool awp, bool noPreload){
     //moveToPoint(-1.7_ft, 1.2_ft, true, 0.5_x, 0.5_x, 1.5_s); // move to standing pin intermediately
     //moveToPoint(-2_ft+1_in, 1_ft-2.5_in, true, 0.8_x, 0.8_x, 1_s); // move to standing pin intermediately
     moveToPoint(-2_ft-0.6_in, 2_ft+4.5_in , true, 0.6_x, 0.6_x, 2_s); // move to standing pin
-    moveToPoint(-2_ft-1.6_in, 2_ft+7_in, true, 0.4_x, 0.4_x, 2_s); // move to standing pin
+    moveToPoint(-2_ft-1.5_in, 2_ft+7_in, true, 0.4_x, 0.4_x, 2_s); // move to standing pin
     delay(30_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     liftToPosition(1,127);
@@ -1025,7 +1025,7 @@ void RightAuto(){
     
     // First standing pin
     moveToPoint(2_ft-8_in, 2_ft+3_in , true, 0.6_x, 0.6_x, 2_s); // move to standing pin
-    moveToPoint(2_ft-5_in, 2_ft+9_in, true, 0.4_x, 0.4_x, 2_s); // move to standing pin
+    moveToPoint(2_ft-5_in, 2_ft+10_in, true, 0.4_x, 0.4_x, 2_s); // move to standing pin
     delay(25_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     liftToPosition(1,127);
@@ -1341,7 +1341,7 @@ void skills() {
     
     // First standing pin
     moveToPoint(2_ft-9.5_in, 2_ft+3.75_in , true, 0.6_x, 0.6_x, 2_s); // move to standing pin
-    moveToPoint(2_ft-6.5_in, 2_ft+9.75_in, true, 0.4_x, 0.4_x, 2_s); // move to standing pin
+    moveToPoint(2_ft-6.5_in, 2_ft+10_in, true, 0.4_x, 0.4_x, 2_s); // move to standing pin
     delay(25_ms);
     pros::c::adi_digital_write(kPneumaticClawPort, LOW);
     liftToPosition(1,127);
@@ -1366,7 +1366,7 @@ void skills() {
     turnToAngle(132.5_deg, 0.5_x);
     delay(125_ms);
     liftToPosition(-1,127);
-    moveToPoint(3_ft+7_in, 1_ft+9_in, true, 0.4_x, 0.45_x, 2_s); // move to standing pin
+    moveToPoint(3_ft+7_in, 1_ft+8.5_in, true, 0.4_x, 0.45_x, 2_s); // move to standing pin
 
     // Grab second standing pin
     delay(75_ms);

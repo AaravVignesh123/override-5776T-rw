@@ -52,5 +52,5 @@ void toggleRollers() {
     setMotorSpeed(rightToggleMotor, 80_power);
 }
 void toggleOnce(){
-    rightToggleMotor.move_relative(1000, kToggleOnceVelocity); //1520 is 1 rotation, 3040 is 2 rotations, 4560 is 3 rotations
+    rightToggleMotor.move_relative(800, kToggleOnceVelocity); //1520 is 1 rotation, 3040 is 2 rotations, 4560 is 3 rotations
 }

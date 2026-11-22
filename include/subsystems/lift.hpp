@@ -7,5 +7,6 @@ extern pros::Motor liftMotor2;
 void liftUp();
 void liftDown();
 void liftToPosition(float position, int32_t velocity = 100);
+bool isLiftAtPosition(float position);
 void waitForLiftPosition(float position);
 void tareLiftPosition();

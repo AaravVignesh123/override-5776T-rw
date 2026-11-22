@@ -27,6 +27,12 @@ void liftToPosition(float position, int32_t velocity) {
     liftMotor2.move_absolute(motorDegrees, velocity);
 }
 
+bool isLiftAtPosition(float position) {
+    const double motorDegrees = position * 360.0 / LIFT_INCHES_PER_MOTOR_REV;
+    return std::abs(liftMotor1.get_position() + motorDegrees) <= LIFT_POSITION_TOLERANCE_DEGREES &&
+           std::abs(liftMotor2.get_position() - motorDegrees) <= LIFT_POSITION_TOLERANCE_DEGREES;
+}
+
 void waitForLiftPosition(float position) {
     const double motorDegrees = position * 360.0 / LIFT_INCHES_PER_MOTOR_REV;
     while (std::abs(liftMotor1.get_position() + motorDegrees) > LIFT_POSITION_TOLERANCE_DEGREES ||

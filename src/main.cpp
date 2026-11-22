@@ -465,10 +465,11 @@ void opcontrol() {
         }
 
         // Lift macro
-        if (l1Button.pressed) {
+        if (l1Button.held) {
             macroActive = true;
             liftToPosition(0, 127);
         }
+
 
         // Lift controls
 		if (bButton.held) {

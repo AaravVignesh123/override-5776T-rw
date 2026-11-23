@@ -1,36 +1,6 @@
-#include "main.h"
-#include "subsystems/intake.hpp"
-#include "autonomous/odometry.hpp"
-#include "subsystems/pneumatics.hpp"
+#include "rw-config.h"
 
-// Temporary stubbed-out intake subsystem for odometry testing.
-pros::Motor intakeBottomLarge(-5);
-
-void intakePins() {
-    setMotorSpeed(intakeBottomLarge, 127_power);
-}
-void outtakePins() {
-    setMotorSpeed(intakeBottomLarge, -127_power);
-}   
-
-void scoreBallsUp() {
-    // Intake disabled for odometry testing.
-}
-
-void scoreBallsMiddle(bool driverControl) {
-    (void)driverControl;
-    // Intake disabled for odometry testing.
-}
-
-void clearMiddleSection() {
-    // Intake disabled for odometry testing.
-}
-
-void scoreBallsDown() {
-    // Intake disabled for odometry testing.
-}
-
-void stopIntake() {
-    // Intake disabled for odometry testing.
-    setMotorSpeed(intakeBottomLarge, 0_x);
-}
+// Intake is stubbed out on the current robot (see the port note in src/rw-config.cpp)
+void intakePins() { intakeBottomLarge.move(127); }
+void outtakePins() { intakeBottomLarge.move(-127); }
+void stopIntake() { intakeBottomLarge.move(0); }

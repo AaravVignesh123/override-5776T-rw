@@ -1,17 +1,13 @@
 #pragma once
-#include "main.h"
+#include <cstdint>
 
-enum class ToggleAllianceColor {
-    Red,
-    Blue
-};
+enum class ToggleAllianceColor { Red, Blue };
 
-extern pros::Motor rightToggleMotor;
-extern pros::Motor leftToggleMotor;
 extern ToggleAllianceColor toggleAllianceColor;
 extern bool toggleColorSortEnabled;
 
 std::int32_t initializeToggleColorSensor();
 bool isNonAllianceColorDetected();
 void toggleRollers();
+void stopToggle();
 void toggleOnce();

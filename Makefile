@@ -14,7 +14,8 @@ INCDIR=$(ROOT)/include
 
 WARNFLAGS+=
 EXTRA_CFLAGS=
-EXTRA_CXXFLAGS=
+# RW draws the Brain screen itself, so this project doesn't install liblvgl for LLEMU (pros::lcd)
+EXTRA_CXXFLAGS=-D_PROS_KERNEL_SUPPRESS_LLEMU_WARNING
 
 # Set to 1 to enable hot/cold linking
 USE_PACKAGE:=1

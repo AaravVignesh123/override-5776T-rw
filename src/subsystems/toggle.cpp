@@ -1,13 +1,4 @@
-#include "subsystems/chassis.hpp"
-#include "autonomous/odometry.hpp"
-#include "lemlib/api.hpp"
-#include "toggle.hpp"
-#include "main.h"
-#include "pros/optical.hpp"
-
-//pros::Motor leftToggleMotor(-7);
-pros::Motor rightToggleMotor(8);
-pros::Optical toggleColorSensor(3);
+#include "rw-config.h"
 
 // Change this to Red or Blue before the match.
 ToggleAllianceColor toggleAllianceColor = ToggleAllianceColor::Blue;
@@ -48,9 +39,8 @@ bool isNonAllianceColorDetected() {
     return !isAllianceColor;
 }
 
-void toggleRollers() {
-    setMotorSpeed(rightToggleMotor, 80_power);
-}
-void toggleOnce(){
-    rightToggleMotor.move_relative(780, kToggleOnceVelocity); //1520 is 1 rotation, 3040 is 2 rotations, 4560 is 3 rotations
+void toggleRollers() { rightToggleMotor.move(80); }
+void stopToggle() { rightToggleMotor.move(0); }
+void toggleOnce() {
+    rightToggleMotor.move_relative(780, kToggleOnceVelocity);  // 1520 is 1 rotation, 3040 is 2, 4560 is 3
 }

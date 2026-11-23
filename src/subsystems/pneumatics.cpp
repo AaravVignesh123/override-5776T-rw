@@ -1,16 +1,15 @@
-#include "main.h"
-#include "subsystems/pneumatics.hpp"
+#include "rw-config.h"
 
-
-int kPneumaticClawPort = 'A'; // LOW - closed
-pros::Distance claw_distance_sensor(10);
+void setClaw(bool open) { clawPiston.set_value(open); }
+void openClaw() { setClaw(true); }
+void closeClaw() { setClaw(false); }
 
 int getClawDistanceMm() {
-    return claw_distance_sensor.get();
+    return clawDistanceSensor.get();
 }
 
 bool autoGrab() {
-    int currentDistance = claw_distance_sensor.get();
+    int currentDistance = clawDistanceSensor.get();
     static bool cupAlreadyIn = false;
 
     if (currentDistance > 0 && currentDistance < 20) {

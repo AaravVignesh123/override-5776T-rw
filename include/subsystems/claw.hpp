@@ -1,11 +1,9 @@
 #pragma once
-#include "main.h"
 
-extern pros::Motor clawMotor;
-extern pros::Motor clawTwistMotor;
-
+// Motor claw + twist (clawMotor and clawTwistMotor are in src/rw-config.cpp)
 void storePin();
 void releasePin();
+void stopClawMotor();
 void scoringReady();
 void rest();
 void scoringReady2();

@@ -20,7 +20,7 @@ constexpr double kRedHueUpperBound = 30.0;
 constexpr double kRedHueLowerBound = 330.0;
 constexpr double kBlueHueLowerBound = 190.0;
 constexpr double kBlueHueUpperBound = 260.0;
-constexpr std::int32_t kToggleOnceVelocity = 850;
+constexpr std::int32_t kToggleOnceVelocity = 250;
 }
 
 std::int32_t initializeToggleColorSensor() {

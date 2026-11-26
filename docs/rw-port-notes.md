@@ -48,3 +48,9 @@ sh sim/run-sim.sh "Skills" --start -10.91,10.22,44 --time 60
 ```
 
 This writes a replay to `sim/out/Skills.html`. All five routes run to the end in the simulator. The replays are only as accurate as the start origins and PIDs.
+
+## Recording a route
+
+In driver control, press **D-pad Left** to start recording, drive the route with the joysticks, then press **D-pad Left** again to stop and export. The recorder samples odometry positions and exports a `recordedRoute()` waypoint function; it does not record mechanism actions. The controller screen shows the recording state and waypoint count.
+
+With a writable microSD card, the generated code is saved as `/usd/rw-recorded-route.cpp`. Without one, it prints the code to the PROS terminal. Copy the function into `src/rw-autons.cpp`, declare it in `include/rw-config.h`, and add it to the selector in `src/rw-user.cpp` as indicated in the generated comments. The route uses field-centered odometry coordinates and assumes the robot starts in the same physical position and heading. Test and tune it before competition use.

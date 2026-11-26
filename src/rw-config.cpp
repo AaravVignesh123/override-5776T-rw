@@ -64,9 +64,9 @@ double wheel_distance_in = (450.0 / 600.0) * 2.75 * M_PI;
 // distance_* : Linear PID for straight driving
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
-double distance_kp = 1.1, distance_ki = 0.1, distance_kd = 7;
-double turn_kp = 0.3, turn_ki = 0, turn_kd = 2.5;
-double heading_correction_kp = 0.6, heading_correction_ki = 0, heading_correction_kd = 4;
+double distance_kp = 0.228, distance_ki = 0, distance_kd = 4.5;
+double turn_kp = 0.295, turn_ki = 0, turn_kd = 2.5;
+double heading_correction_kp = 0.6, heading_correction_ki = 0, heading_correction_kd = 3;
 
 // Both tracking wheels, like the LemLib OdomSensors setup
 bool using_horizontal_tracker = true;
@@ -112,10 +112,10 @@ bool dir_change_end = true;     // Less accel/decel due to expecting direction c
 double min_output = 10; // Minimum output voltage to motors while chaining movements
 
 // Maximum allowed change in voltage output per 10 msec during movement
-double max_slew_accel_fwd = 24;
-double max_slew_decel_fwd = 24;
-double max_slew_accel_rev = 24;
-double max_slew_decel_rev = 24;
+double max_slew_accel_fwd = 2;
+double max_slew_decel_fwd = 2;
+double max_slew_accel_rev = 2;
+double max_slew_decel_rev = 2;
 
 // Prevents too much slipping during boomerang movements
 // Decrease if there is too much drifting and inconsistency during boomerang

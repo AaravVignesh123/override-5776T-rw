@@ -266,22 +266,24 @@ void LeftAuto(bool awp, bool noPreload) {
 
 void RightAuto() {
   // Same start as skills (see skills() for the origin)
-  setLocalOrigin(-8.75, 9.5);
-  startAt(-2.16, 0.72, 44);
+  setLocalOrigin(0, -48);
+  startAt(2.6, -19.2, 46.8);
 
   toggleOnce();
   pros::delay(510);
   liftToPosition(3, 127);
 
+  //moveToPoint(fx(23), fy(-10.6), 1, 2000, true, 9);
+
   // Alliance goal: score preload
-  boomerang(fx(13), fy(13), 1, 75, 0.55, 2000, true, 7.8);
-  boomerang(fx(23), fy(15), 1, 90, 0.65, 2000, true, 5.04);
+  //boomerang(fx(13), fy(13), 1, 75, 0.55, 2000, true, 7.8);
+  curveCircle(90, 30.1, 5000, true, 9);
   pros::delay(180);
   liftToPosition(0, 100);
   pros::delay(185);
   openClaw();
-  distanceReset(resetPositionLeft, "left");  // far wall (old: FRONT_BACK)
-
+  //distanceReset(resetPositionLeft, "left");  // far wall (old: FRONT_BACK)
+  /*
   moveToPoint(fx(18), fy(14), -1, 1500, true, 6);
   turnToAngle(39, 800);
 
@@ -326,6 +328,7 @@ void RightAuto() {
   pros::delay(175);
   openClaw();
   driveTo(-10, 1000);
+  */
 }
 
 void RightAwp() {
@@ -542,6 +545,8 @@ void skills() {
 
 // RW's tuning auton: tune distance_* and turn_* with this (docs: Guide > Tuning)
 void exampleAuton() {
+  driveTo(24, 3000);
+  /*
   driveTo(60, 3000);
   turnToAngle(90, 2000);
   turnToAngle(135, 2000);
@@ -550,6 +555,8 @@ void exampleAuton() {
   turnToAngle(165, 2000);
   turnToAngle(0, 2000);
   driveTo(-60, 3000);
+  */
+  
 }
 
 // RW's odometry check: the robot should end where it started
